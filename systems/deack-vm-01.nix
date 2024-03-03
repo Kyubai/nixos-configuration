@@ -106,6 +106,9 @@ in
     pull = {
       ff = "only";
     };
+    safe = {
+      directory = "/etc/nixos";
+    };
   };
 
   security.polkit.enable = true;
