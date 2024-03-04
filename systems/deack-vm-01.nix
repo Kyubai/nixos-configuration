@@ -22,6 +22,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ../hardware-configuration.nix
+      ../modules/base.nix
+      (import ../home/base.nix { username = "mri"; })
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -31,7 +33,6 @@ in
   # Define on which hard drive you want to install Grub.
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
-  networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -43,6 +44,19 @@ in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  fonts.fontconfig.defaultFonts.serif = [
+    "Hack Nerd Font"
+  ];
+
+  fonts.fontconfig.defaultFonts.sansSerif = [
+    "Hack Nerd Font"
+  ];
+
+  fonts.fontconfig.defaultFonts.monospace = [
+    "Hack Nerd Font Mono"
+  ];
+    
+
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -51,17 +65,32 @@ in
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    bat
     brave
     dbus
     dbus-sway-environment
-    git
+    discord
+    htop-vim
+    kitty
+    lunarvim
+    p7zip
+    neofetch
     neovim
     spice-vdagent
+    vivaldi
+    vivaldi-ffmpeg-codecs
     vim
     wayland
-    zsh
+    xwaylandvideobridge
+    zellij
+    zoxide
+  ];
+
+  fonts.packages = with pkgs; [
+    nerdfonts
   ];
 
 
@@ -83,33 +112,21 @@ in
   };
 
   services.gnome.gnome-keyring.enable = true;
+  services.openssh = {
+    enable = true;
+  };
+  programs.ssh.startAgent = true;
 
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
   };
+  
+  # doesn't seem to work with Vivaldi yet
+  programs.chromium.extensions = [ 
+    "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+  ];
 
-  programs.git = {
-    enable = true;
- #    userName = "Matthias Riegel";
- #    userEmail = "public@verriegelt.net";
-  };
-
-  programs.git.config = {
-    init = {
-      defaultBranch = "main";
-    };
-    user = {
-      email = "public@verriegelt.net";
-      name = "Matthias Riegel";
-    };
-    pull = {
-      ff = "only";
-    };
-    safe = {
-      directory = "/etc/nixos";
-    };
-  };
 
   security.polkit.enable = true;
 
@@ -135,6 +152,7 @@ in
   #     tree
   #   ];
   };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
