@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+
   programs.git = {
     enable = true;
   };
@@ -29,15 +30,4 @@
   };
 
   users.defaultUserShell = pkgs.zsh;
-
-  # wayland.windowManager.sway = {
-  #   config = {
-  #     bars = [{
-  #       fonts.size = 15.0;
-  #       # command = "waybar"; You can change it if you want
-  #       position = "bottom";
-  #     }];
-  #   };
-  # };
-
 }
