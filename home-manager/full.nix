@@ -5,13 +5,9 @@
     ./i3
     ./hyprland
     ./kitty
+    ./eza
+    ./vim
   ];
-
-  home = {
-    username = "mri";
-    homeDirectory = "/home/mri";
-  };
-
 
   programs.home-manager.enable = true;
   home.stateVersion = "23.11";

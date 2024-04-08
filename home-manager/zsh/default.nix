@@ -3,13 +3,6 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      # ls
-      ls = "eza";
-      la = "eza -a";
-      ll = "eza -l --time-style long-iso";
-      lh = "eza -lh --time-style long-iso";
-      lla = "eza -la --time-style long-iso";
-      lha = "eza -lha --time-style long-iso";
       # docker-compose
       dc = "docker-compose";
       dcud = "docker-compose up -d";

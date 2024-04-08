@@ -7,6 +7,7 @@
     enable = true;
     # enableNvidiaPatches = true;
     xwayland.enable = true;
+    extraConfig = (import ./hyprland.conf);
   };
   # home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
 

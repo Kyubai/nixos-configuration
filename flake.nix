@@ -26,7 +26,21 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ./home-manager/mri.nix;
+          home-manager.users.mri = import ./home-manager/full.nix;
+          home-manager.users.root = import ./home-manager/full.nix;
+        }
+	];
+      };
+      nixos-test-virtmanager = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        # system = "x86_64-linux";
+        modules = [
+	./systems/nixos-test-virtmanager/configuration.nix
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.mri = import ./home-manager/full.nix;
+          home-manager.users.root = import ./home-manager/full.nix;
         }
 	];
       };
