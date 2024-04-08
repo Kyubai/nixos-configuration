@@ -13,6 +13,10 @@ in
     home.stateVersion = "23.11";
   #   /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
   };
+
+  home-manager = {
+      
+  };
   
 
   # programs.home-manager.enable = true;
