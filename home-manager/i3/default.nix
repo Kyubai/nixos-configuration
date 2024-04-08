@@ -4,7 +4,6 @@
 
   home.file.".xinitrc" = {
     text = ''
-    vmware-user &
     exec i3
     '';
   };
