@@ -17,11 +17,12 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.hostName = "nixos-test";
 
-  hardware = {
-    opengl.enable = true;
-    nvidia.modesetting.enable = true;
-  };
+  # hardware = {
+  #   opengl.enable = true;
+  #   nvidia.modesetting.enable = true;
+  # };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -53,25 +54,19 @@
 
 
   environment.systemPackages = with pkgs; [
-    bat
     brave
     dbus
     discord
-    eza
     htop-vim
     kitty
     konsole
-    lunarvim
     p7zip
-    neofetch
     neovim
     spice-vdagent
     vivaldi
     vivaldi-ffmpeg-codecs
     vim
-    wget
-    zellij
-    zoxide
+    wev
   ];
 
   fonts.packages = with pkgs; [
@@ -79,15 +74,18 @@
   ];
 
 
-  services.spice-vdagentd.enable = true;
-  services.qemuGuest.enable = true;
+  # services.spice-vdagentd.enable = true;
+  # services.qemuGuest.enable = true;
   
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
   };
+  xdg.portal.config.common.default = "*";
   xdg.autostart.enable = true;
 
   services.pipewire = {
