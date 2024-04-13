@@ -3,6 +3,7 @@
   imports = [
     ./zsh
     ./i3
+    ./sway
     ./hyprland
     ./kitty
     ./eza
