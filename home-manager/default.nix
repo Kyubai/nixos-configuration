@@ -8,6 +8,7 @@
     ./kitty
     ./eza
     ./vim
+    ./waybar
   ];
 
   programs.home-manager.enable = true;

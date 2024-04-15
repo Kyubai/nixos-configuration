@@ -26,11 +26,12 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ./home-manager/full.nix;
-          home-manager.users.root = import ./home-manager/full.nix;
+          home-manager.users.mri = import ./home-manager/default.nix;
+          home-manager.users.root = import ./home-manager/default.nix;
         }
 	];
       };
+
       nixos-test-virtmanager = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # system = "x86_64-linux";
@@ -39,10 +40,24 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ./home-manager/full.nix;
-          home-manager.users.root = import ./home-manager/full.nix;
+          home-manager.users.mri = import ./home-manager/default.nix;
+          home-manager.users.root = import ./home-manager/default.nix;
         }
 	];
+      };
+
+    deack-pc-01 = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs outputs;};
+      # system = "x86_64-linux";
+      modules = [
+	./systems/deack-pc-01/configuration.nix
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.mri = import ./home-manager/default.nix;
+          home-manager.users.root = import ./home-manager/default.nix;
+        }
+        ];
       };
     };
 
