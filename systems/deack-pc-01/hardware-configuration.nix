@@ -9,19 +9,19 @@
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/cfd69e69-348f-44b0-b462-3f30f3652307";
+    { device = "/dev/disk/by-uuid/37392e3c-3515-4ada-8a95-eaee2e7c0cb8";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/5bdeb339-46a9-48ab-920d-22a81c4cbea9";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/8418a125-700b-4ed6-a0b6-2bb72ff912f2";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C528-24F2";
+    { device = "/dev/disk/by-uuid/5B29-C2A4";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };

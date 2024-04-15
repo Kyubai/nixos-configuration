@@ -63,6 +63,8 @@
   environment.systemPackages = with pkgs; [
     dbus
     discord
+    pavucontrol
+    plasma-pa
     vesktop
     vivaldi
     vivaldi-ffmpeg-codecs
@@ -87,7 +89,9 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -104,6 +108,7 @@
 
 
   security.polkit.enable = true;
+  security.rtkit.enable = true;
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -113,7 +118,7 @@
   services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
+  # sound.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mri = {
