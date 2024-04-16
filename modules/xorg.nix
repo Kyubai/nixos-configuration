@@ -16,6 +16,8 @@
   services.xserver.enable = true;
   services.xserver.layout = "eu";
 
+  services.xserver.displayManager.lightdm.enable = true;
+
   services.xserver.windowManager.i3 = {
     enable = true;
     extraPackages = with pkgs; [

@@ -11,6 +11,7 @@
       ../../modules/xorg.nix
     ];
 
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
   nixpkgs.config.allowUnfree = true;
@@ -19,10 +20,11 @@
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.hostName = "nixos-test";
 
-  # hardware = {
-  #   opengl.enable = true;
-  #   nvidia.modesetting.enable = true;
-  # };
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -54,72 +56,51 @@
 
 
   environment.systemPackages = with pkgs; [
-    brave
     dbus
-    discord
-    htop-vim
-    kitty
-    konsole
-    p7zip
-    neovim
-    spice-vdagent
+    pavucontrol
+    plasma-pa
     vivaldi
     vivaldi-ffmpeg-codecs
-    vim
-    wev
   ];
 
   fonts.packages = with pkgs; [
     nerdfonts
   ];
-
-
-  # services.spice-vdagentd.enable = true;
-  # services.qemuGuest.enable = true;
   
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
     ];
   };
-  xdg.portal.config.common.default = "*";
   xdg.autostart.enable = true;
+  xdg.portal.config.common.default = "*";
 
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   services.gnome.gnome-keyring.enable = true;
-  services.openssh = {
-    enable = true;
-  };
-  programs.ssh.startAgent = true;
 
   # doesn't seem to work with Vivaldi yet
   programs.chromium.extensions = [ 
     "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
   ];
 
-
   security.polkit.enable = true;
+  security.rtkit.enable = true;
 
   # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
+  services.xserver.xkb.layout = "eu";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mri = {
@@ -131,30 +112,10 @@
   #   ];
   };
 
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
-
+  system.stateVersion = "23.11";
 }
 
