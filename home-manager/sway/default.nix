@@ -13,6 +13,12 @@
       floating = {
         titlebar = false;
       };
+      menu = "wofi -S drun -i";
+      output = {
+        "*" = {
+          bg = "$(find /data/media/backgrounds/ -type f | shuf -n 1) fill";
+        };
+      };
       # bars =  [
       #   {
       #     mode = "hide";
@@ -20,9 +26,14 @@
       #   }
       # ];
     };
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export MOZ_ENABLE_WAYLAND=1
+    '';
   };
-
-  # xdg.configFile.".config/sway/config".source = pkgs.lib.mkOverride 0 ./config;
 
   home.file.".swayinitrc" = {
     source = ./.swayinitrc;
@@ -30,4 +41,5 @@
   };
 
   programs.wofi.enable = true;
+  services.mako.enable = true;
 }

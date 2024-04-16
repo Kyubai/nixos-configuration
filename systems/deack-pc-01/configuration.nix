@@ -7,8 +7,6 @@
   imports = [ 
       ./hardware-configuration.nix
       ../../modules/base.nix
-      ../../modules/vmware-guest.nix
-      ../../modules/xorg.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -28,7 +26,7 @@
     driSupport = true;
     driSupport32Bit = true;
     extraPackages = with pkgs; [ amdvlk ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+    # extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
   # Set your time zone.
@@ -59,10 +57,13 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-
   environment.systemPackages = with pkgs; [
+    brave
     dbus
     discord
+    htop-vim
+    obsidian
+    p7zip
     pavucontrol
     plasma-pa
     keepassxc
@@ -70,6 +71,12 @@
     vivaldi
     vivaldi-ffmpeg-codecs
     steam
+    wine
+  ];
+
+  # for obsidian on 2024-04-16
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
   ];
 
   fonts.packages = with pkgs; [
@@ -101,11 +108,22 @@
   };
 
   programs.ssh.startAgent = true;
+  # fix dynamically linked libraries
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add missing dynamic libraries
+    libglvnd
+    libGL
+  ];
+
+  # required for GTK apps
+  programs.dconf.enable = true;
+
 
   # doesn't seem to work with Vivaldi yet
-  programs.chromium.extensions = [ 
-    "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-  ];
+  # programs.chromium.extensions = [ 
+  #   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+  # ];
 
 
   security.polkit.enable = true;

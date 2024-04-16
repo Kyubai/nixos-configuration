@@ -15,6 +15,14 @@
           "sway/workspaces"
           "sway/mode"
         ];
+        modules-right = [
+          "memory"
+          "cpu"
+          "pulseaudio"
+          "network"
+          "tray"
+          "clock"
+        ];
       };
     };
   };
