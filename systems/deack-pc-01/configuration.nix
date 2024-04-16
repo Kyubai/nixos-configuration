@@ -65,6 +65,7 @@
     discord
     pavucontrol
     plasma-pa
+    keepassxc
     vesktop
     vivaldi
     vivaldi-ffmpeg-codecs
