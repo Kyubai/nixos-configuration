@@ -2,6 +2,7 @@
 {
   imports = [
     ./zsh
+    # ./i3
     ./sway
     ./kitty
     ./eza

@@ -7,11 +7,14 @@
   imports = [ 
       ./hardware-configuration.nix
       ../../modules/base.nix
+      # ../../modules/xorg.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdpgu" ];
+  hardware.cpu.amd.updateMicrocode = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
@@ -25,9 +28,15 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ amdvlk ];
-    # extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+    extraPackages = with pkgs; [
+      amdvlk
+      rocmPackages.clr.icd
+    ];
+    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
+
+  # support for controllers
+  hardware.steam-hardware.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -68,9 +77,13 @@
     plasma-pa
     keepassxc
     vesktop
-    vivaldi
+    (vivaldi.override {
+      proprietaryCodecs = true;
+    })
     vivaldi-ffmpeg-codecs
+    widevine-cdm
     steam
+    syncthing
     wine
   ];
 
@@ -103,8 +116,11 @@
   };
 
   services.gnome.gnome-keyring.enable = true;
-  services.openssh = {
+
+  services.syncthing = {
     enable = true;
+    user = "mri";
+    dataDir = "/srv/syncthing";
   };
 
   programs.ssh.startAgent = true;
@@ -142,7 +158,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mri = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "video"
+    ]; 
   #   packages = with pkgs; [
   #     firefox
   #     tree

@@ -33,6 +33,11 @@
       export _JAVA_AWT_WM_NONREPARENTING=1
       export MOZ_ENABLE_WAYLAND=1
     '';
+    extraConfig = ''
+      bindsym Mod4+i move workspace to output right
+      bindsym Mod4+0 workspace number 0
+      bindsym Mod4+Shift+0 move container to workspace number 0
+    '';
   };
 
   home.file.".swayinitrc" = {
