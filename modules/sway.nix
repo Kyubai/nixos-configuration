@@ -17,7 +17,27 @@ in
     dbus-sway-environment
     wayland
     xwaylandvideobridge
+    lightdm
+    wdisplays
+    grim
+    slurp
+    wl-clipboard
   ];
+
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    # wayland.enable = true;
+    wayland = true;
+    # autoLogin.delay = "0";
+  };
+
+  services.xserver.displayManager = {
+    autoLogin.enable = true;
+    autoLogin.user = "mri";
+    defaultSession = "sway";
+    sessionPackages = [ pkgs.sway ];
+  };
 
   programs.sway = {
     enable = true;

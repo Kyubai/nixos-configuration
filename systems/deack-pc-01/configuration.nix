@@ -7,14 +7,21 @@
   imports = [ 
       ./hardware-configuration.nix
       ../../modules/base.nix
+      ../../modules/sway.nix
+      ../../modules/amd.nix
+      ../../modules/steam.nix
       # ../../modules/xorg.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
-  services.xserver.videoDrivers = [ "amdpgu" ];
-  hardware.cpu.amd.updateMicrocode = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [
+    "video=DP-3:1920x1080@144"
+    "video=DP-1:2560x1440@240"
+  ];
+  boot.kernel.sysctl."vm.max_map_count" = "2147483642";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
@@ -23,20 +30,6 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.hostName = "deack-pc-01";
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      amdvlk
-      rocmPackages.clr.icd
-    ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
-  };
-
-  # support for controllers
-  hardware.steam-hardware.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -60,31 +53,39 @@
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
+    # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  console.keyMap = "us";
+
   environment.systemPackages = with pkgs; [
     brave
+    corefonts
     dbus
     discord
     htop-vim
+    keepassxc
+    lutris
+    mangohud
     obsidian
     p7zip
     pavucontrol
     plasma-pa
-    keepassxc
-    vesktop
     (vivaldi.override {
       proprietaryCodecs = true;
     })
-    vivaldi-ffmpeg-codecs
-    widevine-cdm
-    steam
+    runelite
     syncthing
-    wine
+    vesktop
+    vivaldi-ffmpeg-codecs
+    vulkan-tools
+    widevine-cdm
+    # 32- and 64-bit
+    wineWowPackages.waylandFull
+    winetricks
   ];
 
   # for obsidian on 2024-04-16
@@ -130,17 +131,16 @@
     # Add missing dynamic libraries
     libglvnd
     libGL
+    zlib
   ];
 
   # required for GTK apps
   programs.dconf.enable = true;
 
-
   # doesn't seem to work with Vivaldi yet
   # programs.chromium.extensions = [ 
   #   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
   # ];
-
 
   security.polkit.enable = true;
   security.rtkit.enable = true;
@@ -161,6 +161,7 @@
     extraGroups = [
       "wheel"
       "video"
+      "gamemode"
     ]; 
   #   packages = with pkgs; [
   #     firefox

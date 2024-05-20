@@ -2,12 +2,13 @@
 {
   imports = [
     ./zsh
-    # ./i3
+    ./i3
     ./sway
     ./kitty
     ./eza
     ./vim
     ./waybar
+    ./steam
   ];
 
   gtk = {
