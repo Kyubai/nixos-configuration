@@ -3,6 +3,8 @@
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
+    # to debug config
+    checkConfig = false;
     # extraConfig= (import ./config);
     config = {
       modifier = "Mod4";
@@ -48,8 +50,6 @@
     '';
     extraConfig = ''
       bindsym Mod4+i move workspace to output right
-      bindsym Mod4+0 workspace number 0
-      bindsym Mod4+Shift+0 move container to workspace number 0
       for_window [shell="xwayland"] title_format "[XWayland] %title"
       exec_always xrandr --output $(xrandr --listactivemonitors  | sed 's, ,/,g' | tail -n +2 | sed 's,2560,3000,g' | sort -t '/' -n -k4 -r | sed 's,.*/,,g' | head -n1) --primary
       bindsym Mod4+p exec --no-startup-id grim -g "$(slurp)" - | wl-copy

@@ -14,7 +14,7 @@
   hardware.opengl.driSupport = true;
 
   services.xserver.enable = true;
-  services.xserver.layout = "eu";
+  services.xserver.xkb.layout = "eu";
 
   services.xserver.displayManager.gdm = {
     enable = true;

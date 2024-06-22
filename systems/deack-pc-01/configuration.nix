@@ -6,11 +6,12 @@
 {
   imports = [ 
       ./hardware-configuration.nix
-      ../../modules/base.nix
-      ../../modules/sway.nix
       ../../modules/amd.nix
+      ../../modules/base.nix
+      ../../modules/desktop.nix
       ../../modules/steam.nix
-      # ../../modules/xorg.nix
+      ../../modules/sway.nix
+      ../../modules/xorg.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -68,25 +69,42 @@
     discord
     htop-vim
     keepassxc
-    lutris
+    (lutris.override {
+      extraLibraries = pkgs: [
+      ];
+      extraPkgs = pkgs: [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
+      ];
+    })
     mangohud
     obsidian
     p7zip
     pavucontrol
     plasma-pa
-    (vivaldi.override {
-      proprietaryCodecs = true;
-    })
     runelite
     syncthing
     vesktop
-    vivaldi-ffmpeg-codecs
     vulkan-tools
     widevine-cdm
     # 32- and 64-bit
-    wineWowPackages.waylandFull
-    winetricks
-  ];
+    # (wineWowPackages.waylandFull.override {
+    #     mingwSupport = false;
+    #   })
+    # was using .full before
+    (wineWowPackages.stable.override {
+        # mingwSupport = false;
+      })
+      winetricks
+    ];
 
   # for obsidian on 2024-04-16
   nixpkgs.config.permittedInsecurePackages = [
@@ -124,7 +142,7 @@
     dataDir = "/srv/syncthing";
   };
 
-  programs.ssh.startAgent = true;
+  # programs.ssh.startAgent = true;
   # fix dynamically linked libraries
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -144,10 +162,6 @@
 
   security.polkit.enable = true;
   security.rtkit.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

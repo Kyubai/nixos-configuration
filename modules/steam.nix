@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    steam
+    gamescope
   ];
 
   # support for controllers
@@ -10,6 +10,18 @@
   programs.gamemode = {
     enable = true;
     settings.general.inhibit_screensaver = "0";
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [
+        libkrb5
+        keyutils
+      ];
+    };
   };
 
   # xdg.desktopEntries =-{

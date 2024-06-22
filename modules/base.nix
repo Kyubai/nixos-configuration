@@ -41,11 +41,13 @@
     dbus
     htop-vim
     p7zip
-    pavucontrol
-    plasma-pa
+    # pavucontrol
+    # plasma-pa # volume applet
+    wl-clipboard
     wdisplays
     xsv
     choose
     ripgrep
+    unrar
   ];
 }

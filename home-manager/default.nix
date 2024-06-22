@@ -3,6 +3,7 @@
   imports = [
     ./zsh
     ./i3
+    ./neovim
     ./sway
     ./kitty
     ./eza
@@ -21,8 +22,14 @@
 
   qt = {
     enable = true;
-    # platformTheme = "gnome";
+    platformTheme.name = "adwaita";
     style.name = "adwaita-dark";
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
   };
 
   programs.imv.enable = true;

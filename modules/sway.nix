@@ -32,7 +32,7 @@ in
     # autoLogin.delay = "0";
   };
 
-  services.xserver.displayManager = {
+  services.displayManager = {
     autoLogin.enable = true;
     autoLogin.user = "mri";
     defaultSession = "sway";
