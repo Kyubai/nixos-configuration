@@ -16,7 +16,11 @@ set hlsearch
 " Ignore case in general, but become case-sensitive when uppercase is present
 set ignorecase smartcase 
 
-set autoindent
+" Disable command display
+autocmd!
+
+" set autoindent
+" set smartindent
 
 " Tab settings
 set tabstop=4       " visual spaces per tab
@@ -28,8 +32,7 @@ set expandtab       " expand tab to spaces
 " see http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
 set shiftround
 
-set smartindent
-set 
+
 set ruler 
 set undolevels=1000
 
