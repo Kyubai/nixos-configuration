@@ -8,10 +8,11 @@
       ./hardware-configuration.nix
       ../../modules/amd.nix
       ../../modules/base.nix
+      ../../modules/bluetooth.nix
       ../../modules/desktop.nix
       ../../modules/steam.nix
       ../../modules/sway.nix
-      ../../modules/xorg.nix
+      # ../../modules/xorg.nix
     ];
 
   boot.loader.systemd-boot.enable = true;

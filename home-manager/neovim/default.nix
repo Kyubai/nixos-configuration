@@ -19,6 +19,9 @@
 
     pkgs.vimPlugins.nvim-treesitter.withAllGrammars
 
+    # inspect treesitter and some more functions
+    pkgs.vimPlugins.playground
+
     # Harpoon provides navigation options
     pkgs.vimPlugins.harpoon
 
