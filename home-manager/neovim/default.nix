@@ -1,13 +1,29 @@
-{ pkgs, ... }:
-{
+{ pkgs
+, lib
+, ...
+}:
+
+let
+  luaConfig = import ./lua/config.nix;
+
+in {
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     extraConfig = import ./init.vim;
-    extraLuaConfig = import ./init.lua;
+    extraLuaConfig = ''
+    ${luaConfig}
+    '';
   };
 
-  programs.neovim.plugins = [
+  home.packages = with pkgs; [
+    # lanuage servers
+    rust-analyzer
+    lua-language-server
+  ];
+
+  programs.neovim.plugins = with pkgs.vimPlugins; [
     # TokyNight is my preffered colorscheme
     {
         plugin = pkgs.vimPlugins.tokyonight-nvim;
@@ -30,6 +46,10 @@
 
     # Git integration
     pkgs.vimPlugins.vim-fugitive
+
+    # Language server
+    # pkgs.vimPlugins.lsp-zero-nvim
+    nvim-lspconfig
   ];
 
   home.shellAliases = {

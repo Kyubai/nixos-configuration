@@ -37,4 +37,19 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- FuGitive options
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+
+-- lsp options
+local lsp = require("lspconfig")
+local servers = {
+    'rust_analyzer',
+    'lua_ls',
+}
+
+for _, name in pairs(servers) do
+    lsp[name].setup {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	}
+end
+
 ''
