@@ -1,8 +1,9 @@
-''
 syntax on
 
 " change leader key
 let mapleader = " "
+
+colorscheme tokyonight-night
 
 " dynamic line-numbers
 set number relativenumber
@@ -82,4 +83,3 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
-''

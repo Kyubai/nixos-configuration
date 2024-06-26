@@ -4,16 +4,24 @@
 }:
 
 let
-  luaConfig = import ./lua/config.nix;
+  vimConfig = pkgs.callPackage ./vim/config.nix {};
+  luaConfig = pkgs.callPackage ./lua/config.nix {};
 
 in {
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    extraConfig = import ./init.vim;
+    extraConfig = ''
+      ${vimConfig}
+    '';
     extraLuaConfig = ''
-    ${luaConfig}
+      -- Allow imports from common locations for some packages.
+      -- This is required for things like sumneko_lua to work.
+      local runtime_path = vim.split(package.path, ";")
+      table.insert(runtime_path, "lua/?.lua")
+      table.insert(runtime_path, "lua/?/init.lua")
+      ${luaConfig}
     '';
   };
 
@@ -21,35 +29,40 @@ in {
     # lanuage servers
     rust-analyzer
     lua-language-server
+    nixd
   ];
 
   programs.neovim.plugins = with pkgs.vimPlugins; [
     # TokyNight is my preffered colorscheme
-    {
-        plugin = pkgs.vimPlugins.tokyonight-nvim;
-	    config = "colorscheme tokyonight-night";
-    }
+    tokyonight-nvim
 
     # Telescope improves search
-    pkgs.vimPlugins.telescope-nvim
-
-    pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+    telescope-nvim
 
     # inspect treesitter and some more functions
-    pkgs.vimPlugins.playground
+    nvim-treesitter.withAllGrammars
+    playground
 
     # Harpoon provides navigation options
-    pkgs.vimPlugins.harpoon
+    harpoon
 
     # Improved undo function
-    pkgs.vimPlugins.undotree
+    undotree
 
     # Git integration
-    pkgs.vimPlugins.vim-fugitive
+    vim-fugitive
 
     # Language server
-    # pkgs.vimPlugins.lsp-zero-nvim
     nvim-lspconfig
+    # completions
+    nvim-cmp            # completion engine
+    luasnip             # snippet engine
+    cmp-buffer          # buffer words
+    cmp-path            # paths
+    cmp-nvim-lua        # nvim lua api
+    cmp-nvim-lsp        # lsp
+    cmp_luasnip         # luasnip 
+    friendly-snippets   # snippet collection
   ];
 
   home.shellAliases = {
