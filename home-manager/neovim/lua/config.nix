@@ -16,10 +16,12 @@ let
 
 in
   mkLuaConfigs [
+    ./cmp.lua
     ./fugitive.lua
     ./harpoon.lua
     ./init.lua
     ./lsp.lua
+    ./remap.lua
     ./telescope.lua
     ./undotree.lua
   ]

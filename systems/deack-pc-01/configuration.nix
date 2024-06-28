@@ -10,7 +10,7 @@
       ../../modules/base.nix
       ../../modules/bluetooth.nix
       ../../modules/desktop.nix
-      ../../modules/steam.nix
+      ../../modules/games.nix
       ../../modules/sway.nix
       # ../../modules/xorg.nix
     ];
@@ -64,37 +64,11 @@
   console.keyMap = "us";
 
   environment.systemPackages = with pkgs; [
-    brave
-    corefonts
     dbus
-    discord
     htop-vim
-    keepassxc
-    (lutris.override {
-      extraLibraries = pkgs: [
-      ];
-      extraPkgs = pkgs: [
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
-        xorg.libXScrnSaver
-        libpng
-        libpulseaudio
-        libvorbis
-        stdenv.cc.cc.lib
-        libkrb5
-        keyutils
-      ];
-    })
     mangohud
-    obsidian
     p7zip
-    pavucontrol
     plasma-pa
-    runelite
-    syncthing
-    vesktop
-    vulkan-tools
     widevine-cdm
     # 32- and 64-bit
     # (wineWowPackages.waylandFull.override {
