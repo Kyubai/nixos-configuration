@@ -34,6 +34,25 @@
 
   programs.imv.enable = true;
   programs.mpv.enable = true;
+  programs.bat.enable = true;
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+  };
+
+  # zoxide cd alternative
+  programs.zoxide.enable = true;
+  programs.zoxide.enableZshIntegration = true;
+
+  home.shellAliases = {
+    cat = "bat -p";
+    cd = "z";
+  };
+
+  home.sessionVariables = {
+    BROWSER = "vivaldi";
+    # add nvim?
+  };
 
   programs.home-manager.enable = true;
   home.stateVersion = "23.11";

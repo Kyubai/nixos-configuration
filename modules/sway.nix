@@ -18,9 +18,9 @@ in
     wayland
     xwaylandvideobridge
     lightdm
-    wdisplays
     grim
     slurp
+    wdisplays
     wl-clipboard
   ];
 

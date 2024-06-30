@@ -66,7 +66,6 @@
   environment.systemPackages = with pkgs; [
     dbus
     htop-vim
-    mangohud
     p7zip
     plasma-pa
     widevine-cdm
@@ -75,10 +74,6 @@
     #     mingwSupport = false;
     #   })
     # was using .full before
-    (wineWowPackages.stable.override {
-        # mingwSupport = false;
-      })
-      winetricks
     ];
 
   # for obsidian on 2024-04-16
@@ -152,10 +147,6 @@
       "video"
       "gamemode"
     ]; 
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system

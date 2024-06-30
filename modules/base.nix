@@ -37,17 +37,17 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    bat
     corefonts
     dbus
     htop-vim
     p7zip
-    # pavucontrol
     # plasma-pa # volume applet
-    wl-clipboard
-    wdisplays
     xsv
     choose
     ripgrep
+    tmux
     unrar
+    zoxide
   ];
 }

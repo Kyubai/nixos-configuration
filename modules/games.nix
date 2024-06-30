@@ -2,6 +2,28 @@
 {
   environment.systemPackages = with pkgs; [
     gamescope
+    (lutris.override {
+      extraLibraries = pkgs: [
+      ];
+      extraPkgs = pkgs: [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
+      ];
+    })
+    mangohud
+    runelite
+    (wineWowPackages.stable.override {
+        # mingwSupport = false;
+      })
+      winetricks
   ];
 
   # support for controllers
