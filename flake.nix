@@ -66,8 +66,21 @@
     homeConfigurations = {
       "mri" = home-manager.lib.homeManagerConfiguration {
 	pkgs = nixpkgs.legacyPackages.x86_64-linux;
-	extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/mri.nix];
+	extraSpecialArgs = {
+	  inherit inputs outputs;
+	};
+        modules = [
+	  ./home-manager/mri.nix
+	];
+      };
+      "root" = home-manager.lib.homeManagerConfiguration {
+	pkgs = nixpkgs.legacyPackages.x86_64-linux;
+	extraSpecialArgs = {
+	  inherit inputs outputs;
+	};
+        modules = [
+	  ./home-manager/root.nix
+	];
       };
     };
   };
