@@ -63,19 +63,6 @@
 
   console.keyMap = "us";
 
-  environment.systemPackages = with pkgs; [
-    dbus
-    htop-vim
-    p7zip
-    plasma-pa
-    widevine-cdm
-    # 32- and 64-bit
-    # (wineWowPackages.waylandFull.override {
-    #     mingwSupport = false;
-    #   })
-    # was using .full before
-    ];
-
   # for obsidian on 2024-04-16
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"

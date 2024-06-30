@@ -1,43 +1,31 @@
 { pkgs, ... }:
 {
   imports = [
-    ./zsh
-    ./i3
-    ./neovim
-    ./sway
-    ./kitty
     ./eza
+    ./git
+    ./i3
+    ./kitty
+    ./neovim
+    ./steam
+    ./sway
+    ./theme
     ./vim
     ./waybar
-    ./steam
+    ./zsh
   ];
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
-    };
-  };
 
-  qt = {
-    enable = true;
-    platformTheme.name = "adwaita";
-    style.name = "adwaita-dark";
-  };
-
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-  };
-
+  programs.bat.enable = true;
   programs.imv.enable = true;
   programs.mpv.enable = true;
-  programs.bat.enable = true;
   programs.tmux = {
     enable = true;
     mouse = true;
+  };
+  programs.ripgrep.enable = true;
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   # zoxide cd alternative
@@ -47,6 +35,7 @@
   home.shellAliases = {
     cat = "bat -p";
     cd = "z";
+    nrs = "nixos-rebuild switch --flake /etc/nixos";
   };
 
   home.sessionVariables = {
