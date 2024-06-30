@@ -34,7 +34,7 @@ vim.opt.smartindent = true -- I think this detects other spacings
 -- Scroll and wrap
 vim.opt.wrap = false        -- disable line-wrap
 vim.opt.scrolloff = 8
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
 
 -- Align indent to next multiple value of shiftwidth. For its meaning,
 -- see http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html

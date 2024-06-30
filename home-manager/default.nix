@@ -36,6 +36,7 @@
     cat = "bat -p";
     cd = "z";
     nrs = "nixos-rebuild switch --flake /etc/nixos";
+    hms = "home-manager switch --extra-experimental-features \"nix-command flakes\" --flake .#$USER";
   };
 
   home.sessionVariables = {
