@@ -26,7 +26,7 @@
         i3status
       ];
     };
-    # guest additions resize fix?
+    # guest additions resize fix
     videoDrivers = ["vmware"];
   };
 }
