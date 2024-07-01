@@ -16,7 +16,7 @@
         margin-right = 0;
         margin-top = 0;
         margin-bottom = 0;
-        spacing = 1;
+        # spacing = 1;
 
         modules-left = [
           "sway/workspaces"
@@ -34,7 +34,7 @@
       # tray module
       tray = {
         icon-size = 18;
-        spacing = 5;
+        # spacing = 5;
         show-passive-items = true;
       };
 
@@ -76,103 +76,102 @@
     };
 
     style = ''
-@define-color fg #ffffff;
-@define-color bg #333333;
-@define-color bordercolor #ffffff;
-@define-color disabled #a5a5a5;
-@define-color alert #f53c3c;
-@define-color activegreen #8fb666;
-
-* {
-  min-height: 0;
-  font-size: 14px;
-  border: none;
-  border-radius: 0;
-  background-color: transparent;
+    * {
+    border: none;
+    border-radius: 0;
+    font-family: "Hack Nerd Font";
+    font-size: 16px;
+    min-height: 0;
 }
 
 window#waybar {
-  color: @fg;
-  background-color: transparent;
+    background: transparent;
+    color: white;
 }
+
+#window {
+    font-weight: bold;
+    font-family: "Hack Nerd Font";
+}
+/*
+#workspaces {
+    padding: 0 5px;
+}
+*/
 
 #workspaces button {
-  color: @fg;
+    padding: 0 5px;
+    background: transparent;
+    color: white;
+    border-top: 2px solid transparent;
 }
 
-#workspaces button.urgent {
-  color: @alert;
-}
-#workspaces button.empty {
-  color: @disabled;
-}
 #workspaces button.focused {
-  color: @disabled;
-}
-#workspaces button.active {
-  color: #F2C187;
+    color: #ffffff;
+    border-top: 2px solid #9d7cd8;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#language,
-#backlight,
-#backlight-slider,
-#network,
-#pulseaudio,
-#wireplumber,
-#wireplumber,
-#custom-media,
-#taskbar,
-#tray,
-#tray menu,
-#tray > .needs-attention,
-#tray > .passive,
-#tray > .active,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#custom-power,
-#custom-notification,
-#window
-
-#custom-power {
-  color: @fg;
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
 }
 
-#custom-separator {
-  color: @disabled;
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
+    padding: 0 3px;
+    margin: 0 3px;
 }
 
-#network.disconnected,
-#pulseaudio.muted,
-#wireplumber.muted {
-  color: @alert;
+#clock {
+    font-weight: bold;
 }
 
-#battery.charging,
-#battery.plugged {
-  color: #26a65b;
+#battery {
 }
 
-label:focus {
-  background-color: #333333;
+#battery icon {
+    color: red;
 }
 
-#battery.critical:not(.charging) {
-  background-color: @alert;
-  color: @fg;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+#battery.charging {
 }
 
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+}
+
+#memory {
+}
+
+#network {
+}
+
+#network.disconnected {
+    background: #f53c3c;
+}
+
+#pulseaudio {
+}
+
+#pulseaudio.muted {
+}
+
+#tray {
+}
     '';
   };
 }

@@ -10,6 +10,7 @@
       terminal = "kitty";
       window = {
         titlebar = false;
+        hideEdgeBorders = "both";
       };
       floating = {
         titlebar = false;

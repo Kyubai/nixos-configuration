@@ -16,9 +16,18 @@
       terminal = "${pkgs.kitty}/bin/kitty";
       window = {
         titlebar = false;
+        hideEdgeBorders = "both";
+        border = 0;
       };
       floating = {
         titlebar = false;
+        border = 0;
+      };
+      gaps = {
+        smartBorders = "on";
+        smartGaps = true;
+        inner = 10;
+        outer = 0;
       };
       menu = "wofi -S drun -i";
       output = {
@@ -66,5 +75,5 @@
   };
 
   programs.wofi.enable = true;
-  services.mako.enable = true;
+  services.mako.enable = true; # notification
 }
