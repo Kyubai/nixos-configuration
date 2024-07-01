@@ -9,6 +9,7 @@
       ../../modules/base.nix
       ../../modules/desktop.nix
       ../../modules/vmware-guest.nix
+      ../../modules/vmware-mount-folder.nix
       # ../../modules/sway.nix
       ../../modules/xorg.nix
     ];
