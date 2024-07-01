@@ -13,21 +13,21 @@
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
 
-  services.xserver.enable = true;
-  services.xserver.xkb.layout = "eu";
-
-  services.xserver.displayManager.gdm = {
+  services.xserver = {
     enable = true;
+    xkb.layout = "eu";
+    displayManager = {
+        gdm.enable = true;
+        startx.enable = true;
+    };
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+        i3status
+      ];
+    };
+    # guest additions resize fix?
+    videoDrivers = ["vmware"];
   };
-
-  services.xserver.windowManager.i3 = {
-    enable = true;
-    extraPackages = with pkgs; [
-      i3status
-    ];
-  };
-
-  services.xserver.displayManager.startx.enable = true;
-
 }
 

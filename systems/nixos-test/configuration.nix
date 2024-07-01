@@ -7,7 +7,9 @@
   imports = [ 
       ./hardware-configuration.nix
       ../../modules/base.nix
+      ../../modules/desktop.nix
       ../../modules/vmware-guest.nix
+      # ../../modules/sway.nix
       ../../modules/xorg.nix
     ];
 
@@ -55,18 +57,6 @@
   # };
 
 
-  environment.systemPackages = with pkgs; [
-    dbus
-    pavucontrol
-    plasma-pa
-    vivaldi
-    vivaldi-ffmpeg-codecs
-  ];
-
-  fonts.packages = with pkgs; [
-    nerdfonts
-  ];
-  
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
@@ -88,9 +78,9 @@
   services.gnome.gnome-keyring.enable = true;
 
   # doesn't seem to work with Vivaldi yet
-  programs.chromium.extensions = [ 
-    "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-  ];
+  # programs.chromium.extensions = [ 
+  #   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+  # ];
 
   security.polkit.enable = true;
   security.rtkit.enable = true;

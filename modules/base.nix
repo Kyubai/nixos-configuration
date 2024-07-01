@@ -16,6 +16,7 @@
     corefonts
     dbus
     htop-vim
+    nerdfonts
     p7zip
     plasma-pa # volume applet
     xsv
