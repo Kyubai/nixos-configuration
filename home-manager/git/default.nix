@@ -20,6 +20,14 @@
     push = {
         autoSetupRemote = true;
     };
+    rerere.enabled = true;
+    column.ui = "auto";
+    branch.sort = "-commiterdate";
+  };
+
+  programs.git.aliases = {
+    staash = "stash --all";
+    blame = "blame -w -c -c -c";
   };
 
   home.shellAliases = {
