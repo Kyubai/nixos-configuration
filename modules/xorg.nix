@@ -8,6 +8,7 @@
     xorg.xf86videointel
     xorg.xf86videoati
     xorg.xf86videonouveau
+    wl-clipboard
   ];
 
   hardware.opengl.enable = true;
