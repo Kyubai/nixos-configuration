@@ -22,7 +22,7 @@
     };
     rerere.enabled = true;
     column.ui = "auto";
-    branch.sort = "-commiterdate";
+    # branch.sort = "-commiterdate";
   };
 
   programs.git.aliases = {
