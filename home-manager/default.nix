@@ -9,6 +9,7 @@
     ./steam
     ./sway
     ./theme
+    ./tmux
     ./vim
     ./waybar
     ./zsh
