@@ -11,7 +11,6 @@
   ];
 
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
 
   services.xserver = {
     enable = true;

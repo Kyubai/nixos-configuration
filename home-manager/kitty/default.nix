@@ -8,5 +8,8 @@
     };
     theme = "Tokyo Night";
   };
-  
+
+  home.sessionVariables = {
+    TERM = "kitty";
+  };
 }
