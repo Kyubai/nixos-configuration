@@ -10,6 +10,7 @@
       ../../modules/base.nix
       ../../modules/bluetooth.nix
       ../../modules/desktop.nix
+      ../../modules/development.nix
       ../../modules/games.nix
       ../../modules/sway.nix
       # ../../modules/xorg.nix
