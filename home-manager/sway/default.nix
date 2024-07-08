@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
+  let
+    modifier = "Mod4";
+  in
 {
   wayland.windowManager.sway = {
     enable = true;
@@ -7,13 +10,16 @@
     checkConfig = false;
     # extraConfig= (import ./config);
     config = {
-      modifier = "Mod4";
+      modifier = "${modifier}";
       input = {
         "*" = {
           xkb_layout = "eu";
         };
       };
       terminal = "${pkgs.kitty}/bin/kitty";
+      keybindings = lib.mkOptionDefault {
+        "${modifier}+k" = "exec ${config.wayland.windowManager.sway.config.terminal}";
+      };
       window = {
         titlebar = false;
         hideEdgeBorders = "both";
@@ -43,12 +49,6 @@
           pos = "0 360";
         };
       };
-      # bars =  [
-      #   {
-      #     mode = "hide";
-      #     position = "bottom";
-      #   }
-      # ];
     };
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
@@ -76,4 +76,5 @@
 
   programs.wofi.enable = true;
   services.mako.enable = true; # notification
+  services.flameshot.enable = true;
 }

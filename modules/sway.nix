@@ -14,14 +14,15 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    dbus-sway-environment
-    wayland
-    xwaylandvideobridge
-    lightdm
+    # dbus-sway-environment
+    # flameshot
     grim
+    lightdm
     slurp
+    wayland
     wdisplays
     wl-clipboard
+    xwaylandvideobridge
   ];
 
   services.xserver.enable = true;
