@@ -20,6 +20,7 @@
       keybindings = lib.mkOptionDefault {
         "${modifier}+k" = "exec ${config.wayland.windowManager.sway.config.terminal}";
       };
+      bars = [ ];
       window = {
         titlebar = false;
         hideEdgeBorders = "both";

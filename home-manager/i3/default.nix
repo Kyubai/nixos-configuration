@@ -12,7 +12,7 @@ in
       modifier = "${modifier}";
       terminal = "${pkgs.kitty}/bin/kitty";
       keybindings = lib.mkOptionDefault {
-        "${modifier}+k" = "exec ${config.i3.windowManager.sway.config.terminal}";
+        "${modifier}+k" = "exec ${config.xsession.windowManager.i3.config.terminal}";
       };
       window = {
         titlebar = false;
