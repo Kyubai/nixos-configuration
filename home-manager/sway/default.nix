@@ -18,7 +18,7 @@
       };
       terminal = "${pkgs.kitty}/bin/kitty";
       keybindings = lib.mkOptionDefault {
-        "${modifier}+k" = "exec ${config.wayland.windowManager.sway.config.terminal}";
+        "${modifier}+semicolon" = "exec ${config.wayland.windowManager.sway.config.terminal}";
       };
       bars = [ ];
       window = {

@@ -12,6 +12,8 @@
     { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
   ];
 
+  programs.ssh.startAgent = true;
+
   environment.systemPackages = with pkgs; [
     corefonts
     dbus

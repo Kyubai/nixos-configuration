@@ -12,7 +12,7 @@ in
       modifier = "${modifier}";
       terminal = "${pkgs.kitty}/bin/kitty";
       keybindings = lib.mkOptionDefault {
-        "${modifier}+k" = "exec ${config.xsession.windowManager.i3.config.terminal}";
+        "${modifier}+semicolon" = "exec ${config.xsession.windowManager.i3.config.terminal}"; # 47 is Semicolon
       };
       window = {
         titlebar = false;
