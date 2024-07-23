@@ -2,7 +2,7 @@
 {
   programs.eza.enable = true;
   home.shellAliases = {
-    ls = "eza";
+    ls = "eza --time-style long-iso";
     la = "eza -a";
     ll = "eza -l --time-style long-iso";
     lh = "eza -lh --time-style long-iso";

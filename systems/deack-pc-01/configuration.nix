@@ -134,6 +134,8 @@
       "wheel"
       "video"
       "gamemode"
+      "scanner"
+      "lp"
     ]; 
   };
 
