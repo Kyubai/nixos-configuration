@@ -44,6 +44,10 @@ vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format()
 end)
 
+-- swap { and } to keep in line with j and k
+vim.keymap.set("n", "{", "}")
+vim.keymap.set("n", "}", "{")
+
 -- QuickFix Navigation
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
