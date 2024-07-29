@@ -25,11 +25,16 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Tab settings
+-- https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
 vim.opt.tabstop = 4       -- visual spaces per tab
-vim.opt.softtabstop = 4   -- spaces in tab on edit
-vim.opt.shiftwidth = 4    -- spaces used for autoident
+vim.opt.softtabstop = -1  -- spaces inserted on <Tab> and <Backspace>, -1 means use shiftwidth
+vim.opt.shiftwidth = 2    -- blanks used for << and >>
 vim.opt.expandtab = true  -- expand tab to spaces
-vim.opt.smartindent = true -- I think this detects other spacings
+vim.opt.smarttab = true -- use shiftwidth for identation at start of line
+
+-- indenting
+vim.opt.autoindent = true  -- use indent from last line
+vim.opt.cindent = true -- enable c indenting
 
 -- Scroll and wrap
 vim.opt.wrap = false        -- disable line-wrap
@@ -48,9 +53,6 @@ vim.opt.backspace = "indent,eol,start"
 
 -- spell-check
 vim.opt.spelllang = "en,de"
-
--- Change text without putting the text into register,
--- see https://stackoverflow.com/q/54255/6064933
 
 -- Paste mode toggle, it seems that Neovim's bracketed paste mode
 -- does not work very well for nvim-qt, so we use good-old paste mode
