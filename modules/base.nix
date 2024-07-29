@@ -15,16 +15,18 @@
   programs.ssh.startAgent = true;
 
   environment.systemPackages = with pkgs; [
+    choose
     corefonts
     dbus
+    docker
     htop-vim
     nerdfonts
     openvpn
     p7zip
     plasma-pa # volume applet
-    xsv
-    choose
+    proxychains
     unrar
     widevine-cdm
+    xsv
   ];
 }

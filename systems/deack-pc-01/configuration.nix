@@ -12,6 +12,7 @@
       ../../modules/desktop.nix
       ../../modules/development.nix
       ../../modules/games.nix
+      ../../modules/printing.nix
       ../../modules/sway.nix
       # ../../modules/xorg.nix
     ];
@@ -52,7 +53,6 @@
   fonts.fontconfig.defaultFonts.monospace = [
     "Hack Nerd Font Mono"
   ];
-
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";

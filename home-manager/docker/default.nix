@@ -1,9 +1,9 @@
 { ... }:
 {
   home.shellAliases = {
-    dcud = "docker-compose up -d";
-    dcd = "docker-compose down";
-    dcr = "docker-compose down && docker-compose up -d";
-    dcl = "docker-compose logs";
+    dcud = "sudo docker compose up -d";
+    dcd = "sudo docker compose down";
+    dcr = "sudo docker compose down && docker-compose up -d";
+    dcl = "sudo docker compose logs";
   };
 }

@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./docker
     ./eza
     ./git
     ./i3
@@ -36,7 +37,7 @@
   home.shellAliases = {
     cat = "bat -p";
     cd = "z";
-    nrs = "nixos-rebuild switch --flake /etc/nixos";
+    nrs = "sudo nixos-rebuild switch --flake /etc/nixos";
     hms = "home-manager switch --extra-experimental-features \"nix-command flakes\" --flake .#$USER /etc/nixos";
   };
 

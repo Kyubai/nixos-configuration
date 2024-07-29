@@ -1,6 +1,7 @@
 { pkgs, ...}:
 {
   environment.systemPackages = with pkgs; [
+    bitwarden
     brave
     cargo
     corefonts
@@ -14,28 +15,13 @@
     (vivaldi.override {
       proprietaryCodecs = true;
     })
-    syncthing
     vivaldi-ffmpeg-codecs
+    syncthing
   ];
-
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      gutenprint
-      gutenprintBin
-      hplip
-      hplipWithPlugin
-      samsung-unified-linux-driver
-      samsung-unified-linux-driver_1_00_37
-      samsung-unified-linux-driver_1_00_36
-      splix
-    ];
-  };
-  hardware.sane.enable = true;
 
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     openFirewall = true;
   };
 }
