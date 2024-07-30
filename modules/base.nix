@@ -12,6 +12,8 @@
     { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
   ];
 
+  virtualisation.docker.enable = true;
+
   programs.ssh.startAgent = true;
   security.sudo.extraConfig = ''
     Defaults>root        env_keep += "SSH_AUTH_SOCK"
@@ -21,7 +23,6 @@
     choose
     corefonts
     dbus
-    docker
     htop-vim
     nerdfonts
     openvpn
