@@ -136,6 +136,7 @@
       "gamemode"
       "scanner"
       "lp"
+      "libvirtd" # for virt-manager
     ]; 
   };
 
