@@ -16,6 +16,7 @@
       proprietaryCodecs = true;
     })
     vivaldi-ffmpeg-codecs
+    virtiofsd # for virt-manager https://discourse.nixos.org/t/virt-manager-cannot-find-virtiofsd/26752
     syncthing
   ];
 
