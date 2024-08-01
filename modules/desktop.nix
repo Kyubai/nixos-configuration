@@ -19,6 +19,11 @@
     syncthing
   ];
 
+  # required for virt-manager
+  # https://nixos.wiki/wiki/Virt-manager
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;

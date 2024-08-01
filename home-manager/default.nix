@@ -31,6 +31,15 @@
     enableZshIntegration = true;
   };
 
+  # required for virt-manager
+  # https://nixos.wiki/wiki/Virt-manager
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
+
   # zoxide cd alternative
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
@@ -51,11 +60,11 @@
     enable = true;
   
     defaultApplications = {
-      "text/html" = " vivaldi-stable.desktop";
-      "x-scheme-handler/http" = "vivaldi-stable.desktop";
-      "x-scheme-handler/https" = "vivaldi-stable.desktop";
-      "x-scheme-handler/about" = "vivaldi-stable.desktop";
-      "x-scheme-handler/unknown" = "vivaldi-stable.desktop";
+      "text/html" = " vivaldi.desktop";
+      "x-scheme-handler/http" = "vivaldi.desktop";
+      "x-scheme-handler/https" = "vivaldi.desktop";
+      "x-scheme-handler/about" = "vivaldi.desktop";
+      "x-scheme-handler/unknown" = "vivaldi.desktop";
     };
   };
 
