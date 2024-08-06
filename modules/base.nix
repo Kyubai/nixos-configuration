@@ -17,6 +17,7 @@
   programs.ssh.startAgent = true;
   security.sudo.extraConfig = ''
     Defaults>root        env_keep += "SSH_AUTH_SOCK"
+    Defaults    timestamp_timeout=-1
   '';
 
   environment.systemPackages = with pkgs; [
