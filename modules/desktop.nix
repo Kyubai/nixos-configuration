@@ -12,6 +12,7 @@
     pavucontrol
     pulsemixer
     vesktop
+    veracrypt
     (vivaldi.override {
       proprietaryCodecs = true;
     })

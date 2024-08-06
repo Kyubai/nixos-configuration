@@ -30,6 +30,7 @@
     p7zip
     plasma-pa # volume applet
     proxychains
+    jq
     unrar
     widevine-cdm
     xsv
