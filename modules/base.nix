@@ -26,6 +26,7 @@
     dbus
     htop-vim
     nerdfonts
+    openssl
     openvpn
     p7zip
     plasma-pa # volume applet
