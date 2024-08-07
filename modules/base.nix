@@ -26,6 +26,7 @@
     dbus
     htop-vim
     nerdfonts
+    nmap
     openssl
     openvpn
     p7zip
