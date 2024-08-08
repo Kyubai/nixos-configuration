@@ -4,3 +4,6 @@ require("oil").setup({
   -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
   default_file_explorer = true
 })
+
+-- open oil explorer
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
