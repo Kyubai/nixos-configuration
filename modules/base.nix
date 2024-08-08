@@ -23,16 +23,13 @@
   environment.systemPackages = with pkgs; [
     choose
     corefonts
-    clang
     dbus
-    gcc
     htop-vim
     nerdfonts
     nmap
     openssl
     openvpn
     p7zip
-    pkg-config # devel
     plasma-pa # volume applet
     proxychains
     jq
