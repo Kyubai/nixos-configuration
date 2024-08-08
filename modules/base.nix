@@ -35,6 +35,7 @@
     jq
     unrar
     widevine-cdm
+    wireguard-tools
     xsv
   ];
 }
