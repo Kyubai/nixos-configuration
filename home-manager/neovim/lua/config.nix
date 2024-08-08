@@ -21,6 +21,7 @@ in
     ./harpoon.lua
     ./init.lua
     ./lsp.lua
+    ./oil.lua
     ./remap.lua
     ./telescope.lua
     ./undotree.lua
