@@ -35,6 +35,7 @@
     proxychains
     jq
     unrar
+    tcpdump
     widevine-cdm
     wireguard-tools
     xsv
