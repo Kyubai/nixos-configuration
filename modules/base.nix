@@ -24,6 +24,7 @@
     choose
     corefonts
     dbus
+    dig
     htop-vim
     nerdfonts
     nmap
