@@ -23,7 +23,9 @@
   environment.systemPackages = with pkgs; [
     choose
     corefonts
+    clang
     dbus
+    gcc
     htop-vim
     nerdfonts
     nmap
