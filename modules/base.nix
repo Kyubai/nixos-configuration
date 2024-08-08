@@ -32,6 +32,7 @@
     openssl
     openvpn
     p7zip
+    pkg-config # devel
     plasma-pa # volume applet
     proxychains
     jq
