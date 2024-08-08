@@ -45,7 +45,7 @@ vim.keymap.set("i", "jk", "<Esc>")
 
 
 vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format()
+  vim.lsp.buf.format()
 end)
 
 -- swap { and } to keep in line with j and k

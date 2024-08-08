@@ -38,7 +38,10 @@ in {
 
     # Telescope improves search
     telescope-nvim
-
+    
+    # buffer like dir edit
+    oil-nvim
+    
     # inspect treesitter and some more functions
     nvim-treesitter.withAllGrammars
     playground
