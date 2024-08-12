@@ -49,6 +49,7 @@
     cd = "z";
     nrs = "sudo nixos-rebuild switch --flake /etc/nixos && git -C /etc/nixos add -A && git -C /etc/nixos commit && git -C /etc/nixos push";
     hms = "home-manager switch --extra-experimental-features \"nix-command flakes\" --flake .#$USER /etc/nixos";
+    nix-shell = "nix-shell --run zsh";
   };
 
   home.sessionVariables = {
