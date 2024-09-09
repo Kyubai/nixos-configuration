@@ -5,7 +5,7 @@
 { config, lib, pkgs, ... }:
 {
   imports = [ 
-      # ./hardware-configuration.nix
+      ./hardware-configuration.nix
       ../../modules/base.nix
       ../../modules/desktop.nix
       ../../modules/development.nix
@@ -18,11 +18,13 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
+  system.autoUpgrade.enable = true;
+  
   nixpkgs.config.allowUnfree = true;
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.hostName = "nixos-test";
+  networking.hostName = "hacking-vm";
 
   hardware.opengl = {
     enable = true;
@@ -106,7 +108,7 @@
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+  system.copySystemConfiguration = true;
   system.stateVersion = "23.11";
 }
 
