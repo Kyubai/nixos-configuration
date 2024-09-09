@@ -5,7 +5,7 @@
 { config, lib, pkgs, ... }:
 {
   imports = [ 
-      ./hardware-configuration.nix
+      # ./hardware-configuration.nix
       ../../modules/base.nix
       ../../modules/desktop.nix
       ../../modules/development.nix
