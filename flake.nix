@@ -18,11 +18,11 @@
     # Used with `nixos-rebuild --flake .#<hostname>`
     # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
     nixosConfigurations = {
-      nixos-test = nixpkgs.lib.nixosSystem {
+      hacking-vm = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # system = "x86_64-linux";
         modules = [
-	./systems/nixos-test/configuration.nix
+	./systems/hacking-vm/configuration.nix
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
