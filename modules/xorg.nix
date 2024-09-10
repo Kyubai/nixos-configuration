@@ -1,6 +1,19 @@
-{ pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let cfgXorg = config.modules.desktop.xorg;
+in {
+  options.modules.desktop = {
+    xorg = {
+      enable = lib.mkEnableOption "Xorg display server";
+    };
+  };
+
+  config = lib.mkIf cfgXorg.enable {
+  environment.systemPackages = with pkgs; [ 
     xorg.xorgserver
     xorg.xf86inputevdev
     xorg.xf86inputsynaptics
@@ -28,6 +41,7 @@
     };
     # guest additions resize fix
     videoDrivers = ["vmware"];
+  };
   };
 }
 

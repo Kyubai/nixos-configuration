@@ -30,6 +30,8 @@ in {
     rust-analyzer
     lua-language-server
     nixd
+
+    alejandra # nix formatter
   ];
 
   programs.neovim.plugins = with pkgs.vimPlugins; [
