@@ -6,10 +6,26 @@
 {
   imports = [ 
       ./hardware-configuration.nix
-      ../../modules/base.nix
-      ../../modules/vmware-guest.nix
-      ../../modules/xorg.nix
+      ../../../modules/amd.nix
+      ../../../modules/base.nix
+      ../../../modules/bluetooth.nix
+      ../../../modules/desktop.nix
+      ../../../modules/development.nix
+      ../../../modules/games.nix
+      ../../../modules/printing.nix
+      ../../../modules/sway.nix
+      # ../../../modules/xorg.nix
     ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [
+    "video=DP-3:1920x1080@144"
+    "video=DP-1:2560x1440@240"
+  ];
+  boot.kernel.sysctl."vm.max_map_count" = "2147483642";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
@@ -17,12 +33,7 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.hostName = "nixos-test-virtmanager";
-
-  hardware = {
-    opengl.enable = true;
-    nvidia.modesetting.enable = true;
-  };
+  networking.hostName = "deack-pc-01";
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -43,30 +54,24 @@
     "Hack Nerd Font Mono"
   ];
 
-
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
+    # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  console.keyMap = "us";
 
-  environment.systemPackages = with pkgs; [
-    dbus
-    discord
-    spice-vdagent
-    vivaldi
-    vivaldi-ffmpeg-codecs
+  # for obsidian on 2024-04-16
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
   ];
 
   fonts.packages = with pkgs; [
     nerdfonts
   ];
-
-  services.spice-vdagentd.enable = true;
-  services.qemuGuest.enable = true;
   
   services.dbus.enable = true;
   xdg.portal = {
@@ -77,51 +82,68 @@
     ];
   };
   xdg.autostart.enable = true;
+  xdg.portal.config.common.default = "*";
 
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   services.gnome.gnome-keyring.enable = true;
-  services.openssh = {
+
+  services.syncthing = {
     enable = true;
+    user = "mri";
+    dataDir = "/srv/syncthing";
   };
 
-  programs.ssh.startAgent = true;
-
-  # doesn't seem to work with Vivaldi yet
-  programs.chromium.extensions = [ 
-    "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+  # programs.ssh.startAgent = true;
+  # fix dynamically linked libraries
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add missing dynamic libraries
+    libglvnd
+    libGL
+    zlib
   ];
 
+  # required for GTK apps
+  programs.dconf.enable = true;
+
+  # doesn't seem to work with Vivaldi yet
+  # programs.chromium.extensions = [ 
+  #   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+  # ];
 
   security.polkit.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  security.rtkit.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
+  # sound.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mri = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
+    extraGroups = [
+      "wheel"
+      "video"
+      "gamemode"
+      "scanner"
+      "lp"
+      "libvirtd" # for virt-manager
+    ]; 
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
+  system.stateVersion = "23.11";
 }
 

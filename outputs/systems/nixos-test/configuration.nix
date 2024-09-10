@@ -6,13 +6,13 @@
 {
   imports = [ 
       # ./hardware-configuration.nix
-      ../../modules/base.nix
-      ../../modules/desktop.nix
-      ../../modules/development.nix
-      ../../modules/vmware-guest.nix
-      ../../modules/vmware-mount-folder.nix
-      # ../../modules/sway.nix
-      ../../modules/xorg.nix
+      ../../../modules/base.nix
+      ../../../modules/desktop.nix
+      ../../../modules/development.nix
+      ../../../modules/vmware-guest.nix
+      ../../../modules/vmware-mount-folder.nix
+      # ../../../modules/sway.nix
+      ../../../modules/xorg.nix
     ];
 
 
