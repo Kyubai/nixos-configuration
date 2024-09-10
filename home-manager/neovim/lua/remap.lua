@@ -35,13 +35,13 @@ vim.keymap.set("n", "<leader>d", '"_d')
 vim.keymap.set("v", "<leader>d", '"_d')
 
 -- this button is useless
-vim.keymap.set("n", "Q", "<nop>")
+-- vim.keymap.set("n", "Q", "<nop>")
 
 -- fast quit to normal mode
 vim.keymap.set("i", "jk", "<Esc>")
 
 
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set("n", "Q", function()
   vim.lsp.buf.format()
 end)
 

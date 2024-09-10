@@ -1,14 +1,11 @@
-{ pkgs
-, lib
-, ...
-}:
-
-let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   vimConfig = pkgs.callPackage ./vim/config.nix {};
   luaConfig = pkgs.callPackage ./lua/config.nix {};
-
 in {
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -40,10 +37,10 @@ in {
 
     # Telescope improves search
     telescope-nvim
-    
+
     # buffer like dir edit
     oil-nvim
-    
+
     # inspect treesitter and some more functions
     nvim-treesitter.withAllGrammars
     playground
@@ -60,14 +57,14 @@ in {
     # Language server
     nvim-lspconfig
     # completions
-    nvim-cmp            # completion engine
-    luasnip             # snippet engine
-    cmp-buffer          # buffer words
-    cmp-path            # paths
-    cmp-nvim-lua        # nvim lua api
-    cmp-nvim-lsp        # lsp
-    cmp_luasnip         # luasnip 
-    friendly-snippets   # snippet collection
+    nvim-cmp # completion engine
+    luasnip # snippet engine
+    cmp-buffer # buffer words
+    cmp-path # paths
+    cmp-nvim-lua # nvim lua api
+    cmp-nvim-lsp # lsp
+    cmp_luasnip # luasnip
+    friendly-snippets # snippet collection
   ];
 
   home.shellAliases = {

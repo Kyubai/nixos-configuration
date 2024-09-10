@@ -17,10 +17,14 @@ local lsp_on_attach = function(client, bufnr)
   vim.keymap.set("n", "]w", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
   vim.keymap.set("n", "[e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end, opts)
   vim.keymap.set("n", "]e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end, opts)
-  vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-  -- vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  -- https://neovim.io/doc/user/lsp.html#gra
+  -- not sure why these mappings don't work by default, here you are
+  vim.keymap.set("n", "gra", function() vim.lsp.buf.code_action() end, opts)
+  vim.keymap.set("v", "gra", function() vim.lsp.buf.code_action() end, opts)
+  vim.keymap.set("n", "grr", function() vim.lsp.buf.references() end, opts)
+  vim.keymap.set("n", "grn", function() vim.lsp.buf.rename() end, opts)
+  vim.keymap.set("n", "<C-s>", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set("i", "<C-s>", function() vim.lsp.buf.signature_help() end, opts)
 end
 
 local servers = {
@@ -35,15 +39,14 @@ for _, name in pairs(servers) do
   }
 end
 
-  lsp.nixd.setup({
-    settings = {
-      nixd = {
-        formatting = {
-          -- command = { "%!alejandra -qq" },
-          command = { "alejandra" },
-        },
+lsp.nixd.setup({
+  settings = {
+    nixd = {
+      formatting = {
+        command = { "alejandra" },
       },
     },
-    on_attach = lsp_on_attach,
-    capabilities = lsp_capabilities,
-  })
+  },
+  on_attach = lsp_on_attach,
+  capabilities = lsp_capabilities,
+})
