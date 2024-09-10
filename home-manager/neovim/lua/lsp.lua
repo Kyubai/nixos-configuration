@@ -27,6 +27,7 @@ local servers = {
     'rust_analyzer',
     'lua_ls',
     'nixd',
+    'alejandra',
 }
 
 for _, name in pairs(servers) do
