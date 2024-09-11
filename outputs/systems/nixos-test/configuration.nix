@@ -1,22 +1,25 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
 {
-  imports = [ 
-      # ./hardware-configuration.nix
-      ../../../modules/base.nix
-      ../../../modules/desktop.nix
-      ../../../modules/development.nix
-      ../../../modules/vmware-guest.nix
-      ../../../modules/vmware-mount-folder.nix
-      # ../../../modules/sway.nix
-      ../../../modules/xorg.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    #  ../../../modules/development.nix
+  ];
 
+  modules.base.enable = true;
+  modules.desktop.tools.enable = true;
+  modules.desktop.xorg.enable = true;
+  modules.desktop.sound.enable = true;
+  modules.vmware.guest.enable = true;
+  modules.vmware.sharedFolder.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.auto-optimise-store = true;
   nixpkgs.config.allowUnfree = true;
   # Pick only one of the below networking options.
@@ -48,7 +51,6 @@
     "Hack Nerd Font Mono"
   ];
 
-
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -56,7 +58,6 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
-
 
   services.dbus.enable = true;
   xdg.portal = {
@@ -68,18 +69,10 @@
   xdg.autostart.enable = true;
   xdg.portal.config.common.default = "*";
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
   services.gnome.gnome-keyring.enable = true;
 
   # doesn't seem to work with Vivaldi yet
-  # programs.chromium.extensions = [ 
+  # programs.chromium.extensions = [
   #   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
   # ];
 
@@ -96,11 +89,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mri = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    #   packages = with pkgs; [
+    #     firefox
+    #     tree
+    #   ];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
@@ -109,4 +102,3 @@
   # system.copySystemConfiguration = true;
   system.stateVersion = "23.11";
 }
-

@@ -3,16 +3,13 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+with lib; let
   cfgXorg = config.modules.desktop.xorg;
 in {
-  options.modules.desktop = {
-    xorg = {
-      enable = lib.mkEnableOption "Xorg display server";
-    };
-  };
+  options.modules.desktop.xorg.enable = mkEnableOption "Xorg display server";
 
-  config = lib.mkIf cfgXorg.enable {
+  config = mkIf cfgXorg.enable {
     environment.systemPackages = with pkgs; [
       xorg.xorgserver
       xorg.xf86inputevdev
