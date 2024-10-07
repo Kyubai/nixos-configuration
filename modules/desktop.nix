@@ -36,6 +36,9 @@ in {
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
 
+    virtualisation.virtualbox.host.enable = true;
+    virtualisation.virtualbox.host.enableExtensionPack = true;
+
     services.avahi = {
       enable = true;
       nssmdns4 = true;
