@@ -49,6 +49,7 @@ in {
       tcpdump
       widevine-cdm
       wireguard-tools
+      openvpn
       xsv
     ];
   };
