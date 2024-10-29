@@ -18,6 +18,7 @@ in {
       gimp
       keepassxc
       obsidian
+      kdePackages.okular
       pavucontrol
       pulsemixer
       vesktop # discord client
