@@ -33,6 +33,8 @@ in {
       syncthing
     ];
 
+    services.flatpak.enable = true;
+
     # required for virt-manager
     # https://nixos.wiki/wiki/Virt-manager
     virtualisation.libvirtd.enable = true;
