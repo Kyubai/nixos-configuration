@@ -55,23 +55,23 @@
     # add nvim?
   };
 
-#   xdg.mimeApps = {
-#     enable = true;
-#     associations.added = {
-#       "text/html" = ["vivaldi.desktop"];
-#       "x-scheme-handler/http" = ["vivaldi.desktop"];
-#       "x-scheme-handler/https" = ["vivaldi.desktop"];
-#       "x-scheme-handler/about" = ["vivaldi.desktop"];
-#       "x-scheme-handler/unknown" = ["vivaldi.desktop"];
-#     };
-#     defaultApplications = {
-#       "text/html" = ["vivaldi.desktop"];
-#       "x-scheme-handler/http" = ["vivaldi.desktop"];
-#       "x-scheme-handler/https" = ["vivaldi.desktop"];
-#       "x-scheme-handler/about" = ["vivaldi.desktop"];
-#       "x-scheme-handler/unknown" = ["vivaldi.desktop"];
-#     };
-#   };
+  xdg.mimeApps = {
+  enable = true;
+  associations.added = {
+    "text/html" = ["vivaldi-stable.desktop"];
+    "x-scheme-handler/http" = ["vivaldi-stable.desktop"];
+    "x-scheme-handler/https" = ["vivaldi-stable.desktop"];
+    "x-scheme-handler/about" = ["vivaldi-stable.desktop"];
+    "x-scheme-handler/unknown" = ["vivaldi-stable.desktop"];
+  };
+  defaultApplications = {
+    "text/html" = ["vivaldi-stable.desktop"];
+    "x-scheme-handler/http" = ["vivaldi-stable.desktop"];
+    "x-scheme-handler/https" = ["vivaldi-stable.desktop"];
+    "x-scheme-handler/about" = ["vivaldi-stable.desktop"];
+    "x-scheme-handler/unknown" = ["vivaldi-stable.desktop"];
+  };
+};
 
   programs.home-manager.enable = true;
   home.stateVersion = "23.11";
