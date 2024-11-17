@@ -15,6 +15,7 @@ in {
       cargo
       corefonts
       # discord
+      feishin
       gimp
       keepassxc
       obsidian
