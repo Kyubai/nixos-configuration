@@ -11,7 +11,6 @@ in {
     default = "Mod4";
   };
 
-
   config = lib.mkIf cfgI3.enable {
     modules.kitty.enable = true; # kitty is used as terminal emulator
 
