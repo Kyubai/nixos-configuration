@@ -3,12 +3,12 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfgDesktop = config.modules.desktop.tools;
 in {
-  options.modules.desktop.tools.enable = mkEnableOption "basic desktop gui tools";
-  config = mkIf cfgDesktop.enable {
+  options.modules.desktop.tools.enable = lib.mkEnableOption "basic desktop gui tools";
+
+  config = lib.mkIf cfgDesktop.enable {
     environment.systemPackages = with pkgs; [
       bitwarden
       brave

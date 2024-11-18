@@ -1,28 +1,22 @@
-{pkgs, ...}: {
+{...}: {
   imports = [
-    ./docker
-    ./eza
-    ./git
-    ./i3
-    ./kitty
-    ./neovim
-    ./ssh
-    ./steam
-    ./sway
-    ./theme
-    ./tmux
-    ./vim
-    ./waybar
-    ./zsh
+    ./modules
   ];
+
+  # my own modules, which I always want to be enabled
+  modules.docker.enable = true;
+  modules.eza.enable = true;
+  modules.flatpak.enable = true;
+  modules.git.enable = true;
+  modules.kitty.enable = true;
+  modules.neovim.enable = true;
+  modules.theme.enable = true;
+  modules.tmux.enable = true;
+  modules.zsh.enable = true;
 
   programs.bat.enable = true;
   programs.imv.enable = true;
   programs.mpv.enable = true;
-  programs.tmux = {
-    enable = true;
-    mouse = true;
-  };
   programs.ripgrep.enable = true;
   programs.starship = {
     enable = true;
@@ -38,7 +32,7 @@
     };
   };
 
-  # zoxide cd alternative
+  # zoxide is a cd alternative
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
 
@@ -52,26 +46,26 @@
 
   home.sessionVariables = {
     BROWSER = "vivaldi";
-    # add nvim?
+    # EDITOR is set in nvim
   };
 
   xdg.mimeApps = {
-  enable = true;
-  associations.added = {
-    "text/html" = ["vivaldi-stable.desktop"];
-    "x-scheme-handler/http" = ["vivaldi-stable.desktop"];
-    "x-scheme-handler/https" = ["vivaldi-stable.desktop"];
-    "x-scheme-handler/about" = ["vivaldi-stable.desktop"];
-    "x-scheme-handler/unknown" = ["vivaldi-stable.desktop"];
+    enable = true;
+    associations.added = {
+      "text/html" = ["vivaldi-stable.desktop"];
+      "x-scheme-handler/http" = ["vivaldi-stable.desktop"];
+      "x-scheme-handler/https" = ["vivaldi-stable.desktop"];
+      "x-scheme-handler/about" = ["vivaldi-stable.desktop"];
+      "x-scheme-handler/unknown" = ["vivaldi-stable.desktop"];
+    };
+    defaultApplications = {
+      "text/html" = ["vivaldi-stable.desktop"];
+      "x-scheme-handler/http" = ["vivaldi-stable.desktop"];
+      "x-scheme-handler/https" = ["vivaldi-stable.desktop"];
+      "x-scheme-handler/about" = ["vivaldi-stable.desktop"];
+      "x-scheme-handler/unknown" = ["vivaldi-stable.desktop"];
+    };
   };
-  defaultApplications = {
-    "text/html" = ["vivaldi-stable.desktop"];
-    "x-scheme-handler/http" = ["vivaldi-stable.desktop"];
-    "x-scheme-handler/https" = ["vivaldi-stable.desktop"];
-    "x-scheme-handler/about" = ["vivaldi-stable.desktop"];
-    "x-scheme-handler/unknown" = ["vivaldi-stable.desktop"];
-  };
-};
 
   programs.home-manager.enable = true;
   home.stateVersion = "23.11";

@@ -1,4 +1,0 @@
-{ ... }:
-{
-  programs.ssh.addKeysToAgent = "yes";
-}

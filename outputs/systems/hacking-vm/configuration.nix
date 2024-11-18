@@ -5,8 +5,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../../modules
-    # ../../../modules/development.nix
-    # ../../../modules/vmware-mount-folder.nix
   ];
 
   # my own /etc/nixos/modules
