@@ -32,30 +32,22 @@ in {
   ];
 
   programs.neovim.plugins = with pkgs.vimPlugins; [
-    # TokyNight is my preffered colorscheme
-    tokyonight-nvim
-
-    # Telescope improves search
-    telescope-nvim
-
-    # buffer like dir edit
-    oil-nvim
+    tokyonight-nvim # preffered colorscheme
+    telescope-nvim # Telescope improves search
+    oil-nvim # buffer like dir edit
+    nvim-surround # improved movements for objects
 
     # inspect treesitter and some more functions
     nvim-treesitter.withAllGrammars
     playground
 
-    # Harpoon provides navigation options
-    harpoon
-
-    # Improved undo function
-    undotree
-
-    # Git integration
-    vim-fugitive
+    harpoon # Harpoon provides navigation options
+    undotree # Improved undo function
+    vim-fugitive # Git integration
 
     # Language server
     nvim-lspconfig
+
     # completions
     nvim-cmp # completion engine
     luasnip # snippet engine
