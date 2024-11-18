@@ -12,8 +12,8 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "breeze";
-    style.name = "adwaita-dark";
+    platformTheme.name = "qt5ct";
+    style.name = "kvantum";
   };
 
   dconf.settings = {
