@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.zsh = {
     enable = true;
-    # defaultKeymap = "viins";
+    # defaultKeymap = "viins"; # replaced by zsh-vi-mode
     initExtra = ''
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;5C" forward-word
@@ -16,5 +16,8 @@
         file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
     ];
+    sessionVariables = {
+      ZVM_VI_ESCAPE_BINDKEY = "jk"; # used by zsh-vi-mode
+    };
   };
 }
