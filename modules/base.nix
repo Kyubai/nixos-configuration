@@ -36,6 +36,7 @@ in {
 
     fonts.packages = with pkgs; [
       nerdfonts
+      noto-fonts-cjk-sans
     ];
 
     fonts.fontconfig.defaultFonts.serif = [

@@ -10,7 +10,7 @@
   imports = [
     ./hardware-configuration.nix
     #     ../../../modules/base.nix
-# ../../../modules/vmware-guest.nix
+    # ../../../modules/vmware-guest.nix
     # ../../../modules/xorg.nix
   ];
 
