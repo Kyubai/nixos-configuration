@@ -1,5 +1,4 @@
 {
-  self,
   nixpkgs,
   home-manager,
   ...
@@ -13,22 +12,6 @@
       modules = [
         ../modules
         ./systems/hacking-vm/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/default.nix;
-          home-manager.users.root = import ../home-manager/default.nix;
-        }
-      ];
-    };
-
-    nixos-test-virtmanager = nixpkgs.lib.nixosSystem {
-      # specialArgs = {inherit inputs outputs;};
-      # system = "x86_64-linux";
-      modules = [
-        ../modules
-        ./systems/nixos-test-virtmanager/configuration.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
