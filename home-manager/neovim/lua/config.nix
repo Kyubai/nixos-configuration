@@ -1,19 +1,15 @@
-{ lib
-, ...
-}:
-
+{lib, ...}:
 # with lib;
 let
-  mkLuaConfig = file: 
-      (builtins.readFile file);
+  mkLuaConfig = file: (builtins.readFile file);
 
   mkLuaConfigs = files:
     lib.concatMapStringsSep "\n"
-      (file:
+    (
+      file:
         mkLuaConfig file
-      )
-      files;
-
+    )
+    files;
 in
   mkLuaConfigs [
     ./cmp.lua
@@ -21,9 +17,9 @@ in
     ./harpoon.lua
     ./init.lua
     ./lsp.lua
+    ./nvim-surround.lua
     ./oil.lua
     ./remap.lua
     ./telescope.lua
     ./undotree.lua
   ]
-
