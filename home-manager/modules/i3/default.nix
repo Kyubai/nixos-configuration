@@ -17,7 +17,7 @@ in {
     xsession.windowManager.i3 = {
       enable = true;
       config = {
-        modifier = cfgI3.i3.modifier;
+        modifier = cfgI3.modifier;
         terminal = "${pkgs.kitty}/bin/kitty";
         keybindings = lib.mkOptionDefault {
           "${cfgI3.modifier}+semicolon" = "exec ${config.xsession.windowManager.i3.config.terminal}"; # 47 is Semicolon

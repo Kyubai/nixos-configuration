@@ -16,8 +16,8 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/default.nix;
-          home-manager.users.root = import ../home-manager/default.nix;
+          home-manager.users.mri = import ../home-manager/mri.nix;
+          home-manager.users.root = import ../home-manager/root.nix;
         }
       ];
     };
@@ -32,8 +32,8 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/default.nix;
-          home-manager.users.root = import ../home-manager/default.nix;
+          home-manager.users.mri = import ../home-manager/mri.nix;
+          home-manager.users.root = import ../home-manager/root.nix;
         }
       ];
     };

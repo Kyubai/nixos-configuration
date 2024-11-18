@@ -19,7 +19,7 @@ in {
       checkConfig = false;
       # extraConfig= (import ./config);
       config = {
-        modifier = cfgSway.modifer;
+        modifier = cfgSway.modifier;
         input = {
           "*" = {
             xkb_layout = "eu";
@@ -28,7 +28,7 @@ in {
         terminal = "${pkgs.kitty}/bin/kitty";
         # mkOptionDefault is used so this is merged with default config
         keybindings = lib.mkOptionDefault {
-          "${cfgSway.modifer}+semicolon" = "exec ${config.wayland.windowManager.sway.config.terminal}";
+          "${cfgSway.modifier}+semicolon" = "exec ${config.wayland.windowManager.sway.config.terminal}";
         };
         bars = [];
         window = {

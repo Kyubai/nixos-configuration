@@ -9,5 +9,5 @@
   modules.steam.enable = true;
 
   home.username = "root";
-  home.homeDirectory = /root;
+  # home.homeDirectory = /root;
 }
