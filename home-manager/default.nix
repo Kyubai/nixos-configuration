@@ -8,7 +8,6 @@
   modules.eza.enable = true;
   modules.flatpak.enable = true;
   modules.git.enable = true;
-  modules.kitty.enable = true;
   modules.neovim.enable = true;
   modules.theme.enable = true;
   modules.tmux.enable = true;
