@@ -8,6 +8,7 @@
     ./i3
     ./kitty
     ./neovim
+    ./polybar
     ./ssh
     ./steam
     ./sway

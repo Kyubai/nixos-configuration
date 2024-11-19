@@ -13,6 +13,7 @@ in {
 
   config = lib.mkIf cfgI3.enable {
     modules.kitty.enable = true; # kitty is used as terminal emulator
+    modules.polybar.enable = true; # polybar is my status-bar
 
     xsession.windowManager.i3 = {
       enable = true;
@@ -32,10 +33,11 @@ in {
       };
     };
 
-    home.file.".xinitrc" = {
-      text = ''
-        exec i3
-      '';
-    };
+# I use a login manager now, so this shell-script is redundant
+#     home.file.".xinitrc" = {
+#       text = ''
+#         exec i3
+#       '';
+#     };
   };
 }

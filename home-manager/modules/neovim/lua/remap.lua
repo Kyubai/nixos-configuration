@@ -34,20 +34,18 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set("n", "<leader>d", '"_d')
 vim.keymap.set("v", "<leader>d", '"_d')
 
--- this button is useless
--- vim.keymap.set("n", "Q", "<nop>")
-
 -- fast quit to normal mode
 vim.keymap.set("i", "jk", "<Esc>")
 
-
+-- this button is useless
+-- vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "Q", function()
   vim.lsp.buf.format()
 end)
 
 -- swap { and } to keep in line with j and k
-vim.keymap.set("n", "{", "}")
-vim.keymap.set("n", "}", "{")
+-- vim.keymap.set("n", "{", "}")
+-- vim.keymap.set("n", "}", "{")
 
 -- QuickFix Navigation
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
