@@ -21,8 +21,8 @@ in {
 
       qt = {
         enable = true;
-        platformTheme.name = "adwaita";
-        style.name = "adwaita-dark";
+        platformTheme.name = "qt5ct";
+        style.name = "kvantum";
       };
 
       dconf.settings = {
