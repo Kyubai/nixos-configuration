@@ -33,7 +33,6 @@ in {
         keybindings = lib.mkOptionDefault {
           "${cfgSway.modifier}+semicolon" = "exec ${config.wayland.windowManager.sway.config.terminal}";
         };
-        bars = [];
         window = {
           titlebar = false;
           hideEdgeBorders = "both";
