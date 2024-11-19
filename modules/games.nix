@@ -57,6 +57,20 @@ in {
       };
     };
 
+    # this softlinks my clips dir into the steam_recording tmpfs to make clips persistent
+    systemd.user.services.steam_recording_softlink = {
+      description = "this services creates a softlink, which is located in a ramdisk, where my steam-recording feature is located. This makes the clips persistent";
+      script = ''
+        ln -s /data/media/clips/steam ~/.steam_recording/clips
+      '';
+      wantedBy = ["multi-user.target"];
+    };
+    fileSystems."/home/mri/.steam_recording" = {
+      device = "none";
+      fsType = "tmpfs";
+      options = ["defaults" "size=20G" "mode=755" "uid=1000" "gid=1000"];
+    };
+
     # xdg.desktopEntries =-{
     # steam = {
     # name = "Steam";
