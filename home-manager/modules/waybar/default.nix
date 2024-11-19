@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfgWaybar = config.modules.waybar;
@@ -8,6 +9,11 @@ in {
   options.modules.waybar.enable = lib.mkEnableOption "enable waybar statusbar";
 
   config = lib.mkIf cfgWaybar.enable {
+
+    wayland.windowManager.sway.config.bars = [{
+      command = "${pkgs.waybar}/bin/waybar";
+    }];
+
     programs.waybar = {
       enable = true;
       settings = {
