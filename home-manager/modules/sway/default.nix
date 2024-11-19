@@ -12,6 +12,9 @@ in {
   };
 
   config = lib.mkIf cfgSway.enable {
+    modules.kitty.enable = true;
+    modules.waybar.enable = true;
+
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
