@@ -23,7 +23,7 @@ in {
       kdePackages.okular
       pavucontrol
       pulsemixer
-      vesktop # discord client
+      # vesktop # discord client, currently installed via flatpak
       veracrypt
       (vivaldi.override {
         proprietaryCodecs = true;
