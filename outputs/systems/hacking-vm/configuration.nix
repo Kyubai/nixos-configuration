@@ -62,10 +62,14 @@
     enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-kde # for file-picker
     ];
   };
   xdg.autostart.enable = true;
-  xdg.portal.config.common.default = "*";
+
+  xdg.portal.config.common.default = "gtk";
+  xdg.portal.config.common.org.freedesktop.impl.portal.FileChooser = "kde";
+
 
   services.pipewire = {
     enable = true;
