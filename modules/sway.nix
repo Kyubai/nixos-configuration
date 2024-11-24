@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfgSway = config.modules.desktop.sway;
   dbus-sway-environment = pkgs.writeTextFile {
     name = "dbus-sway-environment";
@@ -18,9 +17,9 @@ with lib; let
     '';
   };
 in {
-  options.modules.desktop.sway.enable = mkEnableOption "sway desktop environment";
+  options.modules.desktop.sway.enable = lib.mkEnableOption "sway desktop environment";
 
-  config = mkIf cfgSway.enable {
+  config = lib.mkIf cfgSway.enable {
     environment.systemPackages = with pkgs; [
       # dbus-sway-environment
       # flameshot
@@ -54,12 +53,17 @@ in {
       wrapperFeatures.gtk = true;
     };
 
+    xdg.autostart.enable = true;
     xdg.portal = {
       enable = true;
       wlr.enable = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-kde # for file-picker
       ];
     };
+
+    xdg.portal.config.common.default = ["gtk"];
+    xdg.portal.config.common."org.freedesktop.impl.portal.FileChooser" = ["kde"];
   };
 }

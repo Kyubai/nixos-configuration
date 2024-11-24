@@ -4,12 +4,12 @@
   pkgs,
   ...
 }:
-with lib; let
+let
   cfgBase = config.modules.base;
 in {
-  options.modules.base.enable = mkEnableOption "base nix config";
+  options.modules.base.enable = lib.mkEnableOption "base nix config";
 
-  config = mkIf cfgBase.enable {
+  config = lib.mkIf cfgBase.enable {
     # TODO: move this to home-manager
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
@@ -76,7 +76,6 @@ in {
     services.dbus.enable = true;
     xdg.portal.enable = true;
     xdg.autostart.enable = true;
-    xdg.portal.config.common.default = "*";
 
     programs.ssh.startAgent = true;
     security.sudo.extraConfig = ''
