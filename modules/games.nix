@@ -61,6 +61,7 @@ in {
     systemd.user.services.steam_recording_softlink = {
       description = "this services creates a softlink, which is located in a ramdisk, where my steam-recording feature is located. This makes the clips persistent";
       script = ''
+        rmdir ~/.steam_recording/clips
         ln -s /data/media/clips/steam ~/.steam_recording/clips
       '';
       wantedBy = ["multi-user.target"];

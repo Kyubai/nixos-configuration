@@ -57,13 +57,14 @@ in {
     xdg.portal = {
       enable = true;
       wlr.enable = true;
+      xdgOpenUsePortal = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-kde # for file-picker
       ];
     };
 
-    xdg.portal.config.common.default = ["gtk"];
-    xdg.portal.config.common."org.freedesktop.impl.portal.FileChooser" = ["kde"];
+    xdg.portal.config.sway.default = ["wlr;gtk"];
+    xdg.portal.config.sway."org.freedesktop.impl.portal.FileChooser" = ["kde"];
   };
 }
