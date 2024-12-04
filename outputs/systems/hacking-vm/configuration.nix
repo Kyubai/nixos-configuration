@@ -67,7 +67,6 @@
   };
   xdg.autostart.enable = true;
 
-  xdg.portal.config.common.default = ["gtk"];
   xdg.portal.config.common.org.freedesktop.impl.portal.FileChooser = ["kde"];
 
   services.pipewire = {
