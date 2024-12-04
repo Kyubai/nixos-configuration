@@ -90,5 +90,6 @@ in {
     programs.wofi.enable = true;
     services.mako.enable = true; # notification
     services.flameshot.enable = true;
+    services.copyq.enable = true;
   };
 }
