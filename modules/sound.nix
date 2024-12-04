@@ -9,7 +9,6 @@ with lib; let
 in {
   options.modules.desktop.sound.enable = mkEnableOption "sound";
   config = mkIf cfgSound.enable {
-    sound.enable = true;
     services.pipewire = {
       enable = true;
       alsa.enable = true;

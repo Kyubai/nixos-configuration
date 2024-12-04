@@ -35,7 +35,7 @@ in {
     console.keyMap = "us";
 
     fonts.packages = with pkgs; [
-      nerdfonts
+      nerd-fonts.hack
       noto-fonts-cjk-sans
     ];
 
