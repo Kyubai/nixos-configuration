@@ -19,6 +19,9 @@
   nix.settings.auto-optimise-store = true;
   system.autoUpgrade.enable = true;
 
+  # required for zfs support
+  networking.hostId = "621cba57";
+
   nixpkgs.config.allowUnfree = true;
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -58,16 +61,6 @@
   # };
 
   services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-kde # for file-picker
-    ];
-  };
-  xdg.autostart.enable = true;
-
-  xdg.portal.config.common.org.freedesktop.impl.portal.FileChooser = ["kde"];
 
   services.pipewire = {
     enable = true;

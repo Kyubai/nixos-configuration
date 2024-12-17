@@ -19,10 +19,12 @@ in {
       feishin
       gimp
       keepassxc
+      ntfs3g # todo move to hacking/forensics module
       obsidian
       kdePackages.okular
       pavucontrol
       pulsemixer
+      qbittorrent
       # vesktop # discord client, currently installed via flatpak
       veracrypt
       (vivaldi.override {
