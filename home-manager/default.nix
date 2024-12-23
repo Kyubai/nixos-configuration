@@ -48,6 +48,11 @@
     # EDITOR is set in nvim
   };
 
+  home.sessionPath = [
+    "$HOME/scripts/"
+    "/data/security/scripts/"
+  ];
+
   xdg.mimeApps = {
     enable = true;
     associations.added = {
