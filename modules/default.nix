@@ -14,6 +14,7 @@
     ./desktop.nix
     ./development.nix
     ./games.nix
+    ./it-sec.nix
     ./printing.nix
     ./sound.nix
     ./sway.nix
