@@ -28,6 +28,7 @@ in {
           keyutils
         ];
       })
+      prismlauncher # minecraft client
       mangohud
       runelite
       (wineWowPackages.stable.override {
