@@ -8,6 +8,7 @@
   ];
 
   networking.hostName = "deack-pc-01";
+  networking.hostId = "6fd16622";
 
   # my own /etc/nixos/modules
   modules.base.enable = true;
