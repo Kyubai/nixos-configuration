@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfgBase = config.modules.base;
 in {
   options.modules.base.enable = lib.mkEnableOption "base nix config";
@@ -14,8 +13,9 @@ in {
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
 
-    boot.supportedFilesystems = [ "zfs" ];
-    boot.zfs.forceImportRoot = false;
+    # disabled as package is broken atm. 2024-12-31
+    # boot.supportedFilesystems = ["zfs"];
+    # boot.zfs.forceImportRoot = false;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
