@@ -15,6 +15,7 @@
     ./development.nix
     ./games.nix
     ./it-sec.nix
+    ./japanese-input.nix
     ./printing.nix
     ./sound.nix
     ./sway.nix

@@ -22,6 +22,8 @@
   modules.hardware.amd.enable = true;
   modules.hardware.printer.samsung.enable = true;
 
+  modules.input.japanese.enable = true;
+
   # enable CUPS and SANE for printing
   services.printing.enable = true;
   hardware.sane.enable = true;
