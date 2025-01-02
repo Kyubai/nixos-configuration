@@ -6,6 +6,7 @@
     ./git
     ./hyprland
     ./i3
+    ./japanese-input
     ./kitty
     ./neovim
     ./polybar
