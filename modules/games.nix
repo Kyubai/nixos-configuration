@@ -31,6 +31,7 @@ in {
       prismlauncher # minecraft client
       mangohud
       runelite
+      steamtinkerlaunch
       (wineWowPackages.stable.override {
         # mingwSupport = false;
       })
