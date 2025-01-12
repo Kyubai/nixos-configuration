@@ -38,6 +38,7 @@ in {
       dbus
       dig
       htop-vim
+      netdiscover
       nmap
       openssl
       openvpn
