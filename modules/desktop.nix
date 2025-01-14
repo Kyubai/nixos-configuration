@@ -45,8 +45,8 @@ in {
     programs.virt-manager.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
 
-    virtualisation.virtualbox.host.enable = true;
-    virtualisation.virtualbox.host.enableExtensionPack = true;
+    # virtualisation.virtualbox.host.enable = true;
+    # virtualisation.virtualbox.host.enableExtensionPack = true;
 
     services.avahi = {
       enable = true;
