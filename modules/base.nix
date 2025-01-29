@@ -82,7 +82,7 @@ in {
 
     programs.ssh.startAgent = true;
     security.sudo.extraConfig = ''
-      Defaults>root        env_keep += "SSH_AUTH_SOCK"
+      Defaults>root        env_keep += "SSH_AUTH_SOCK XAUTHORITY DISPLAY"
       Defaults    timestamp_timeout=-1
     '';
 
