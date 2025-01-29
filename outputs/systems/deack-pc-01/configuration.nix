@@ -29,6 +29,10 @@
   hardware.sane.enable = true;
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings = {
+    insecure-registries = [
+    ];
+  };
 
   # boot config
   boot.loader.systemd-boot.enable = true;
