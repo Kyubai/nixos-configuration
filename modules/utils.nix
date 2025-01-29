@@ -37,6 +37,7 @@ in {
       choose
       dbus
       dig
+      expect # for unbuffer command
       htop-vim
       netdiscover
       nmap
@@ -46,8 +47,10 @@ in {
       plasma-pa # volume applet
       proxychains
       jq
+      unixtools.xxd
       unrar
       tcpdump
+      vim
       widevine-cdm
       wireguard-tools
       openvpn
