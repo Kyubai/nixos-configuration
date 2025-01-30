@@ -46,6 +46,7 @@ in {
       tcpdump
       vim
       widevine-cdm
+      wineWowPackages.stable
       wireguard-tools
       openvpn
       xsv
