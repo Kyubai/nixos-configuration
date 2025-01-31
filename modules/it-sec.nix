@@ -14,7 +14,6 @@ in {
       imhex
       nmap
       lnav
-      rsbkb # for bgrep
       openfortivpn
     ];
     security.krb5.enable = true;

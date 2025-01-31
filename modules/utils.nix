@@ -48,8 +48,11 @@ in {
       widevine-cdm
       wineWowPackages.stable
       wireguard-tools
-      openvpn
       xsv
     ];
+
+    # make update-resolv-conf script available to update dns server on openvpn connect
+    # https://github.com/NixOS/nixpkgs/issues/73822
+    environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
   };
 }
