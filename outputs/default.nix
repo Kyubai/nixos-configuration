@@ -2,7 +2,7 @@
   nixpkgs,
   home-manager,
   ...
-}: {
+} @ inputs: {
   # Used with `nixos-rebuild --flake .#<hostname>`
   # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
   nixosConfigurations = {
@@ -23,8 +23,9 @@
     };
 
     deack-pc-01 = nixpkgs.lib.nixosSystem {
-      # specialArgs = {inherit inputs outputs;};
-      # system = "x86_64-linux";
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      # _module.args = {inherit inputs;};
       modules = [
         ../modules
         ./systems/deack-pc-01/configuration.nix

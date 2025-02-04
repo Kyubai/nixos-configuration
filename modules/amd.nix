@@ -9,9 +9,9 @@ with lib; let
 in {
   options.modules.hardware.amd.enable = mkEnableOption "amd graphics";
   config = mkIf cfgAmd.enable {
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
         # amdvlk
         # rocmPackages.clr.icd
@@ -23,6 +23,11 @@ in {
         # vulkan-extension-layer
       ];
     };
+
+    # amdgpu.amdvlk = {
+    # enable = true;
+    # support32Bit.enable = true;
+    # };
 
     environment.systemPackages = with pkgs; [
       vulkan-tools
