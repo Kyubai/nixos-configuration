@@ -1,11 +1,18 @@
 {
   config,
+  inputs,
   lib,
+  nixpkgs-stable,
   pkgs,
   ...
 }:
 with lib; let
   cfgGaming = config.modules.desktop.gaming;
+  pkgs-stable = import nixpkgs-stable {
+    config.allowUnfree = true;
+  };
+  inherit (pkgs.stdenv.hostPlatform) system;
+  umu-launcher = inputs.umu.packages.${system}.default;
 in {
   options.modules.desktop.gaming.enable = mkEnableOption "wine steam and other gaming-related things";
 
@@ -16,16 +23,16 @@ in {
         extraLibraries = pkgs: [
         ];
         extraPkgs = pkgs: [
+          keyutils
+          libpng
+          libpulseaudio
+          libvorbis
+          libkrb5
+          stdenv.cc.cc.lib
           xorg.libXcursor
           xorg.libXi
           xorg.libXinerama
           xorg.libXScrnSaver
-          libpng
-          libpulseaudio
-          libvorbis
-          stdenv.cc.cc.lib
-          libkrb5
-          keyutils
         ];
       })
       prismlauncher # minecraft client
@@ -35,6 +42,7 @@ in {
       (wineWowPackages.stable.override {
         # mingwSupport = false;
       })
+      umu-launcher
       winetricks
     ];
 
@@ -48,15 +56,13 @@ in {
 
     programs.steam = {
       enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-      package = pkgs.steam.override {
-        extraPkgs = pkgs:
-          with pkgs; [
-            libkrb5
-            keyutils
-          ];
-      };
+      # package = pkgs-stable.steam;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+
+      gamescopeSession.enable = true;
+      protontricks.enable = true;
     };
 
     # this softlinks my clips dir into the steam_recording tmpfs to make clips persistent

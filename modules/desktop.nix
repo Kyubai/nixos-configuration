@@ -48,10 +48,10 @@ in {
     # virtualisation.virtualbox.host.enable = true;
     # virtualisation.virtualbox.host.enableExtensionPack = true;
 
-    services.avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
+    # services.avahi = {
+    # enable = true;
+    # nssmdns4 = true;
+    # openFirewall = true;
+    # };
   };
 }

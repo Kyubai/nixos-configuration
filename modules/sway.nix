@@ -67,5 +67,6 @@ in {
     # I think this option is set by the wayland module
     # xdg.portal.config.sway.default = ["wlr;gtk"];
     xdg.portal.config.sway."org.freedesktop.impl.portal.FileChooser" = ["kde"];
+    xdg.portal.config.sway."org.freedesktop.impl.portal.AppChooser" = ["kde"];
   };
 }
