@@ -13,7 +13,6 @@ in {
       anki
       bitwarden
       brave
-      cargo
       corefonts
       # discord
       feishin

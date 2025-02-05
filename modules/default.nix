@@ -12,7 +12,6 @@
     ./base.nix
     ./bluetooth.nix
     ./desktop.nix
-    ./development.nix
     ./games.nix
     ./it-sec.nix
     ./japanese-input.nix
