@@ -13,6 +13,7 @@
     ./bluetooth.nix
     ./desktop.nix
     ./games.nix
+    ./hyprland.nix
     ./it-sec.nix
     ./japanese-input.nix
     ./printing.nix
