@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./default.nix
   ];
@@ -7,6 +6,7 @@
   # my own modules
   modules.sway.enable = true;
   modules.i3.enable = true;
+  modules.hyprland.enable = true;
   modules.steam.enable = true;
 
   home.username = "mri";
