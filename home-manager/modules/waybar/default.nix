@@ -9,10 +9,11 @@ in {
   options.modules.waybar.enable = lib.mkEnableOption "enable waybar statusbar";
 
   config = lib.mkIf cfgWaybar.enable {
-
-    wayland.windowManager.sway.config.bars = [{
-      command = "${pkgs.waybar}/bin/waybar";
-    }];
+    wayland.windowManager.sway.config.bars = [
+      {
+        command = "${pkgs.waybar}/bin/waybar";
+      }
+    ];
 
     programs.waybar = {
       enable = true;
@@ -28,9 +29,12 @@ in {
           # spacing = 1;
 
           modules-left = [
+            "hyprland/workspaces"
+            "hyprland/mode"
             "sway/workspaces"
             "sway/mode"
           ];
+          modules-center = ["hyprland/window"];
           modules-right = [
             "network"
             "cpu"
@@ -38,49 +42,55 @@ in {
             "tray"
             "clock"
           ];
-        };
 
-        # tray module
-        tray = {
-          icon-size = 18;
-          # spacing = 5;
-          show-passive-items = true;
-        };
+          # tray module
+          tray = {
+            icon-size = 18;
+            # spacing = 5;
+            show-passive-items = true;
+          };
 
-        # cpu module
-        cpu = {
-          format = "{usage}% ";
-        };
+          "hyprland/window" = {
+            separate-outputs = true;
+            icon = true;
+            format = "{class}";
+          };
 
-        # network module
-        network = {
-          # "interface": "wlp2*", // (Optional) To force the use of this interface
-          interval = 1;
-          format-wifi = "{bandwidthTotalBytes:>3}  "; # ({essid} {signalStrength}%)
-          format-ethernet = "{ipaddr}/{cidr} ";
-          tooltip-format-wifi = "{ipaddr} ({signalStrength}%) ";
-          tooltip-format = "{ifname} via {gwaddr} ";
-          format-linked = "{ifname} (No IP) ";
-          format-disconnected = "󰀦"; # Disconnected ⚠
-          format-alt = "{ifname}: {ipaddr}/{cidr}";
-        };
+          # cpu module
+          cpu = {
+            format = "{usage}% ";
+          };
 
-        wireplumber = {
-          format = "{volume}% {icon}";
-          format-muted = "{volume}% 󰖁";
-          format-bluetooth = "{volume}% {icon} 󰂯"; # {format_source}",
-          format-bluetooth-muted = "󰖁 {icon} 󰂯"; # {format_source}",
-          format-icons = [
-            ""
-            ""
-            ""
-          ];
-        };
+          # network module
+          network = {
+            # "interface": "wlp2*", // (Optional) To force the use of this interface
+            interval = 1;
+            format-wifi = "{bandwidthTotalBytes:>3}  "; # ({essid} {signalStrength}%)
+            format-ethernet = "{ipaddr}/{cidr} ";
+            tooltip-format-wifi = "{ipaddr} ({signalStrength}%) ";
+            tooltip-format = "{ifname} via {gwaddr} ";
+            format-linked = "{ifname} (No IP) ";
+            format-disconnected = "󰀦"; # Disconnected ⚠
+            format-alt = "{ifname}: {ipaddr}/{cidr}";
+          };
 
-        "custom/separator" = {
-          format = "{icon}";
-          format-icons = "|";
-          tooltip = false;
+          wireplumber = {
+            format = "{volume}% {icon}";
+            format-muted = "{volume}% 󰖁";
+            format-bluetooth = "{volume}% {icon} 󰂯"; # {format_source}",
+            format-bluetooth-muted = "󰖁 {icon} 󰂯"; # {format_source}",
+            format-icons = [
+              ""
+              ""
+              ""
+            ];
+          };
+
+          "custom/separator" = {
+            format = "{icon}";
+            format-icons = "|";
+            tooltip = false;
+          };
         };
       };
 
@@ -116,6 +126,11 @@ in {
         }
 
         #workspaces button.focused {
+            color: #ffffff;
+            border-top: 2px solid #9d7cd8;
+        }
+
+        #workspaces button.active {
             color: #ffffff;
             border-top: 2px solid #9d7cd8;
         }

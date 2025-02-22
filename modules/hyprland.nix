@@ -21,33 +21,52 @@ in {
 
   config = lib.mkIf cfgHyprland.enable {
     environment.systemPackages = with pkgs; [
-      # dbus-sway-environment
-      # flameshot
-      grim
-      lightdm
-      slurp
+      grimblast # screenshot utility
+      hyprpaper # wallpaper
+      # https://wiki.nixos.org/wiki/Dolphin
+      kdePackages.dolphin # file manager
+      kdePackages.kio
+      kdePackages.kdf
+      kdePackages.qtsvg # icons for dolphin
+      kdePackages.kio-fuse # to mount remote filesystems via FUSE
+      kdePackages.kio-extras # extra protocols support (sftp, fish and more)
+      kdePackages.kio-admin
+      kdePackages.qtwayland # Qt wayland support
+      kdePackages.plasma-integration
+      kdePackages.breeze-icons
+      kdePackages.kservice
+      kdePackages.plasma-workspace # required for dolphin applications menu
+      shared-mime-info
+      slurp # geometry selector
+      swappy # screenshot editor
+      wl-screenrec # screen recording utility
       wayland
-      wdisplays
-      wl-clipboard
+      wdisplays # manage monitors
+      wl-clipboard # clipboard cli
       xwaylandvideobridge
     ];
 
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
-    # this seems to be required for autologin, I might be able to remove this later (2024-09-11)
-    # services.xserver.enable = true;
-    # services.xserver.displayManager.gdm = {
-    # enable = true;
-    # wayland.enable = true;
-    # wayland = true;
-    # autoLogin.delay = "0";
-    # };
-
-    services.displayManager = {
-      autoLogin.enable = true;
-      autoLogin.user = "mri";
-      defaultSession = "hyprland";
-      sessionPackages = [pkgs.hyprland];
+    services.greetd = {
+      enable = true;
+      settings = {
+        terminal = {
+          vt = 1;
+        };
+        default_session = {
+          command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+          user = "mri";
+        };
+        initial_session = {
+          command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+          user = "mri";
+        };
+      };
     };
+    #     services.displayManager = {
+    #       autoLogin.enable = true;
+    #       autoLogin.user = "mri";
+    #       defaultSession = "hyprland";
+    #     };
 
     programs.hyprland = {
       enable = true;
@@ -56,14 +75,14 @@ in {
     };
     programs.hyprlock.enable = true;
 
-    xdg.autostart.enable = true;
+    # xdg.autostart.enable = true;
     xdg.portal = {
       enable = true;
       # wlr.enable = true;
       # xdgOpenUsePortal = true;
       extraPortals = [
-        # pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-kde # for file-picker
+        pkgs.xdg-desktop-portal-gtk # required for themes?
+        pkgs.xdg-desktop-portal-kde
       ];
     };
 

@@ -78,7 +78,7 @@ in {
 
     services.dbus.enable = true;
     xdg.portal.enable = true;
-    xdg.autostart.enable = true;
+    xdg.menus.enable = true;
 
     programs.ssh.startAgent = true;
     security.sudo.extraConfig = ''
@@ -88,6 +88,11 @@ in {
 
     environment.systemPackages = with pkgs; [
       dbus
+      file
+      libsForQt5.qtstyleplugin-kvantum # might be required for kvantum https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
+      libsForQt5.qt5ct # might be required for kvantum
+      # lxqt.lxqt-menu-data
+      # shared-mime-info # optional, but nice to have
     ];
   };
 }
