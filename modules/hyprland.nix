@@ -43,7 +43,7 @@ in {
       wayland
       wdisplays # manage monitors
       wl-clipboard # clipboard cli
-      xwaylandvideobridge
+      kdePackages.xwaylandvideobridge
     ];
 
     services.greetd = {
@@ -82,7 +82,7 @@ in {
       # xdgOpenUsePortal = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk # required for themes?
-        pkgs.xdg-desktop-portal-kde
+        pkgs.kdePackages.xdg-desktop-portal-kde
       ];
     };
 

@@ -38,7 +38,7 @@ in {
       openssl
       openvpn
       p7zip
-      plasma-pa # volume applet
+      kdePackages.plasma-pa # volume applet
       proxychains
       jq
       unixtools.xxd
@@ -48,7 +48,7 @@ in {
       widevine-cdm
       wineWowPackages.stable
       wireguard-tools
-      xsv
+      xan
     ];
 
     # make update-resolv-conf script available to update dns server on openvpn connect

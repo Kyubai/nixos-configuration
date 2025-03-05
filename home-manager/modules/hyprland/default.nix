@@ -6,7 +6,7 @@
 }: let
   cfgHyprland = config.modules.hyprland;
 in {
-  options.modules.hyprland.enable = lib.mkEnableOption "enable hyprland windows manager";
+  options.modules.hyprland.enable = lib.mkEnableOption "enable hyprland window manager";
 
   config = lib.mkIf cfgHyprland.enable {
     modules.kitty.enable = true; # kitty is configured as terminal in config
@@ -60,6 +60,9 @@ in {
         exec-once = sleep 1 && hyprctl hyprpaper reload , $(find /data/media/backgrounds -type f | shuf -n 1)
         exec-once = waybar
         exec-once = hyprctl setcursor Nordzy-hyprcursors 24
+        # fix screen cast portal not being available
+        # https://wiki.hyprland.org/Hypr-Ecosystem/xdg-desktop-portal-hyprland/#usage
+        exec-once = sleep 5 && xdg-desktop-portal-hyprland.service && sleep 5 && systemctl --user restart xdg-desktop-portal.service
 
         # autostart user applications
         exec-once = [workspace 0 silent] kitty
