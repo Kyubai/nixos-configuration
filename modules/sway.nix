@@ -29,7 +29,7 @@ in {
       wayland
       wdisplays
       wl-clipboard
-      xwaylandvideobridge
+      kdePackages.xwaylandvideobridge
     ];
 
     # this seems to be required for autologin, I might be able to remove this later (2024-09-11)
@@ -60,7 +60,7 @@ in {
       xdgOpenUsePortal = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-kde # for file-picker
+        pkgs.kdePackages.xdg-desktop-portal-kde # for file-picker
       ];
     };
 
