@@ -4,13 +4,19 @@
   pkgs,
   ...
 }: let
-  cfgHyprland = config.modules.hyprland;
+  cfg = config.modules.hyprland;
 in {
-  options.modules.hyprland.enable = lib.mkEnableOption "enable hyprland window manager";
+  options.modules.hyprland = {
+    enable = lib.mkEnableOption "enable hyprland window manager";
+    terminal = lib.mkOption {
+      default = "kitty";
+      type = lib.types.str;
+    };
+  };
 
-  config = lib.mkIf cfgHyprland.enable {
-    modules.kitty.enable = true; # kitty is configured as terminal in config
+  config = lib.mkIf cfg.enable {
     services.dunst.enable = true; # notification deamon
+    programs.wofi.enable = true; # dmenu
 
     home.pointerCursor = {
       hyprcursor.enable = true;
@@ -55,6 +61,8 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = ''
+        monitor = Virtual-1, 2560x1440, 0x0, 1
+
         # applications for wayland
         exec-once = hyprpaper
         exec-once = sleep 1 && hyprctl hyprpaper reload , $(find /data/media/backgrounds -type f | shuf -n 1)
@@ -65,7 +73,7 @@ in {
         exec-once = sleep 5 && xdg-desktop-portal-hyprland.service && sleep 5 && systemctl --user restart xdg-desktop-portal.service
 
         # autostart user applications
-        exec-once = [workspace 0 silent] kitty
+        exec-once = [workspace 0 silent] ${cfg.terminal}
         exec-once = [workspace 2 silent] vivaldi
         exec-once = [workspace 5 silent] flatpak run dev.vencord.Vesktop
         exec-once = [workspace 6 silent] feishin
@@ -116,7 +124,7 @@ in {
       xwayland.enable = true;
       settings = {
         "$mod" = "SUPER";
-        "$terminal" = "kitty";
+        "$terminal" = "${cfg.terminal}";
         "$menu" = "wofi -S drun -i";
         "$fileManager" = "dolphin";
         # debug = {

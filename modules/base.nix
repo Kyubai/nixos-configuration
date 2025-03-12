@@ -89,6 +89,8 @@ in {
     environment.systemPackages = with pkgs; [
       dbus
       file
+      kdePackages.konsole # fallback terminal
+      alacritty
       libsForQt5.qtstyleplugin-kvantum # might be required for kvantum https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
       libsForQt5.qt5ct # might be required for kvantum
       # lxqt.lxqt-menu-data

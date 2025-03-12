@@ -11,10 +11,13 @@ in {
   options.modules.sec.utils.enable = mkEnableOption "basic dfir and pentest utils";
   config = mkIf cfgSec.enable {
     environment.systemPackages = with pkgs; [
+      angle-grinder
+      bintools
       imhex
       nmap
       lnav
       openfortivpn
+      sqlite
     ];
     security.krb5.enable = true;
     security.krb5.settings.include = "/current_customer/.config/krb5.conf";

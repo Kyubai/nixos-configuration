@@ -16,6 +16,7 @@ in {
       corefonts
       # discord
       feishin
+      filezilla
       gimp
       keepassxc
       ntfs3g # todo move to hacking/forensics module

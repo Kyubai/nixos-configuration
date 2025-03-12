@@ -10,5 +10,5 @@
   modules.steam.enable = true;
 
   home.username = "mri";
-  # home.homeDirectory = /home/mri;
+  home.homeDirectory = /home/mri;
 }
