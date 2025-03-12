@@ -16,14 +16,14 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/mri.nix;
-          home-manager.users.root = import ../home-manager/root.nix;
+          home-manager.users.mri = import ../home-manager/hacking-vm.nix;
+          home-manager.users.root = import ../home-manager/hacking-vm.nix;
         }
       ];
     };
 
     deack-pc-01 = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      # system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [

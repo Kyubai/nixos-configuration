@@ -43,11 +43,6 @@
     nix-shell = "nix-shell --run zsh";
   };
 
-  home.sessionVariables = {
-    BROWSER = "vivaldi";
-    # EDITOR is set in nvim
-  };
-
   home.sessionPath = [
     "$HOME/scripts/"
     "/data/security/scripts/"

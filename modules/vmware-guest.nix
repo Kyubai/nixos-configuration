@@ -13,6 +13,13 @@ in {
   config = mkMerge [
     (mkIf cfgGuest.enable {
       virtualisation.vmware.guest.enable = true;
+      environment.etc."vmware-tools/tools.conf" = {
+        mode = "0444";
+        text = ''
+          [resolutionKMS]
+          enable=true
+        '';
+      };
     })
 
     (mkIf cfgFolder.enable {
