@@ -33,6 +33,7 @@ in {
       dig
       expect # for unbuffer command
       htop-vim
+      imagemagick
       netdiscover
       nmap
       openssl
