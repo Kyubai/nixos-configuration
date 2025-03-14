@@ -20,7 +20,6 @@
     ./sound.nix
     ./sway.nix
     ./utils.nix
-    ./vbox-guest.nix
     ./vmware-guest.nix
     ./xorg.nix
   ];

@@ -11,9 +11,12 @@
   };
 
   # my own modules
-  modules.hyprland = {
-    enable = true;
-    terminal = "alacritty";
-  };
+  # modules.hyprland = {
+  # enable = true;
+  # terminal = "alacritty";
+  # };
+  modules.i3.enable = true;
+  modules.sway.enable = true;
+  modules.steam.enable = true;
   modules.alacritty.enable = true;
 }

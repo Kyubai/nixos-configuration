@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./default.nix
   ];
@@ -8,6 +7,6 @@
   modules.sway.enable = true;
   modules.steam.enable = true;
 
-  home.username = "root";
+  # home.username = "root";
   # home.homeDirectory = /root;
 }
