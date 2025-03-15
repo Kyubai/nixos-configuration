@@ -10,6 +10,6 @@
   modules.steam.enable = true;
   modules.opencomposite.enable = true;
 
-  home.username = "mri";
-  home.homeDirectory = /home/mri;
+  # home.username = "mri";
+  # home.homeDirectory = /home/mri;
 }
