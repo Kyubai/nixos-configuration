@@ -12,7 +12,6 @@ with lib; let
     config.allowUnfree = true;
   };
   inherit (pkgs.stdenv.hostPlatform) system;
-  umu-launcher = inputs.umu.packages.${system}.default;
 in {
   options.modules.desktop.gaming.enable = mkEnableOption "wine steam and other gaming-related things";
   options.modules.desktop.gaming.vr.enable = mkEnableOption "enable vr support";
@@ -117,7 +116,6 @@ in {
         (wineWowPackages.stable.override {
           # mingwSupport = false;
         })
-        umu-launcher
         winetricks
       ];
 
