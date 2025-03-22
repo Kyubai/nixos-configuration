@@ -22,6 +22,7 @@ in {
         # alvr # VR streaming
         wivrn
         wlx-overlay-s
+        unityhub # for 3d avatar modelling
       ];
       # https://wiki.nixos.org/wiki/VR
       # services.monado = {
@@ -29,10 +30,10 @@ in {
       # defaultRuntime = true; # Register as default OpenXR runtime
       # };
 
-      systemd.user.services.monado.environment = {
-        STEAMVR_LH_ENABLE = "1";
-        XRT_COMPOSITOR_COMPUTE = "1";
-      };
+      # systemd.user.services.monado.environment = {
+      # STEAMVR_LH_ENABLE = "1";
+      # XRT_COMPOSITOR_COMPUTE = "1";
+      # };
 
       programs.git = {
         enable = true;

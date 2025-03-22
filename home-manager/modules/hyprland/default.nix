@@ -61,7 +61,8 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = ''
-        monitor = Virtual-1, 2560x1440, 0x0, 1
+        monitor = DP-1, 1920x1080, 0x180, 1
+        monitor = DP-3, 2560x1440, 1920x0, 1
 
         # applications for wayland
         exec-once = hyprpaper
