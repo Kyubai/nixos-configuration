@@ -42,8 +42,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
-    "video=DP-3:1920x1080@144"
-    "video=DP-1:2560x1440@240"
+    "video=DP-1:1920x1080@144"
+    "video=DP-3:2560x1440@240"
   ];
   boot.kernel.sysctl."vm.max_map_count" = "2147483642";
 

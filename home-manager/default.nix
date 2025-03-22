@@ -39,7 +39,7 @@
     cat = "bat -p";
     cd = "z";
     nrs = "sudo nixos-rebuild switch --flake /etc/nixos --show-trace --option eval-cache false && git -C /etc/nixos add -A && git -C /etc/nixos commit && git -C /etc/nixos push";
-    hms = "home-manager switch --extra-experimental-features \"nix-command flakes\" --flake .#$USER /etc/nixos";
+    hms = "pushd /etc/nixos && home-manager switch --extra-experimental-features \"nix-command flakes\" --flake .#$USER && popd";
     nix-shell = "nix-shell --run zsh";
     "nix build" = "nix build --print-out-paths";
   };
