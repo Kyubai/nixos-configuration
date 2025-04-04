@@ -77,7 +77,14 @@ in {
     ];
 
     services.dbus.enable = true;
-    xdg.portal.enable = true;
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.kdePackages.xdg-desktop-portal-kde # for file-picker
+      ];
+    };
     xdg.menus.enable = true;
 
     programs.ssh.startAgent = true;
