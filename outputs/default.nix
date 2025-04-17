@@ -22,6 +22,22 @@
       ];
     };
 
+    surf01 = nixpkgs.lib.nixosSystem {
+      # specialArgs = {inherit inputs outputs;};
+      # system = "x86_64-linux";
+      modules = [
+        ../modules
+        ./systems/surf01/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.mri = import ../home-manager/hacking-vm.nix;
+          home-manager.users.root = import ../home-manager/hacking-vm.nix;
+        }
+      ];
+    };
+
     deack-pc-01 = nixpkgs.lib.nixosSystem {
       # system = "x86_64-linux";
       specialArgs = {inherit inputs;};
