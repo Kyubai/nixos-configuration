@@ -38,6 +38,23 @@
       ];
     };
 
+    work-admin = nixpkgs.lib.nixosSystem {
+      # system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      # _module.args = {inherit inputs;};
+      modules = [
+        ../modules
+        ./systems/work-admin/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.mri = import ../home-manager/mri.nix;
+          home-manager.users.root = import ../home-manager/root.nix;
+        }
+      ];
+    };
+
     deack-pc-01 = nixpkgs.lib.nixosSystem {
       # system = "x86_64-linux";
       specialArgs = {inherit inputs;};
