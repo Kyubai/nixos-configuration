@@ -91,5 +91,6 @@ in {
     # xdg.portal.config.sway.default = ["wlr;gtk"];
     xdg.portal.config.hyprland."org.freedesktop.impl.portal.FileChooser" = ["kde"];
     xdg.portal.config.hyprland."org.freedesktop.impl.portal.AppChooser" = ["kde"];
+    xdg.portal.config.hyprland."org.freedesktop.portal.OpenURI" = ["kde"];
   };
 }

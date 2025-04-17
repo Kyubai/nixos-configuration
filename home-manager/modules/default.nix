@@ -10,6 +10,7 @@
     ./japanese-input
     ./kitty
     ./neovim
+    ./opencomposite
     ./polybar
     ./ssh
     ./steam
