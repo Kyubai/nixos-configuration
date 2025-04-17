@@ -93,10 +93,11 @@
   users.users.mri = {
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    #   packages = with pkgs; [
-    #     firefox
-    #     tree
-    #   ];
+  };
+
+  users.users.test = {
+    isNormalUser = true;
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
