@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
   imports = [
     ./default.nix
   ];
@@ -8,7 +8,8 @@
   modules.i3.enable = true;
   modules.hyprland.enable = true;
   modules.steam.enable = true;
+  modules.opencomposite.enable = true;
 
-  home.username = "mri";
-  home.homeDirectory = /home/mri;
+  home.username = lib.mkDefault "mri";
+  home.homeDirectory = lib.mkDefault /home/mri;
 }
