@@ -1,21 +1,35 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{pkgs, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  nixpkgs,
+  ...
+}: {
   imports = [
-    ./hardware-configuration.nix
+    # ./hardware-configuration.nix
     ../../../modules
+    ./disk-configuration.nix
   ];
 
   # my own /etc/nixos/modules
   modules.base.enable = true;
-  modules.cli.utils.enable = true;
-  modules.sec.utils.enable = true;
-  modules.desktop.tools.enable = true;
+  # modules.cli.utils.enable = true;
+  # modules.sec.utils.enable = true;
+  # modules.desktop.tools.enable = true;
   # modules.desktop.hyprland.enable = true;
   modules.desktop.xorg.enable = true;
   modules.vm.vmware.guest.enable = true;
-  modules.vm.vmware.sharedFolder.enable = true;
+
+  boot.loader.grub = {
+    # no need to set devices, disko will add all devices that have a EF02 partition to the list already
+    # devices = [ ];
+    enable = true;
+    # efiSupport = true;
+    # efiInstallAsRemovable = true;
+  };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.auto-optimise-store = true;
@@ -89,15 +103,21 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  services.openssh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.mri = {
-    isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-  };
+  users.users = {
+    mri = {
+      isNormalUser = true;
+      extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    };
 
-  users.users.test = {
-    isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    root = {
+      # change this to your ssh key
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHSkWxGNSbQ6IqxdOf7fF5j0lCDKZMm3Dt+GEaUlnWVN mri@work-admin"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEAORp9ktyNM2aPoGa4JeI0QLhxDhLmvSuEpUztpLovr root@nixos"
+      ];
+    };
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
