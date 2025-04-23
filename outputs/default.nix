@@ -1,5 +1,6 @@
 {
   nixpkgs,
+  disko,
   home-manager,
   ...
 } @ inputs: {
@@ -8,17 +9,18 @@
   nixosConfigurations = {
     hacking-vm = nixpkgs.lib.nixosSystem {
       # specialArgs = {inherit inputs outputs;};
-      # system = "x86_64-linux";
+      system = "x86_64-linux";
       modules = [
-        ../modules
+        # ../modules
+        disko.nixosModules.disko
         ./systems/hacking-vm/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/hacking-vm.nix;
-          home-manager.users.root = import ../home-manager/hacking-vm.nix;
-        }
+        # home-manager.nixosModules.home-manager
+        #         {
+        #           home-manager.useGlobalPkgs = true;
+        #           home-manager.useUserPackages = true;
+        #           home-manager.users.mri = import ../home-manager/hacking-vm.nix;
+        #           home-manager.users.root = import ../home-manager/hacking-vm.nix;
+        #         }
       ];
     };
 
