@@ -49,7 +49,7 @@ in {
       widevine-cdm
       wineWowPackages.stable
       wireguard-tools
-      xan
+      # pkgs-unstable.xan
     ];
 
     # make update-resolv-conf script available to update dns server on openvpn connect

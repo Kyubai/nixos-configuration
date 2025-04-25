@@ -16,7 +16,10 @@
   # terminal = "alacritty";
   # };
   modules.i3.enable = true;
-  modules.sway.enable = true;
-  modules.steam.enable = true;
-  modules.alacritty.enable = true;
+  # modules.sway.enable = true;
+  # modules.steam.enable = true;
+  # modules.alacritty.enable = true;
+
+  programs.home-manager.enable = true;                                                                                                                                                                                                                        
+  home.stateVersion = "23.11";
 }

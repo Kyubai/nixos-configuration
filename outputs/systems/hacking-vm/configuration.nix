@@ -5,20 +5,18 @@
   config,
   lib,
   pkgs,
-  nixpkgs,
   ...
 }: {
   imports = [
     # ./hardware-configuration.nix
-    ../../../modules
-    ./disk-configuration.nix
+    ./disk-config.nix
   ];
 
   # my own /etc/nixos/modules
   modules.base.enable = true;
-  # modules.cli.utils.enable = true;
-  # modules.sec.utils.enable = true;
-  # modules.desktop.tools.enable = true;
+  modules.cli.utils.enable = true;
+  modules.sec.utils.enable = true;
+  modules.desktop.tools.enable = true;
   # modules.desktop.hyprland.enable = true;
   modules.desktop.xorg.enable = true;
   modules.vm.vmware.guest.enable = true;
@@ -26,7 +24,7 @@
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
     # devices = [ ];
-    enable = true;
+    # enable = true;
     # efiSupport = true;
     # efiInstallAsRemovable = true;
   };
@@ -36,9 +34,10 @@
   system.autoUpgrade.enable = true;
 
   # required for zfs support
-  networking.hostId = "621cba57";
+  # networking.hostId = "621cba57";
 
   nixpkgs.config.allowUnfree = true;
+  # nixpkgs-unstable.allowUnfree = true;
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -51,10 +50,6 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   fonts.fontconfig.defaultFonts.serif = [
     "Hack Nerd Font"
@@ -124,5 +119,5 @@
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

@@ -1,26 +1,44 @@
 {
   nixpkgs,
+  # nixpkgs-unstable,
   disko,
   home-manager,
   ...
-} @ inputs: {
+}@inputs: let 
+  system = "x86_64-linux";
+  # variables = nixpkgs.lib.importJSON ./secrets/variables.json;
+  # pkgs = nixpkgs.legacyPackages.${system};
+#   pkgs-unstable = import nixpkgs-unstable {
+#     inherit system;
+#     config.allowUnfree = true;
+#   };
+ in{
   # Used with `nixos-rebuild --flake .#<hostname>`
   # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
   nixosConfigurations = {
     hacking-vm = nixpkgs.lib.nixosSystem {
-      # specialArgs = {inherit inputs outputs;};
-      system = "x86_64-linux";
+    inherit system;
+      specialArgs = {inherit inputs;};
+
+          # nixpkgs-unstable = import nixpkgs-unstable {
+      # system = "x86_64-linux";
+            # config = {
+              # allowUnfree = true;
+              # };
+      # };
+      # };
       modules = [
-        # ../modules
+        ../modules
         disko.nixosModules.disko
         ./systems/hacking-vm/configuration.nix
-        # home-manager.nixosModules.home-manager
-        #         {
-        #           home-manager.useGlobalPkgs = true;
-        #           home-manager.useUserPackages = true;
-        #           home-manager.users.mri = import ../home-manager/hacking-vm.nix;
-        #           home-manager.users.root = import ../home-manager/hacking-vm.nix;
-        #         }
+        home-manager.nixosModules.home-manager
+                {
+                  home-manager.extraSpecialArgs = {inherit inputs;};
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.users.mri = import ../home-manager/hacking-vm.nix;
+                  home-manager.users.root = import ../home-manager/hacking-vm.nix;
+                }
       ];
     };
 
@@ -42,7 +60,7 @@
 
     work-admin = nixpkgs.lib.nixosSystem {
       # system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
+      # specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [
         ../modules
@@ -51,15 +69,15 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/mri.nix;
-          home-manager.users.root = import ../home-manager/root.nix;
+          home-manager.users.mri = import ../home-manager/hacking-vm.nix;
+          home-manager.users.root = import ../home-manager/hacking-vm.nix;
         }
       ];
     };
 
     deack-pc-01 = nixpkgs.lib.nixosSystem {
       # system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
+      # specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [
         ../modules
