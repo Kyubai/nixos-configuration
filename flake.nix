@@ -23,7 +23,9 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    # NeoVim Framework
+    # https://github.com/NotAShelf/nvf
+    nvf.url = "github:notashelf/nvf";
   };
 
 #   outputs = {
