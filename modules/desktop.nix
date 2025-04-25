@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   ...
 }: let
   cfgDesktop = config.modules.desktop.tools;
@@ -15,7 +16,7 @@ in {
       brave
       corefonts
       # discord
-      feishin
+      # feishin
       filezilla
       gimp
       keepassxc
@@ -26,10 +27,11 @@ in {
       pulsemixer
       qbittorrent
       # vesktop # discord client, currently installed via flatpak
-      veracrypt
-      (vivaldi.override {
-        proprietaryCodecs = true;
-      })
+      # veracrypt
+      # pkgs-unstable.vivaldi
+#       (vivaldi.override {
+#         proprietaryCodecs = true;
+#       })
       vivaldi-ffmpeg-codecs
       virtiofsd # for virt-manager https://discourse.nixos.org/t/virt-manager-cannot-find-virtiofsd/26752
       remmina # rdp client

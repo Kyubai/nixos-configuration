@@ -17,10 +17,11 @@ in {
           name = "Tokyonight-Dark";
           package = pkgs.tokyonight-gtk-theme;
         };
-        font = {
-          name = "Hack Nerd Font";
-          package = pkgs.nerd-fonts.hack;
-        };
+        # disabled, since mixing stable and unstable channel seems to be broken
+        # font = {
+          # name = "Hack Nerd Font";
+          # package = unstable-pkgs.nerd-fonts.hack;
+        # };
         cursorTheme = {
           name = "Nordzy-cursors";
           package = pkgs.nordzy-cursor-theme;
