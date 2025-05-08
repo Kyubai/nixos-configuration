@@ -28,7 +28,7 @@ in {
       qbittorrent
       # vesktop # discord client, currently installed via flatpak
       # veracrypt
-      # pkgs-unstable.vivaldi
+      vivaldi
 #       (vivaldi.override {
 #         proprietaryCodecs = true;
 #       })

@@ -35,6 +35,12 @@
     options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount"];
   };
 
+  fileSystems."/data/tools/personal" = {
+    device = ".host:/data_personal";
+    fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+    options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount"];
+  };
+
   fileSystems."/data/at-yet" = {
     device = ".host:/data_work";
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";

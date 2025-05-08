@@ -49,6 +49,7 @@ in {
       widevine-cdm
       wineWowPackages.stable
       wireguard-tools
+      xsv
       # pkgs-unstable.xan
     ];
 
