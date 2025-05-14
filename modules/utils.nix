@@ -34,6 +34,8 @@ in {
       expect # for unbuffer command
       htop-vim
       imagemagick
+      jc # convert formats to json, e.g. nmap
+      jq
       netdiscover
       nmap
       openssl
@@ -41,7 +43,6 @@ in {
       p7zip
       kdePackages.plasma-pa # volume applet
       proxychains
-      jq
       unixtools.xxd
       unrar
       tcpdump
