@@ -14,6 +14,7 @@ in {
       anki
       bitwarden
       brave
+      chromium
       corefonts
       # discord
       # feishin

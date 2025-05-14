@@ -42,7 +42,7 @@
       ];
     };
 
-    surf01 = nixpkgs.lib.nixosSystem {
+    work2home = nixpkgs.lib.nixosSystem {
       # specialArgs = {inherit inputs outputs;};
       # system = "x86_64-linux";
       modules = [
