@@ -4,41 +4,41 @@
   disko,
   home-manager,
   ...
-}@inputs: let 
+} @ inputs: let
   system = "x86_64-linux";
   # variables = nixpkgs.lib.importJSON ./secrets/variables.json;
   # pkgs = nixpkgs.legacyPackages.${system};
-#   pkgs-unstable = import nixpkgs-unstable {
-#     inherit system;
-#     config.allowUnfree = true;
-#   };
- in{
+  #   pkgs-unstable = import nixpkgs-unstable {
+  #     inherit system;
+  #     config.allowUnfree = true;
+  #   };
+in {
   # Used with `nixos-rebuild --flake .#<hostname>`
   # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
   nixosConfigurations = {
     hacking-vm = nixpkgs.lib.nixosSystem {
-    inherit system;
+      inherit system;
       specialArgs = {inherit inputs;};
 
-          # nixpkgs-unstable = import nixpkgs-unstable {
+      # nixpkgs-unstable = import nixpkgs-unstable {
       # system = "x86_64-linux";
-            # config = {
-              # allowUnfree = true;
-              # };
+      # config = {
+      # allowUnfree = true;
+      # };
       # };
       # };
       modules = [
         ../modules
-        disko.nixosModules.disko
+        disko.nixosModules.disko # required for nixos-anywhere
         ./systems/hacking-vm/configuration.nix
         home-manager.nixosModules.home-manager
-                {
-                  home-manager.extraSpecialArgs = {inherit inputs;};
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users.mri = import ../home-manager/hacking-vm.nix;
-                  home-manager.users.root = import ../home-manager/hacking-vm.nix;
-                }
+        {
+          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.mri = import ../home-manager/hacking-vm.nix;
+          home-manager.users.root = import ../home-manager/hacking-vm.nix;
+        }
       ];
     };
 

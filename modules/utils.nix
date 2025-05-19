@@ -37,12 +37,15 @@ in {
       jc # convert formats to json, e.g. nmap
       jq
       netdiscover
+      nixos-anywhere # for remote-deployment
       nmap
       openssl
       openvpn
       p7zip
       kdePackages.plasma-pa # volume applet
       proxychains
+      jc # converts formats to json
+      jq
       unixtools.xxd
       unrar
       tcpdump
