@@ -1,8 +1,9 @@
 {
   nixpkgs,
   # nixpkgs-unstable,
-  disko,
   home-manager,
+  disko,
+  nvf,
   ...
 } @ inputs: let
   system = "x86_64-linux";
@@ -36,8 +37,14 @@ in {
           home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/hacking-vm.nix;
-          home-manager.users.root = import ../home-manager/hacking-vm.nix;
+          home-manager.users.mri.imports = [
+            inputs.nvf.homeManagerModules.default
+            ../home-manager/hacking-vm.nix
+          ];
+          home-manager.users.root.imports = [
+            inputs.nvf.homeManagerModules.default
+            ../home-manager/hacking-vm.nix
+          ];
         }
       ];
     };
@@ -52,25 +59,39 @@ in {
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/hacking-vm.nix;
-          home-manager.users.root = import ../home-manager/hacking-vm.nix;
+          home-manager.users.mri.imports = [
+            inputs.nvf.homeManagerModules.default
+            ../home-manager/hacking-vm.nix
+          ];
+          home-manager.users.root.imports = [
+            inputs.nvf.homeManagerModules.default
+            ../home-manager/hacking-vm.nix
+          ];
         }
       ];
     };
 
     work-admin = nixpkgs.lib.nixosSystem {
       # system = "x86_64-linux";
-      # specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [
+        nvf.nixosModules.default
         ../modules
         ./systems/work-admin/configuration.nix
         home-manager.nixosModules.home-manager
         {
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/hacking-vm.nix;
-          home-manager.users.root = import ../home-manager/hacking-vm.nix;
+          home-manager.users.mri.imports = [
+            inputs.nvf.homeManagerModules.default
+            ../home-manager/hacking-vm.nix
+          ];
+          home-manager.users.root.imports = [
+            inputs.nvf.homeManagerModules.default
+            ../home-manager/hacking-vm.nix
+          ];
         }
       ];
     };

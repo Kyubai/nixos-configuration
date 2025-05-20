@@ -2,70 +2,105 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   cfgNvim = config.modules.neovim;
-  vimConfig = pkgs.callPackage ./vim/config.nix {};
-  luaConfig = pkgs.callPackage ./lua/config.nix {};
 in {
   options.modules.neovim.enable = lib.mkEnableOption "enable nvim text editor";
 
   config = lib.mkIf cfgNvim.enable {
-    programs.neovim = {
+    programs.nvf = {
       enable = true;
-      defaultEditor = true;
-      extraConfig = ''
-        ${vimConfig}
-      '';
-      extraLuaConfig = ''
-        -- Allow imports from common locations for some packages.
-        -- This is required for things like sumneko_lua to work.
-        local runtime_path = vim.split(package.path, ";")
-        table.insert(runtime_path, "lua/?.lua")
-        table.insert(runtime_path, "lua/?/init.lua")
-        ${luaConfig}
-      '';
-    };
+      settings.vim = {
+        # package = inputs.neovim-overlay.packages.${pkgs.stdenv.system}.neovim;
+        viAlias = false;
+        vimAlias = true;
 
-    home.packages = with pkgs; [
-      # lanuage servers
-      rust-analyzer
-      lua-language-server
-      nixd
+        options = {
+          autoindent = true;
+          shiftwidth = 0; # spaces used for autoindent 0 = use tabstop
+          tabstop = 4; # visual spaces per tab
+          softtabstop = 4; # visual spaces in tab on edit
+          expandtab = true; # expand tabs to spaces
+          shiftround = true; # align indent to next multiple value of shiftwidth. For its meaning see http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
+          tm = 100; # timeout in ms
+          updatetime = 100; # The number of milliseconds till Cursor Hold event is fired
+          wrap = false;
+        };
+        theme = {
+          enable = true;
+          name = "tokyonight";
+          style = "night";
+        };
+        syntaxHighlighting = true;
+        # TODO vim.maps
+        # TODO vim.ui
+        # TODO vim.utility
+        utility = {
+          surround.enable = true;
+          oil-nvim.enable = true;
+        };
 
-      alejandra # nix formatter
-    ];
+        undoFile.enable = true;
+        telescope.enable = true;
+        snippets.luasnip.enable = true;
+        statusline.lualine.enable = true;
+        navigation.harpoon.enable = true;
+        tabline.nvimBufferline.enable = true;
+        terminal.toggleterm.enable = true;
+        lsp = {
+          enable = true;
+          formatOnSave = true;
+          inlayHints.enable = true;
+          lightbulb.enable = true;
+          lspconfig.enable = true;
+          lspkind.enable = true;
+        };
+        languages = {
+          enableDAP = true;
+          enableFormat = true;
+          enableTreesitter = true;
+        };
+        languages.nix = {
+          enable = true;
+          lsp.enable = true;
+          # format.enable = true;
+          # treesitter.enable = true;
+        };
+        languages.assembly = {
+          enable = true;
+          lsp.enable = true;
+        };
+        languages.bash = {
+          enable = true;
+          extraDiagnostics.enable = true;
+          lsp.enable = true;
+        };
+        autocomplete.nvim-cmp.enable = true;
 
-    programs.neovim.plugins = with pkgs.vimPlugins; [
-      tokyonight-nvim # preffered colorscheme
-      telescope-nvim # Telescope improves search
-      oil-nvim # buffer like dir edit
-      nvim-surround # improved movements for objects
+        autopairs.nvim-autopairs.enable = true;
+        binds.hardtime-nvim.enable = true;
+        binds.whichKey.enable = true;
+        comments.comment-nvim.enable = true;
+        debugger.nvim-dap.enable = true;
+        filetree.neo-tree.enable = true;
+        formatter.conform-nvim.enable = true;
+        fzf-lua.enable = true;
+        git.enable = true;
+        git.git-conflict.enable = true;
+        git.gitsigns.enable = true;
+        # notes.obsidian.enable = true;
+        notes.todo-comments.enable = true;
+        notify.nvim-notify.enable = true;
 
-      # inspect treesitter and some more functions
-      nvim-treesitter.withAllGrammars
-      playground
-
-      harpoon # Harpoon provides navigation options
-      undotree # Improved undo function
-      vim-fugitive # Git integration
-
-      # Language server
-      nvim-lspconfig
-
-      # completions
-      nvim-cmp # completion engine
-      luasnip # snippet engine
-      cmp-buffer # buffer words
-      cmp-path # paths
-      cmp-nvim-lua # nvim lua api
-      cmp-nvim-lsp # lsp
-      cmp_luasnip # luasnip
-      friendly-snippets # snippet collection
-    ];
-
-    home.shellAliases = {
-      vim = "nvim";
+        # extraPlugins = {
+        #   harpoon = {
+        #     package = pkgs.vimPlugins.harpoon;
+        #     setup = "require('harpoon').setup {}";
+        #   };
+        # };
+      };
     };
   };
 }

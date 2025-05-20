@@ -19,6 +19,7 @@ in {
       # discord
       # feishin
       filezilla
+      floorp
       gimp
       keepassxc
       ntfs3g # todo move to hacking/forensics module
