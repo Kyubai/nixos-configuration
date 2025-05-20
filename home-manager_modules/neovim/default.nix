@@ -13,19 +13,29 @@ in {
     programs.nvf = {
       enable = true;
       settings.vim = {
-        # package = inputs.neovim-overlay.packages.${pkgs.stdenv.system}.neovim;
+        package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.system}.neovim;
         viAlias = false;
         vimAlias = true;
 
+        # searching
+        hideSearchHighlight = true;
+        searchCase = "smart";
+
         options = {
-          autoindent = true;
-          shiftwidth = 0; # spaces used for autoindent 0 = use tabstop
-          tabstop = 4; # visual spaces per tab
-          softtabstop = 4; # visual spaces in tab on edit
-          expandtab = true; # expand tabs to spaces
+          # Indenting
+          autoindent = true; # use indent from last line
+          smarttab = true; # use shiftwidth for identation at start of line
           shiftround = true; # align indent to next multiple value of shiftwidth. For its meaning see http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
-          tm = 100; # timeout in ms
-          updatetime = 100; # The number of milliseconds till Cursor Hold event is fired
+
+          # Tab Settings
+          # https://gist.github.com/LunarLambda/4c444238fb364509b72cfb891979f1dd
+          shiftwidth = 2; # spaces used for autoindent 0 = use tabstop
+          tabstop = 4; # visual spaces per tab
+          softtabstop = -1; # spaces inserted on <Tab> and <Backspace>, -1 = use shiftwidth
+          expandtab = true; # expand tabs to spaces
+
+          tm = 500; # timeout in ms
+          updatetime = 50; # The number of milliseconds till Cursor Hold event is fired
           wrap = false;
         };
         theme = {
@@ -35,6 +45,15 @@ in {
         };
         syntaxHighlighting = true;
         # TODO vim.maps
+        maps = {
+          normal = {
+            "H" = {
+              action = "^";
+              desc = "Go to start of line";
+            };
+          };
+          insert = {};
+        };
         # TODO vim.ui
         # TODO vim.utility
         utility = {
