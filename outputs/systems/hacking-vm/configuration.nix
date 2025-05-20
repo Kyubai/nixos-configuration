@@ -8,28 +8,28 @@
   ...
 }: {
   imports = [
-    # ./hardware-configuration.nix
+    ./hardware-configuration.nix
     ./disk-config.nix
   ];
 
   # my own /etc/nixos/modules
   modules.base.enable = true;
   modules.cli.utils.enable = true;
-  modules.sec.utils.enable = true;
-  modules.desktop.tools.enable = true;
+  # modules.sec.utils.enable = true;
+  # modules.desktop.tools.enable = true;
   # modules.desktop.hyprland.enable = true;
   modules.desktop.xorg.enable = true;
   modules.vm.vmware.guest.enable = true;
 
-  boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
 
-  # boot.loader.grub = {
+  boot.loader.grub = {
   # no need to set devices, disko will add all devices that have a EF02 partition to the list already
   # devices = [ ];
   # enable = true;
   # efiSupport = true;
   # efiInstallAsRemovable = true;
-  # };
+  };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.auto-optimise-store = true;
@@ -121,26 +121,26 @@
   fileSystems."/data/tools/personal" = {
     device = ".host:/tools_personal";
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
-    options = ["uid=1000" "gid=1000" "umask=0000" "allow_other" "auto_unmount"];
+    options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
   };
 
   fileSystems."/data/share" = {
     device = ".host:/share";
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
-    options = ["uid=1000" "gid=1000" "umask=0000" "allow_other" "auto_unmount"];
+    options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
   };
 
   fileSystems."/data/at-yet/vpn/react" = {
     device = ".host:/vpn_react";
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
-    options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount"];
+    options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
   };
 
   # exported folders
   fileSystems."/export/tools/scripts" = {
     device = "/data/tools/personal/scripts";
     # device = "/home/mri/test";
-    options = ["bind"];
+    options = ["bind" "nofail"];
   };
 
   services.samba = {
