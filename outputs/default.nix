@@ -1,6 +1,6 @@
 {
   nixpkgs,
-  # nixpkgs-unstable,
+  nixpkgs-unstable,
   home-manager,
   disko,
   nvf,
@@ -9,13 +9,14 @@
   system = "x86_64-linux";
   # variables = nixpkgs.lib.importJSON ./secrets/variables.json;
   # pkgs = nixpkgs.legacyPackages.${system};
-  #   pkgs-unstable = import nixpkgs-unstable {
-  #     inherit system;
-  #     config.allowUnfree = true;
-  #   };
+  # pkgs-unstable = import nixpkgs-unstable {
+  # inherit system;
+  # config.allowUnfree = true;
+  # };
 in {
   # Used with `nixos-rebuild --flake .#<hostname>`
   # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
+  homeManagerModules.default = ../home-manager_modules;
   nixosConfigurations = {
     hacking-vm = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -76,21 +77,23 @@ in {
       specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [
+        ../nixos_modules
         nvf.nixosModules.default
-        ../modules
         ./systems/work-admin/configuration.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri.imports = [
+          home-manager.sharedModules = [
+            inputs.self.outputs.homeManagerModules.default
             inputs.nvf.homeManagerModules.default
-            ../home-manager/hacking-vm.nix
+          ];
+          home-manager.users.mri.imports = [
+            ./home-manager/hacking-vm.nix
           ];
           home-manager.users.root.imports = [
-            inputs.nvf.homeManagerModules.default
-            ../home-manager/hacking-vm.nix
+            ./home-manager/hacking-vm.nix
           ];
         }
       ];

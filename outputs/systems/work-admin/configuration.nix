@@ -4,7 +4,6 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    ../../../modules
   ];
 
   # my own /etc/nixos/modules
@@ -65,17 +64,17 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-#   fonts.fontconfig.defaultFonts.serif = [
-#     "Hack Nerd Font"
-#   ];
-# 
-#   fonts.fontconfig.defaultFonts.sansSerif = [
-#     "Hack Nerd Font"
-#   ];
-# 
-#   fonts.fontconfig.defaultFonts.monospace = [
-#     "Hack Nerd Font Mono"
-#   ];
+  #   fonts.fontconfig.defaultFonts.serif = [
+  #     "Hack Nerd Font"
+  #   ];
+  #
+  #   fonts.fontconfig.defaultFonts.sansSerif = [
+  #     "Hack Nerd Font"
+  #   ];
+  #
+  #   fonts.fontconfig.defaultFonts.monospace = [
+  #     "Hack Nerd Font Mono"
+  #   ];
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";

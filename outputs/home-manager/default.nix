@@ -1,8 +1,4 @@
 {...}: {
-  imports = [
-    ./modules
-  ];
-
   # my own modules, which I always want to be enabled
   modules.docker.enable = true;
   modules.eza.enable = true;
