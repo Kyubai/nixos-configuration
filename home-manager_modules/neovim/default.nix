@@ -46,13 +46,85 @@ in {
         syntaxHighlighting = true;
         # TODO vim.maps
         maps = {
-          normal = {
+          normalVisualOp = {
             "H" = {
               action = "^";
               desc = "Go to start of line";
             };
+            "L" = {
+              action = "g_";
+              desc = "Go to end of line";
+            };
+            "<C-c>" = {
+              action = "\"+y";
+              desc = "Copy to clipboard";
+            };
+            "<leader>p" = {
+              action = "+p";
+              desc = "Paste from clipboard";
+            };
+            "<leader>P" = {
+              action = "+P";
+              desc = "Paste from clipboard";
+            };
+            "<leader>d" = {
+              action = "\"_d";
+              desc = "delete without yanking";
+            };
           };
-          insert = {};
+          normal = {
+            "J" = {
+              action = "mzJ`z";
+              desc = "Merge rows without moving the cursor";
+            };
+            "<C-d>" = {
+              action = "<C-d>zz";
+              desc = "Move screen while keeping the cursor centered";
+            };
+            "<C-u>" = {
+              action = "<C-u>zz";
+              desc = "Move screen while keeping the cursor centered";
+            };
+            "n" = {
+              action = "nzzzv";
+              desc = "search match while keeping the cursor centered";
+            };
+            "N" = {
+              action = "Nzzzv";
+              desc = "search match while keeping the cursor centered";
+            };
+            "Q" = {
+              action = "function() vim.lsp.buf.format() end";
+              desc = "Format buffer with lsp";
+              lua = true;
+            };
+            "<leader>s" = {
+              action = ":%s,\\<<C-r><C-w>\\>,<C-r><C-w>,gI<Left><Left><Left>";
+              desc = "search and replace current word";
+            };
+            "<leader>x" = {
+              action = "<cmd>!chmod +x %<CR>";
+              desc = "make current file executable";
+              silent = true;
+            };
+          };
+          visual = {
+            "J" = {
+              action = ":m '>+1<CR>gv=gv";
+              desc = "move highlighted lines";
+            };
+            "K" = {
+              action = ":m '<-2<CR>gv=gv";
+              desc = "move highlighted lines";
+            };
+          };
+          insert = {
+            "jk" = {
+              action = "<Esc>";
+              desc = "fast quite to normal mode";
+              nowait = true;
+            };
+          };
         };
         # TODO vim.ui
         # TODO vim.utility
@@ -112,13 +184,6 @@ in {
         # notes.obsidian.enable = true;
         notes.todo-comments.enable = true;
         notify.nvim-notify.enable = true;
-
-        # extraPlugins = {
-        #   harpoon = {
-        #     package = pkgs.vimPlugins.harpoon;
-        #     setup = "require('harpoon').setup {}";
-        #   };
-        # };
       };
     };
   };
