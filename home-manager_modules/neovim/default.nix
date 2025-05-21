@@ -43,7 +43,7 @@ in {
           name = "tokyonight";
           style = "night";
         };
-        syntaxHighlighting = true;
+        # syntaxHighlighting = true;
         # TODO vim.maps
         maps = {
           normalVisualOp = {
@@ -106,6 +106,10 @@ in {
               action = "<cmd>!chmod +x %<CR>";
               desc = "make current file executable";
               silent = true;
+            };
+            "-" = {
+              action = "<CMD>Oil<CR>";
+              desc = "Open parent directory";
             };
           };
           visual = {
