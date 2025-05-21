@@ -35,21 +35,4 @@
     # Obsidian nvim plugin for nvf
     # obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
   };
-
-  #   outputs = {
-  #   nixpkgs,
-  #   disko,
-  #   nixos-facter-modules,
-  #   ...
-  #   }:
-  #   {
-  #   nixosConfigurations.hacking-vm = nixpkgs.lib.nixosSystem {
-  #   system = "x86_64-linux";
-  #   modules = [
-  #   disko.nixosModules.disko
-  #   ./outputs/systems/hacking-vm/configuration.nix
-  #   ./outputs/systems/hacking-vm/hardware-configuration.nix
-  #   ];
-  #   };
-  #   };
 }
