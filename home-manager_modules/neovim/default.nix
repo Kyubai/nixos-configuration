@@ -111,6 +111,11 @@ in {
               action = "<CMD>Oil<CR>";
               desc = "Open parent directory";
             };
+            "<leader>gs" = {
+              action = "vim.cmd.Git";
+              desc = "Open fuGitive";
+              lua = true;
+            };
           };
           visual = {
             "J" = {
@@ -137,13 +142,13 @@ in {
           oil-nvim.enable = true;
         };
 
-        undoFile.enable = true;
-        telescope.enable = true;
+        navigation.harpoon.enable = true;
         snippets.luasnip.enable = true;
         statusline.lualine.enable = true;
-        navigation.harpoon.enable = true;
         tabline.nvimBufferline.enable = true;
+        telescope.enable = true;
         terminal.toggleterm.enable = true;
+        undoFile.enable = true;
         lsp = {
           enable = true;
           formatOnSave = true;

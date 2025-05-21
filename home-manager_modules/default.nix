@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./alacritty
     ./docker
@@ -18,6 +22,7 @@
     ./theme
     ./tmux
     ./waybar
+    ./zellij
     ./zsh
   ];
 }

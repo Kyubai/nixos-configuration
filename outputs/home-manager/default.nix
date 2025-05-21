@@ -7,8 +7,10 @@
   modules.neovim.enable = true;
   modules.theme.enable = true;
   modules.tmux.enable = true;
+  modules.zellij.enable = true;
   modules.zsh.enable = true;
 
+  # additional programs
   programs.bat.enable = true;
   programs.imv.enable = true;
   programs.mpv.enable = true;
@@ -41,8 +43,8 @@
   };
 
   home.sessionPath = [
+    "/data/tools/personal/scripts/"
     "$HOME/scripts/"
-    "/data/security/scripts/"
   ];
 
   xdg.mimeApps = {
