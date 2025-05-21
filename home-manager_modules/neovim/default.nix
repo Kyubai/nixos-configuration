@@ -138,7 +138,10 @@ in {
         # TODO vim.ui
         # TODO vim.utility
         utility = {
-          surround.enable = true;
+          surround = {
+            enable = true;
+            useVendoredKeybindings = false;
+          };
           oil-nvim.enable = true;
         };
 

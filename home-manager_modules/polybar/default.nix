@@ -14,18 +14,36 @@ in {
       package = customPackage;
       script = "polybar main &";
       settings = {
-        "bar/main" = {
-          bottom = true;
-          modules-left = "i3";
-          modules-right = "date";
+        "colors" = {
+          dark-base = "#1f2335";
+          light-base = "#c0caf5";
+
+          red-dark = "#c53b53";
+          red-light = "#ff757f";
+
+          green-dark = "#41a6b5";
+          green-light = "#c3e88d";
+
+          purple-dark = "#9d7cd8";
+          purple-light = "#bb9af7";
+
+          blue-dark = "#3d59a1";
+          blue-light = "#7dcfff";
         };
 
-        "module/date" = {
-          type = "internal/date";
-          internal = 5;
-          date = "%Y-%m-%d";
-          time = "%H:%M";
-          label = "%date% %time%";
+        "bar/main" = {
+          bottom = true;
+          background = "\${colors.dark-base}";
+          foreground = "\${colors.light-base}";
+          fixed-center = true;
+          padding = "5px"; # padding to left and right of bar
+          font-0 = "HackNerdMono:size=11";
+
+          scroll-up = "#i3.prev";
+          scroll-down = "#i3.next";
+
+          modules-left = "i3";
+          modules-right = "tray date";
         };
 
         # https://github.com/polybar/polybar/wiki/Module:-i3
@@ -34,15 +52,49 @@ in {
           format = "<label-state> <label-mode>";
 
           index-sort = true;
+          enable-click = true;
+          enable-scroll = true;
+
+          label-mode = "%mode%";
+          label-mode-padding = "2px";
+          label-mode-background = "\${colors.dark-base}";
 
           label-focused = "%index%";
-          label-focused-foreground = "#ffffff";
-          label-focused-background = "#3f3f3f";
-          label-focused-underline = "#fba922";
-          label-focused-padding = "0";
+          label-focused-foreground = "\${colors.dark-base}";
+          label-focused-background = "\${colors.light-base}";
+          label-focused-underline = "\${colors.light-base}";
+          label-focused-padding = "4px";
+
+          label-unfocused = "%index%";
+          label-unfocused-padding = "4px";
+
+          label-visible = "%index%";
+          label-visible-underline = "\${colors.light-base}";
+          label-visible-padding = "4px";
+
+          label-urgent = "%index%";
+          label-urgent-foreground = "\${colors.red-light}";
+          label-urgent-background = "\${colors.red-dark}";
+          label-urgent-padding = "4px";
 
           label-separator = "|";
-          label-separator-padding = 0;
+          label-separator-padding = "2px";
+          label-separator-foreground = "\${colors.light-base}";
+        };
+
+        "module/tray" = {
+          type = "internal/tray";
+
+          format-margin = "8px";
+          tray-spacing = "8px";
+        };
+
+        "module/date" = {
+          type = "internal/date";
+          internal = 5;
+          date = "%Y-%m-%d";
+          time = "%H:%M";
+          label = "%date% %time%";
         };
 
         "module/volume" = {
@@ -55,7 +107,6 @@ in {
         };
       };
     };
-
     xsession.windowManager.i3.config.bars = [
       {
         command = "${customPackage}/bin/polybar";
