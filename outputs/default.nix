@@ -143,6 +143,7 @@ in {
         inputs.self.outputs.homeManagerModules.default
         inputs.nvf.homeManagerModules.default
         ./home-manager/ssh-utils.nix
+        ./home-manager/mri.nix
       ];
     };
   };
