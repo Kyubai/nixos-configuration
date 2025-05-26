@@ -137,9 +137,11 @@ in {
     "ssh-utils" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       extraSpecialArgs = {
-        # inherit inputs outputs;
+        inherit inputs;
       };
       modules = [
+        inputs.self.outputs.homeManagerModules.default
+        inputs.nvf.homeManagerModules.default
         ./home-manager/ssh-utils.nix
       ];
     };
