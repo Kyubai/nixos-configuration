@@ -21,16 +21,8 @@ in {
     hacking-vm = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs;};
-
-      # nixpkgs-unstable = import nixpkgs-unstable {
-      # system = "x86_64-linux";
-      # config = {
-      # allowUnfree = true;
-      # };
-      # };
-      # };
       modules = [
-        ../modules
+        ../nixos_modules
         disko.nixosModules.disko # required for nixos-anywhere
         ./systems/hacking-vm/configuration.nix
         home-manager.nixosModules.home-manager
@@ -38,13 +30,17 @@ in {
           home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri.imports = [
+
+          home-manager.sharedModules = [
+            inputs.self.outputs.homeManagerModules.default
             inputs.nvf.homeManagerModules.default
-            ../home-manager/hacking-vm.nix
+          ];
+
+          home-manager.users.mri.imports = [
+            ./home-manager/hacking-vm.nix
           ];
           home-manager.users.root.imports = [
-            inputs.nvf.homeManagerModules.default
-            ../home-manager/hacking-vm.nix
+            ./home-manager/hacking-vm.nix
           ];
         }
       ];
@@ -126,7 +122,7 @@ in {
         # inherit inputs outputs;
       };
       modules = [
-        ../home-manager/mri.nix
+        ./home-manager/mri.nix
       ];
     };
     "root" = home-manager.lib.homeManagerConfiguration {
@@ -135,7 +131,16 @@ in {
         # inherit inputs outputs;
       };
       modules = [
-        ../home-manager/root.nix
+        ./home-manager/root.nix
+      ];
+    };
+    "ssh-utils" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      extraSpecialArgs = {
+        # inherit inputs outputs;
+      };
+      modules = [
+        ./home-manager/ssh-utils.nix
       ];
     };
   };
