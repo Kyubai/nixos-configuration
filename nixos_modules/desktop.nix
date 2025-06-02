@@ -17,12 +17,12 @@ in {
       chromium
       corefonts
       # discord
-      # feishin
+      feishin
       filezilla
       floorp
       gimp
       keepassxc
-      ntfs3g # todo move to hacking/forensics module
+      ntfs3g # TODO move to hacking/forensics module
       obsidian
       kdePackages.okular
       pavucontrol
@@ -31,9 +31,9 @@ in {
       # vesktop # discord client, currently installed via flatpak
       # veracrypt
       vivaldi
-#       (vivaldi.override {
-#         proprietaryCodecs = true;
-#       })
+      #       (vivaldi.override {
+      #         proprietaryCodecs = true;
+      #       })
       vivaldi-ffmpeg-codecs
       virtiofsd # for virt-manager https://discourse.nixos.org/t/virt-manager-cannot-find-virtiofsd/26752
       remmina # rdp client

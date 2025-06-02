@@ -17,6 +17,8 @@ in {
   config = lib.mkIf cfg.enable {
     services.dunst.enable = true; # notification deamon
     programs.wofi.enable = true; # dmenu
+    modules.kitty.enable = true;
+    modules.waybar.enable = true;
 
     home.pointerCursor = {
       hyprcursor.enable = true;

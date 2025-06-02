@@ -1,0 +1,3 @@
+{...}: {
+  modules.steam.enable = true;
+}

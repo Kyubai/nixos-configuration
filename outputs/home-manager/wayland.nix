@@ -1,2 +1,3 @@
 {...}: {
+  modules.hyprland.enable = true;
 }
