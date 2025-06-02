@@ -8,7 +8,7 @@
   cfgBase = config.modules.base;
   # nixpkgs-unstable.config.allowUnfree = true;
   # unstablePkgs = import nixpkgs-unstable {
-# };
+  # };
 in {
   options.modules.base.enable = lib.mkEnableOption "base nix config";
 
@@ -43,22 +43,22 @@ in {
     time.timeZone = "Europe/Berlin";
     console.keyMap = "us";
 
-#     fonts.packages = [
-#       pkgs-unstable.nerd-fonts.hack
-#       pkgs-unstable.noto-fonts-cjk-sans
-#     ];
-# 
-#     fonts.fontconfig.defaultFonts.serif = [
-#       "Hack Nerd Font"
-#     ];
-# 
-#     fonts.fontconfig.defaultFonts.sansSerif = [
-#       "Hack Nerd Font"
-#     ];
-# 
-#     fonts.fontconfig.defaultFonts.monospace = [
-#       "Hack Nerd Font Mono"
-#     ];
+    fonts.packages = [
+      pkgs.nerd-fonts.hack
+      pkgs.noto-fonts-cjk-sans
+    ];
+
+    fonts.fontconfig.defaultFonts.serif = [
+      "Hack Nerd Font"
+    ];
+
+    fonts.fontconfig.defaultFonts.sansSerif = [
+      "Hack Nerd Font"
+    ];
+
+    fonts.fontconfig.defaultFonts.monospace = [
+      "Hack Nerd Font Mono"
+    ];
 
     services.gnome.gnome-keyring.enable = true;
     # required for GTK apps
@@ -87,8 +87,8 @@ in {
       enable = true;
       xdgOpenUsePortal = true;
       # extraPortals = with pkgs; [
-        # xdg-desktop-portal-gtk
-        # kdePackages.xdg-desktop-portal-kde # for file-picker
+      # xdg-desktop-portal-gtk
+      # kdePackages.xdg-desktop-portal-kde # for file-picker
       # ];
     };
     xdg.menus.enable = true;
