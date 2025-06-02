@@ -1,12 +1,4 @@
-{...}: {
-  imports = [
-    ./default.nix
-  ];
-
-  # my own modules
-  modules.sway.enable = true;
-  modules.steam.enable = true;
-
-  # home.username = "root";
-  # home.homeDirectory = /root;
+{lib, ...}: {
+  home.username = lib.mkDefault "root";
+  home.homeDirectory = lib.mkDefault /root;
 }

@@ -78,6 +78,7 @@
   users.users.mri = {
     isNormalUser = true;
     extraGroups = [
+      "dialout"
       "wheel"
       "video"
       "gamemode"

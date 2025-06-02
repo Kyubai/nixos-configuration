@@ -100,14 +100,25 @@ in {
       # specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [
-        ../modules
+        ../nixos_modules
+        nvf.nixosModules.default
         ./systems/deack-pc-01/configuration.nix
         home-manager.nixosModules.home-manager
         {
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri = import ../home-manager/mri.nix;
-          home-manager.users.root = import ../home-manager/root.nix;
+          home-manager.sharedModules = [
+            inputs.self.outputs.homeManagerModules.default
+            inputs.nvf.homeManagerModules.default
+            ./home-manager/gaming-pc.nix
+          ];
+          home-manager.users.mri.imports = [
+            ./home-manager/mri.nix
+          ];
+          home-manager.users.root.imports = [
+            ./home-manager/mri.nix
+          ];
         }
       ];
     };
