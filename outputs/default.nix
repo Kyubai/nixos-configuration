@@ -47,22 +47,27 @@ in {
     };
 
     work2home = nixpkgs.lib.nixosSystem {
-      # specialArgs = {inherit inputs outputs;};
-      # system = "x86_64-linux";
+      inherit system;
+      specialArgs = {inherit inputs;};
       modules = [
-        ../modules
-        ./systems/surf01/configuration.nix
+        ../nixos_modules
+        ./systems/work2home/configuration.nix
         home-manager.nixosModules.home-manager
         {
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.mri.imports = [
+
+          home-manager.sharedModules = [
+            inputs.self.outputs.homeManagerModules.default
             inputs.nvf.homeManagerModules.default
-            ../home-manager/hacking-vm.nix
+          ];
+
+          home-manager.users.mri.imports = [
+            ./home-manager/hacking-vm.nix
           ];
           home-manager.users.root.imports = [
-            inputs.nvf.homeManagerModules.default
-            ../home-manager/hacking-vm.nix
+            ./home-manager/hacking-vm.nix
           ];
         }
       ];

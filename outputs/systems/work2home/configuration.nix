@@ -4,7 +4,6 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    ../../../modules
   ];
 
   # Use the systemd-boot EFI boot loader.
