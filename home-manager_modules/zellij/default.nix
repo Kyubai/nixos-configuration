@@ -16,6 +16,8 @@ in {
         default_shell = "zsh";
         theme = "tokyo-night-storm";
         copy_on_select = false;
+        pane_frames = false;
+        show_startup_tips = false;
       };
     };
   };
