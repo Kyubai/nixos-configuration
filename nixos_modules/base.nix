@@ -24,6 +24,7 @@ in {
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
     nixpkgs.config.allowUnfree = true;
+    system.autoUpgrade.enable = true;
     # Perform garbage collection to save disk space
     nix.gc = {
       automatic = true;
@@ -40,8 +41,14 @@ in {
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+    hardware.opengl = {
+      enable = true;
+      driSupport32Bit = true;
+    };
+
     time.timeZone = "Europe/Berlin";
     console.keyMap = "us";
+    services.xserver.xkb.layout = "eu";
 
     fonts.packages = [
       pkgs.nerd-fonts.hack
@@ -100,7 +107,6 @@ in {
     '';
 
     environment.systemPackages = with pkgs; [
-      alacritty
       dbus
       file
       home-manager
