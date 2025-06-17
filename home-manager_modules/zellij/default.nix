@@ -15,7 +15,7 @@ in {
       settings = {
         default_shell = "zsh";
         theme = "tokyo-night-storm";
-        copy_on_select = false;
+        copy_on_select = true;
         pane_frames = false;
         show_startup_tips = false;
       };
