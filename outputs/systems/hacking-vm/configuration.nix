@@ -15,8 +15,8 @@
   # my own /etc/nixos/modules
   modules.base.enable = true;
   modules.cli.utils.enable = true;
-  # modules.sec.utils.enable = true;
-  # modules.desktop.tools.enable = true;
+  modules.sec.utils.enable = true;
+  modules.desktop.tools.enable = true;
   # modules.desktop.hyprland.enable = true;
   modules.desktop.xorg.enable = true;
   modules.vm.vmware.guest.enable = true;
@@ -24,11 +24,11 @@
   # boot.loader.systemd-boot.enable = true;
 
   boot.loader.grub = {
-  # no need to set devices, disko will add all devices that have a EF02 partition to the list already
-  # devices = [ ];
-  # enable = true;
-  # efiSupport = true;
-  # efiInstallAsRemovable = true;
+    # no need to set devices, disko will add all devices that have a EF02 partition to the list already
+    # devices = [ ];
+    # enable = true;
+    # efiSupport = true;
+    # efiInstallAsRemovable = true;
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
