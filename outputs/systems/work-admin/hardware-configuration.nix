@@ -1,22 +1,21 @@
 # to /etc/nixos/configuration.nix instead.
 # { config, lib, pkgs, modulesPath, ... }:
+{lib, ...}: {
+  imports = [];
 
-{
-  imports = [ ];
-
-  boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "ahci" "xhci_pci" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = ["ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "ahci" "xhci_pci" "sd_mod" "sr_mod"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = [];
+  boot.extraModulePackages = [];
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.device = lib.mkDefault "/dev/sda";
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/d6b8caad-3a86-4cba-b596-780879698ba2";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/d6b8caad-3a86-4cba-b596-780879698ba2";
+    fsType = "ext4";
+  };
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
