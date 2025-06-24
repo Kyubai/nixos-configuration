@@ -124,6 +124,12 @@
     options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
   };
 
+  fileSystems."/data/tools/at-yet" = {
+    device = ".host:/tools_at-yet";
+    fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+    options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
+  };
+
   fileSystems."/data/share" = {
     device = ".host:/share";
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
@@ -132,6 +138,12 @@
 
   fileSystems."/data/at-yet/vpn/react" = {
     device = ".host:/vpn_react";
+    fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+    options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
+  };
+
+  fileSystems."/data/obsidian_vaults/security_notes" = {
+    device = ".host:/security_notes";
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
     options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
   };

@@ -32,6 +32,7 @@ in {
       dbus
       dig
       expect # for unbuffer command
+      gptfdisk
       htop-vim
       imagemagick
       jc # convert formats to json, e.g. nmap
@@ -44,8 +45,6 @@ in {
       p7zip
       kdePackages.plasma-pa # volume applet
       proxychains
-      jc # converts formats to json
-      jq
       unixtools.xxd
       unrar
       tcpdump
@@ -54,7 +53,6 @@ in {
       wineWowPackages.stable
       wireguard-tools
       xan
-      # pkgs-unstable.xan
     ];
 
     # make update-resolv-conf script available to update dns server on openvpn connect
