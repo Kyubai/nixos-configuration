@@ -17,6 +17,7 @@
   modules.cli.utils.enable = true;
   modules.sec.utils.enable = true;
   modules.desktop.tools.enable = true;
+  modules.work.enable = true;
   # modules.desktop.hyprland.enable = true;
   modules.desktop.xorg.enable = true;
   modules.vm.vmware.guest.enable = true;
