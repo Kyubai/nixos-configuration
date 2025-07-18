@@ -21,6 +21,7 @@
     ./sway.nix
     ./utils.nix
     ./vmware-guest.nix
+    ./work.nix
     ./xorg.nix
   ];
 }
