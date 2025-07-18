@@ -1,5 +1,5 @@
 # Edit this configuration file to define what should be installed on
-#intern your system. Help is available in the configuration.nix(5) man page, on
+#internintern your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {pkgs, ...}: {
   imports = [
@@ -51,6 +51,8 @@
         # "2a0f:fc80::" # dns0.eu
         # "185.253.5.0" # dns0.eu
         # "2a0f:fc81::" # dns0.eu
+        "/addyet.intern/10.10.0.2" # Hacker DMZ
+        "/addyet.intern/192.168.250.5" # addyet.intern
         "/verriegelt.intern/10.105.201.1"
       ];
     };
