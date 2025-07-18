@@ -1,5 +1,5 @@
 # Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
+#intern your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {pkgs, ...}: {
   imports = [
@@ -26,7 +26,7 @@
   # modules.desktop.hyprland.enable = true;
   modules.desktop.xorg.enable = true;
   modules.vm.vmware.guest.enable = true;
-  modules.work.enable = true;
+  # modules.work.enable = true;
 
   # required for zfs support
   # networking.hostId = "621cba57";
@@ -40,8 +40,21 @@
   services.dnsmasq = {
     enable = true;
     settings = {
-      
+      listen-address = "::1,127.0.0.1";
+      no-resolv = true; # ignore resolv.conf
+      log-queries = true;
+      log-facility = "/var/log/dnsmasq.log";
+      server = [
+        "185.222.222.222" # dns.sb
+        "45.11.45.11" # dns.sb
+        # "193.110.81.0" # dns0.eu
+        # "2a0f:fc80::" # dns0.eu
+        # "185.253.5.0" # dns0.eu
+        # "2a0f:fc81::" # dns0.eu
+        "/verriegelt.intern/10.105.201.1"
+      ];
     };
+  };
 
   fileSystems."/data/tools/personal" = {
     device = ".host:/data_personal";
