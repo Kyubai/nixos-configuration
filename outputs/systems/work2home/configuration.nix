@@ -40,6 +40,12 @@
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.hostName = "work2home";
 
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      
+    };
+
   fileSystems."/data/tools/personal" = {
     device = ".host:/data_personal";
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
