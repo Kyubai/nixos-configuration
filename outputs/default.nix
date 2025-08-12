@@ -126,7 +126,7 @@ in {
           home-manager.sharedModules = [
             inputs.self.outputs.homeManagerModules.default
             inputs.nvf.homeManagerModules.default
-            ./home-manager/gaming-pc.nix
+            ./home-manager/systems/gaming-pc.nix
           ];
           home-manager.users.mri.imports = [
             ./home-manager/mri.nix

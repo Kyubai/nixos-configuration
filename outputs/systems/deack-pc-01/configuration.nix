@@ -4,7 +4,6 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    # ../../../modules/development.nix
   ];
 
   networking.hostName = "deack-pc-01";
@@ -59,12 +58,6 @@
   nixpkgs.config.permittedInsecurePackages = [
     # "electron-25.9.0" # for obsidian on 2024-04-16
   ];
-
-  #   services.syncthing = {
-  #     enable = true;
-  #     user = "mri";
-  #     dataDir = "/srv/syncthing";
-  #   };
 
   # fix dynamically linked libraries
   programs.nix-ld.enable = true;
