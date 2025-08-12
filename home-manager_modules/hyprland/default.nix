@@ -165,7 +165,7 @@ in {
           # "$mod SHIFT, C, forcekillactive" # doesn't work for some reason
           "$mod, v, exec, pulsemixer"
           "$mod, p, exec, grimblast --freeze save area - | swappy -f - -o - | wl-copy"
-          "$mod SHIFT, p, exec, grimblast --freeze save area - | swappy -f - -o ~/screenshots/$(date -Iseconds)_screenshot.png"
+          "$mod SHIFT, p, exec, grimblast --freeze save screen ~/screenshots/$(date -Iseconds)_screenshot.png"
           "$mod CTRL, p, exec, wl-screenrec -g \"$(slurp)\" -f ~/recordings/$(date -Iseconds)_recording.mp4"
 
           # Move focus with mainMod + arrow keys
