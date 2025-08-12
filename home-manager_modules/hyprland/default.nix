@@ -8,6 +8,7 @@
 in {
   options.modules.hyprland = {
     enable = lib.mkEnableOption "enable hyprland window manager";
+    laptop.enable = lib.mkEnableOption "enable additional options and modules for laptops";
     terminal = lib.mkOption {
       default = "kitty";
       type = lib.types.str;
@@ -19,6 +20,8 @@ in {
     programs.wofi.enable = true; # dmenu
     modules.kitty.enable = true;
     modules.waybar.enable = true;
+
+    modules.waybar.laptop = lib.mkIf cfg.laptop.enable {enable = true;};
 
     home.pointerCursor = {
       hyprcursor.enable = true;

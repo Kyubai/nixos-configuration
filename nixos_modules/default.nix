@@ -16,6 +16,7 @@
     ./hyprland.nix
     ./it-sec.nix
     ./japanese-input.nix
+    ./notebook.nix
     ./printing.nix
     ./sound.nix
     ./sway.nix

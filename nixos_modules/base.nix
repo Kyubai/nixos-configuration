@@ -20,6 +20,7 @@ in {
     # disabled as package is broken atm. 2024-12-31
     # boot.supportedFilesystems = ["zfs"];
     # boot.zfs.forceImportRoot = false;
+    # nixpkgs.config.allowBroken = true;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
