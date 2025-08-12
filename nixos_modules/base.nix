@@ -14,7 +14,10 @@ in {
 
   config = lib.mkIf cfgBase.enable {
     # TODO: move this to home-manager
-    programs.zsh.enable = true;
+    programs.zsh = {
+      enable = true;
+      enableGlobalCompInit = false; # home-manager config includes custom compinit to run only once a day for new completions
+    };
     users.defaultUserShell = pkgs.zsh;
 
     # disabled as package is broken atm. 2024-12-31
@@ -114,6 +117,7 @@ in {
       kdePackages.konsole # fallback terminal
       libsForQt5.qtstyleplugin-kvantum # might be required for kvantum https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
       libsForQt5.qt5ct # might be required for kvantum
+      nix-search-cli
       # lxqt.lxqt-menu-data
       # shared-mime-info # optional, but nice to have
     ];

@@ -20,8 +20,10 @@
   };
 
   # zoxide is a cd alternative
-  programs.zoxide.enable = true;
-  programs.zoxide.enableZshIntegration = true;
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   home.shellAliases = {
     cat = "bat -p";
