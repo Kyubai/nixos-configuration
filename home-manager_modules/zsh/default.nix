@@ -91,8 +91,6 @@ in {
         bindkey "^R" history-beginning-search-backward
         # bindkey "''${key[Up]}" up-line-or-search # not sure if this works
 
-        zstyle ':completion::complete:*' gain-privileges 1 # activate arrow key tab-menu
-
         # only compinit once a day
         # https://gist.github.com/ctechols/ca1035271ad134841284
         autoload -Uz compinit
@@ -101,6 +99,11 @@ in {
         else
           compinit -C;
         fi;
+
+        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+        zstyle ':completion:*' menu select # arrow key completion
+        zstyle ':completion::complete:*' gain-privileges 1 # activate arrow key tab-menu
+
       '';
       plugins = [
         #  {
