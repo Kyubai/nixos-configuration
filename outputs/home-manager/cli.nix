@@ -32,6 +32,11 @@
     "nix build" = "nix build --print-out-paths";
   };
 
+  home.file.".ssh/config.template" = {
+    source = ./ssh_config.template;
+    recursive = true;
+  };
+
   home.sessionPath = [
     "/data/tools/personal/scripts/"
     "$HOME/scripts/"

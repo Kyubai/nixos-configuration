@@ -56,6 +56,16 @@ in {
       ];
     };
 
+    nixos-anywhere-encrypted = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = {inherit inputs;};
+      modules = [
+        ../nixos_modules
+        disko.nixosModules.disko # required for nixos-anywhere
+        ./systems/nixos-anywhere-encrypted/configuration.nix
+      ];
+    };
+
     work2home = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs;};
