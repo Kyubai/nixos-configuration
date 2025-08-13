@@ -18,7 +18,7 @@ in {
         update_check_interval = 0;
         term = "kitty";
       };
-      theme = "Tokyo Night";
+      themeFile = "tokyo_night_night";
       keybindings = {
         "ctrl+c" = "copy_to_clipboard";
         "ctrl+v" = "paste_from_clipboard";

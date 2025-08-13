@@ -14,7 +14,7 @@
   # modules.desktop.hyprland.enable = true;
   modules.desktop.xorg.enable = true;
   modules.vm.vmware.guest.enable = true;
-  modules.work.enable = true;
+  modules.localdns.enable = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.auto-optimise-store = true;
