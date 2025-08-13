@@ -13,13 +13,17 @@ in {
     environment.systemPackages = with pkgs; [
       angle-grinder
       bintools
+      flawz # tui cve
+      fq # jq for binary
       imhex
       nmap
+      jless # less for json
       lnav
       openfortivpn
       sqlite
+      vmfs-tools
     ];
     security.krb5.enable = true;
-    security.krb5.settings.include = "/current_customer/.config/krb5.conf";
+    # security.krb5.settings.include = "/current_customer/.config/krb5.conf";
   };
 }
