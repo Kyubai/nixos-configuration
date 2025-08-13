@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.modules.work;
+  cfg = config.modules.localdns;
 in {
-  options.modules.work.enable = lib.mkEnableOption "enable settings required for work machines";
+  options.modules.localdns.enable = lib.mkEnableOption "enable local dns server for various vpns";
 
   config = lib.mkIf cfg.enable {
     services.dnsmasq = {
@@ -25,6 +25,7 @@ in {
           "/react.intern/10.103.0.1"
           "/addyet.intern/10.10.0.2" # Hacker DMZ
           "/addyet.intern/192.168.250.5" # addyet.intern
+          "/intern.verriegelt.net/10.105.201.1"
         ];
       };
     };

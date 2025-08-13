@@ -12,7 +12,7 @@ in {
     # following from: https://github.com/infinisil/system/blob/07534666e0592d9ceb1fc157dc48baa7b1494d99/config/modules/japanese-input/default.nix
     # Only really for env vars
     i18n.inputMethod = {
-      enabled = "fcitx5";
+      type = "fcitx5";
       fcitx5.addons = [
         pkgs.fcitx5-mozc
         pkgs.fcitx5-gtk
