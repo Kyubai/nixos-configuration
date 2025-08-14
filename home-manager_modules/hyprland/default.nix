@@ -8,6 +8,7 @@
 in {
   options.modules.hyprland = {
     enable = lib.mkEnableOption "enable hyprland window manager";
+    laptop.enable = lib.mkEnableOption "enable additional options and modules for laptops";
     terminal = lib.mkOption {
       default = "kitty";
       type = lib.types.str;
@@ -19,6 +20,8 @@ in {
     programs.wofi.enable = true; # dmenu
     modules.kitty.enable = true;
     modules.waybar.enable = true;
+
+    modules.waybar.laptop = lib.mkIf cfg.laptop.enable {enable = true;};
 
     home.pointerCursor = {
       hyprcursor.enable = true;
@@ -162,7 +165,7 @@ in {
           # "$mod SHIFT, C, forcekillactive" # doesn't work for some reason
           "$mod, v, exec, pulsemixer"
           "$mod, p, exec, grimblast --freeze save area - | swappy -f - -o - | wl-copy"
-          "$mod SHIFT, p, exec, grimblast --freeze save area - | swappy -f - -o ~/screenshots/$(date -Iseconds)_screenshot.png"
+          "$mod SHIFT, p, exec, grimblast --freeze save screen ~/screenshots/$(date -Iseconds)_screenshot.png"
           "$mod CTRL, p, exec, wl-screenrec -g \"$(slurp)\" -f ~/recordings/$(date -Iseconds)_recording.mp4"
 
           # Move focus with mainMod + arrow keys

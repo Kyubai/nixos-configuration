@@ -14,12 +14,16 @@ in {
 
   config = lib.mkIf cfgBase.enable {
     # TODO: move this to home-manager
-    programs.zsh.enable = true;
+    programs.zsh = {
+      enable = true;
+      enableGlobalCompInit = false; # home-manager config includes custom compinit to run only once a day for new completions
+    };
     users.defaultUserShell = pkgs.zsh;
 
     # disabled as package is broken atm. 2024-12-31
     # boot.supportedFilesystems = ["zfs"];
     # boot.zfs.forceImportRoot = false;
+    # nixpkgs.config.allowBroken = true;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
@@ -41,9 +45,9 @@ in {
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
 
     time.timeZone = "Europe/Berlin";
@@ -113,6 +117,7 @@ in {
       kdePackages.konsole # fallback terminal
       libsForQt5.qtstyleplugin-kvantum # might be required for kvantum https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
       libsForQt5.qt5ct # might be required for kvantum
+      nix-search-cli
       # lxqt.lxqt-menu-data
       # shared-mime-info # optional, but nice to have
     ];

@@ -6,22 +6,26 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "deack-pc-01";
-  networking.hostId = "6fd16622";
+  networking.hostName = "notebook";
+  networking.hostId = "6fd16644";
+  # networking.wireless.enable = true;
+  networking.networkmanager.enable = true;
 
   # my own /etc/nixos/modules
   modules.base.enable = true;
   modules.bluetooth.enable = true;
   modules.cli.utils.enable = true;
   modules.desktop.tools.enable = true;
+  modules.notebook.enable = true;
   # modules.desktop.sway.enable = true;
   modules.desktop.hyprland.enable = true;
   # modules.desktop.xorg.enable = true;
-  modules.desktop.gaming.enable = true;
-  modules.desktop.gaming.vr.enable = true;
+  # modules.desktop.gaming.enable = true;
+  # modules.desktop.gaming.vr.enable = true;
   modules.desktop.sound.enable = true;
+  modules.localdns.enable = true;
   modules.hardware.amd.enable = true;
-  modules.hardware.printer.samsung.enable = true;
+  # modules.hardware.printer.samsung.enable = true;
 
   modules.input.japanese.enable = true;
 
@@ -35,17 +39,28 @@
     ];
   };
 
-  # boot config
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Bootloader.
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/nvme0n1";
+  boot.loader.grub.useOSProber = true;
+
+  boot.initrd.luks.devices."luks-e4463f91-e6dd-4622-b677-ff3f4a4c362b".device = "/dev/disk/by-uuid/e4463f91-e6dd-4622-b677-ff3f4a4c362b";
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/boot/crypto_keyfile.bin" = null;
+  };
+
+  boot.loader.grub.enableCryptodisk = true;
+  boot.initrd.luks.devices."luks-96244679-dafb-406c-936c-bf61bf2d6ddf".keyFile = "/boot/crypto_keyfile.bin";
+  boot.initrd.luks.devices."luks-e4463f91-e6dd-4622-b677-ff3f4a4c362b".keyFile = "/boot/crypto_keyfile.bin";
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
-    "video=DP-1:1920x1080@144"
-    "video=DP-3:2560x1440@240"
+    "video=eDP-1:1920x1080@60"
   ];
-  boot.kernel.sysctl."vm.max_map_count" = "2147483642";
-  boot.kernel.sysctl."split_lock_mitigate" = "0";
+
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernel.sysctl."vm.max_map_count" = "2147483642";
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -57,15 +72,6 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     # "electron-25.9.0" # for obsidian on 2024-04-16
-  ];
-
-  # fix dynamically linked libraries
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add missing dynamic libraries
-    libglvnd
-    libGL
-    zlib
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

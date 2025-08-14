@@ -6,7 +6,10 @@
 }: let
   cfgWaybar = config.modules.waybar;
 in {
-  options.modules.waybar.enable = lib.mkEnableOption "enable waybar statusbar";
+  options.modules.waybar = {
+    enable = lib.mkEnableOption "enable waybar statusbar";
+    laptop.enable = lib.mkEnableOption "enable laptop config";
+  };
 
   config = lib.mkIf cfgWaybar.enable {
     wayland.windowManager.sway.config.bars = [
@@ -35,13 +38,25 @@ in {
             "sway/mode"
           ];
           modules-center = ["hyprland/window"];
-          modules-right = [
-            "network"
-            "cpu"
-            "wireplumber"
-            "tray"
-            "clock"
-          ];
+
+          modules-right =
+            [
+              "network"
+              "cpu"
+              "wireplumber"
+            ]
+            ++ (
+              if cfgWaybar.laptop.enable
+              then [
+                "battery"
+                "backlight"
+              ]
+              else []
+            )
+            ++ [
+              "tray"
+              "clock"
+            ];
 
           # tray module
           tray = {
@@ -56,9 +71,29 @@ in {
             format = "{class}";
           };
 
+          battery = {
+            format = "{capacity}% {icon}";
+            format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
+          };
+
           # cpu module
           cpu = {
             format = "{usage}% ";
+          };
+
+          backlight = {
+            device = "intel_backlight";
+            format = "{percent}% {icon}";
+            format-icons = [
+              ""
+              ""
+            ];
           };
 
           # network module
@@ -140,9 +175,9 @@ in {
             border-bottom: 3px solid white;
         }
 
-        #clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
-            padding: 0 3px;
-            margin: 0 3px;
+        #clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode, #wireplumber, #backlight {
+            padding: 0 2px;
+            margin: 0 12px;
         }
 
         #clock {
