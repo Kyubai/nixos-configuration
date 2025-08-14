@@ -1,9 +1,7 @@
 {...}: {
   imports = [
-    ./base.nix
-    ./cli.nix
-    ./desktop.nix
-    ./xorg.nix
+    ../base.nix
+    ../cli.nix
   ];
 
   home.stateVersion = "23.11";

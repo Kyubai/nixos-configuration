@@ -4,7 +4,6 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    # ../../../modules/development.nix
   ];
 
   networking.hostName = "deack-pc-01";
@@ -46,6 +45,7 @@
     "video=DP-3:2560x1440@240"
   ];
   boot.kernel.sysctl."vm.max_map_count" = "2147483642";
+  boot.kernel.sysctl."split_lock_mitigate" = "0";
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -58,12 +58,6 @@
   nixpkgs.config.permittedInsecurePackages = [
     # "electron-25.9.0" # for obsidian on 2024-04-16
   ];
-
-  #   services.syncthing = {
-  #     enable = true;
-  #     user = "mri";
-  #     dataDir = "/srv/syncthing";
-  #   };
 
   # fix dynamically linked libraries
   programs.nix-ld.enable = true;

@@ -20,8 +20,10 @@
   };
 
   # zoxide is a cd alternative
-  programs.zoxide.enable = true;
-  programs.zoxide.enableZshIntegration = true;
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   home.shellAliases = {
     cat = "bat -p";
@@ -30,6 +32,11 @@
     hms = "pushd /etc/nixos && home-manager switch --extra-experimental-features \"nix-command flakes\" --flake .#$USER && popd";
     nix-shell = "nix-shell --run zsh";
     "nix build" = "nix build --print-out-paths";
+  };
+
+  home.file.".ssh/config.template" = {
+    source = ./ssh_config.template;
+    recursive = true;
   };
 
   home.sessionPath = [

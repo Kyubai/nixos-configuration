@@ -26,7 +26,7 @@
   # modules.desktop.hyprland.enable = true;
   modules.desktop.xorg.enable = true;
   modules.vm.vmware.guest.enable = true;
-  # modules.work.enable = true;
+  modules.localdns.enable = true;
 
   # required for zfs support
   # networking.hostId = "621cba57";
