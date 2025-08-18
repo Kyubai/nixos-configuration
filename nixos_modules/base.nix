@@ -94,15 +94,15 @@ in {
     ];
 
     services.dbus.enable = true;
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      # extraPortals = with pkgs; [
-      # xdg-desktop-portal-gtk
-      # kdePackages.xdg-desktop-portal-kde # for file-picker
-      # ];
-    };
-    xdg.menus.enable = true;
+    # xdg.portal = {
+    # enable = true;
+    # xdgOpenUsePortal = true;
+    # extraPortals = with pkgs; [
+    # xdg-desktop-portal-gtk
+    # kdePackages.xdg-desktop-portal-kde # for file-picker
+    # ];
+    # };
+    # xdg.menus.enable = true;
 
     programs.ssh.startAgent = true;
     security.sudo.extraConfig = ''
