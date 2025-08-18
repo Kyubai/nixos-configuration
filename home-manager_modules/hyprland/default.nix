@@ -23,6 +23,8 @@ in {
 
     modules.waybar.laptop = lib.mkIf cfg.laptop.enable {enable = true;};
 
+    gtk.enable = true; # required for portals?
+
     home.pointerCursor = {
       hyprcursor.enable = true;
       package = pkgs.nordzy-cursor-theme; # cursor theme
@@ -65,6 +67,13 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
+      # set packages to null to use nixos defined package
+      # https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/#using-the-home-manager-module-with-nixos
+      package = null;
+      portalPackage = null;
+      systemd.enable = true;
+      systemd.variables = ["--all"];
+      systemd.enableXdgAutostart = true;
       extraConfig = ''
         monitor = DP-1, 1920x1080, 0x180, 1
         monitor = DP-3, 2560x1440, 1920x0, 1
@@ -107,9 +116,9 @@ in {
         env = CLUTTER_BACKEND,wayland
         env = GTK_USE_PORTAL,1
         # XDG stuff
-        env = XDG_CURRENT_DESKTOP,Hyprland
-        env = XDG_SESSION_DESKTOP,Hyprland
-        env = XDG_SESSION_TYPE,wayland
+        # env = XDG_CURRENT_DESKTOP,Hyprland
+        # env = XDG_SESSION_DESKTOP,Hyprland
+        # env = XDG_SESSION_TYPE,wayland
         # QT stuff
         env = QT_AUTO_SCREEN_SCALE_FACTOR,1
         env = QT_QPA_PLATFORM,wayland;xcb
@@ -124,6 +133,8 @@ in {
         env = WLR_RENDERER_ALLOW_SOFTWARE,1
         env = _JAVA_AWT_WM_NONREPARENTING,1
         env = NIXOS_XDG_OPEN_USE_PORTAL,1
+        # env = NIX_XDG_DESKTOP_PORTAL_DIR,/run/current-system/sw/share/xdg-desktop-portal/portals
+
       '';
 
       # enableNvidiaPatches = true;

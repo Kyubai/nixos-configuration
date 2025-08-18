@@ -11,7 +11,7 @@
   #     executable = true;
   #
   #     text = ''
-  #       dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+  #       dbus-update-activation-environment --systemd WAYLAND_DISPLAY xdG_CURRENT_DESKTOP=sway
   #       systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
   #       systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
   #     '';
@@ -44,6 +44,10 @@ in {
       wdisplays # manage monitors
       wl-clipboard # clipboard cli
       kdePackages.xwaylandvideobridge
+      # portals
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk # required for themes?
+      kdePackages.xdg-desktop-portal-kde
     ];
 
     services.greetd = {
@@ -72,25 +76,56 @@ in {
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;
+      withUWSM = true;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
       # wrapperFeatures.gtk = true;
+    };
+    programs.uwsm = {
+      enable = true;
+      waylandCompositors.hyprland = {
+        prettyName = "Hyprland";
+        comment = "Hyprland compositor managed by UWSM";
+        # binPath = lib.getExe pkgs.hyprland;
+        binPath = "/run/current-system/sw/bin/Hyprland";
+      };
     };
     programs.hyprlock.enable = true;
 
     # xdg.autostart.enable = true;
     xdg.portal = {
       enable = true;
-      # wlr.enable = true;
-      # xdgOpenUsePortal = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk # required for themes?
-        pkgs.kdePackages.xdg-desktop-portal-kde
+      wlr.enable = false; # disable wlr when using hyprland
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk # required for themes?
+        kdePackages.xdg-desktop-portal-kde
       ];
+      config = {
+        common = {
+          default = ["*"];
+          "org.freedesktop.portal.Settings" = ["hyprland"];
+          "org.freedesktop.portal.ScreenCast" = ["hyprland"];
+          "org.freedesktop.portal.Screenshot" = ["hyprland"];
+          "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+          "org.freedesktop.impl.portal.FileChooser" = ["hyprland"];
+          "org.freedesktop.portal.OpenURI" = ["hyprland"];
+        };
+        hyprland = {
+          default = ["hyprland"];
+          # hyprland.default = ["wlr" "kde" "gtk"];
+          # hyprland."org.freedesktop.impl.portal.FileChooser" = ["kde"];
+          # hyprland."org.freedesktop.impl.portal.AppChooser" = ["kde"];
+          # hyprland."org.freedesktop.portal.OpenURI" = ["kde"];
+        };
+      };
     };
-
-    # I think this option is set by the wayland module
-    # xdg.portal.config.sway.default = ["wlr;gtk"];
-    xdg.portal.config.hyprland."org.freedesktop.impl.portal.FileChooser" = ["kde"];
-    xdg.portal.config.hyprland."org.freedesktop.impl.portal.AppChooser" = ["kde"];
-    xdg.portal.config.hyprland."org.freedesktop.portal.OpenURI" = ["kde"];
+    # xdg-desktop-portal works by exposing a series of D-Bus interfaces
+    # known as portals under a well-known name
+    # (org.freedesktop.portal.Desktop) and object path
+    # (/org/freedesktop/portal/desktop).
+    # The portal interfaces include APIs for file access, opening URIs, printing and others.
+    services.dbus.enable = lib.mkDefault true;
+    security.polkit.enable = true;
   };
 }
