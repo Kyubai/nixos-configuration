@@ -21,8 +21,6 @@ in {
       xsel
     ];
 
-    hardware.opengl.enable = true;
-
     services.xserver = {
       enable = true;
       xkb.layout = "eu";
@@ -39,8 +37,8 @@ in {
       # guest additions resize fix
       videoDrivers = ["vmware"];
     };
-      
-    xdg.portal.config.common.default = [ "kde" ]; # test only
+
+    xdg.portal.config.common.default = ["kde"]; # test only
     xdg.portal.config.common."org.freedesktop.impl.portal.FileChooser" = ["kde"];
     xdg.portal.config.common."org.freedesktop.portal.FileChooser" = ["kde"];
     xdg.portal.config.common."org.freedesktop.impl.portal.AppChooser" = ["kde"];

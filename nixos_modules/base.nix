@@ -113,6 +113,7 @@ in {
     environment.systemPackages = with pkgs; [
       dbus
       file
+      git
       home-manager
       kdePackages.konsole # fallback terminal
       libsForQt5.qtstyleplugin-kvantum # might be required for kvantum https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
