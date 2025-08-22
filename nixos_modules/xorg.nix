@@ -38,9 +38,14 @@ in {
       videoDrivers = ["vmware"];
     };
 
-    xdg.portal.config.common.default = ["kde"]; # test only
-    xdg.portal.config.common."org.freedesktop.impl.portal.FileChooser" = ["kde"];
-    xdg.portal.config.common."org.freedesktop.portal.FileChooser" = ["kde"];
-    xdg.portal.config.common."org.freedesktop.impl.portal.AppChooser" = ["kde"];
+    xdg.portal = {
+      enable = true;
+      config.common = {
+        default = ["kde"]; # test only
+        "org.freedesktop.impl.portal.FileChooser" = ["kde"];
+        "org.freedesktop.portal.FileChooser" = ["kde"];
+        "org.freedesktop.impl.portal.AppChooser" = ["kde"];
+      };
+    };
   };
 }
