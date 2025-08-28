@@ -37,10 +37,10 @@ in {
           ];
 
           home-manager.users.mri.imports = [
-            ./home-manager/hacking-vm.nix
+            ./home-manager/systems/hacking-vm.nix
           ];
           home-manager.users.root.imports = [
-            ./home-manager/hacking-vm.nix
+            ./home-manager/systems/hacking-vm.nix
           ];
         }
       ];
@@ -84,10 +84,10 @@ in {
           ];
 
           home-manager.users.mri.imports = [
-            ./home-manager/hacking-vm.nix
+            ./home-manager/systems/hacking-vm.nix
           ];
           home-manager.users.root.imports = [
-            ./home-manager/hacking-vm.nix
+            ./home-manager/systems/hacking-vm.nix
           ];
         }
       ];
@@ -111,10 +111,10 @@ in {
             inputs.nvf.homeManagerModules.default
           ];
           home-manager.users.mri.imports = [
-            ./home-manager/hacking-vm.nix
+            ./home-manager/systems/hacking-vm.nix
           ];
           home-manager.users.root.imports = [
-            ./home-manager/hacking-vm.nix
+            ./home-manager/systems/hacking-vm.nix
           ];
         }
       ];
