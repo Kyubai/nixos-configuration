@@ -7,6 +7,18 @@
   ...
 } @ inputs: let
   system = "x86_64-linux";
+  unstableHyprlandOverlay = (
+    final: prev: let
+      u = nixpkgs-unstable.legacyPackages.${system};
+    in {
+      # Pull both to avoid wlroots mismatches
+      hyprland = u.hyprland;
+      wlroots-hyprland = u.wlroots-hyprland;
+    }
+  );
+  unstableHyprlandModule = {...}: {
+    nixpkgs.overlays = [unstableHyprlandOverlay];
+  };
   # variables = nixpkgs.lib.importJSON ./secrets/variables.json;
   # pkgs = nixpkgs.legacyPackages.${system};
   # pkgs-unstable = import nixpkgs-unstable {
@@ -22,6 +34,7 @@ in {
       inherit system;
       specialArgs = {inherit inputs;};
       modules = [
+        unstableHyprlandModule
         ../nixos_modules
         disko.nixosModules.disko # required for nixos-anywhere
         ./systems/hacking-vm/configuration.nix
@@ -125,6 +138,7 @@ in {
       # specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [
+        unstableHyprlandModule
         ../nixos_modules
         nvf.nixosModules.default
         ./systems/deack-pc-01/configuration.nix
