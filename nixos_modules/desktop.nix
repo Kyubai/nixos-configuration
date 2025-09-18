@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  pkgs-unstable,
   ...
 }: let
   cfgDesktop = config.modules.desktop.tools;
@@ -19,7 +18,7 @@ in {
       # discord
       feishin
       filezilla
-      floorp
+      # floorp-bin-unwrapped
       gimp
       keepassxc
       ntfs3g # TODO move to hacking/forensics module
