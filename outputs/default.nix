@@ -7,23 +7,22 @@
   ...
 } @ inputs: let
   system = "x86_64-linux";
-  unstableHyprlandOverlay = (
+  unstableOverlay = (
     final: prev: let
       u = nixpkgs-unstable.legacyPackages.${system};
     in {
       # Pull both to avoid wlroots mismatches
-      hyprland = u.hyprland;
-      wlroots-hyprland = u.wlroots-hyprland;
+      # floorp = u.floorp-bin;
+      floorp-bin = u.floorp-bin; # unstable version is more up2date, which might be required for plugins
+      floorp-bin-unwrapped = u.floorp-bin-unwrapped; # unstable version is more up2date, which might be required for plugins
+      hyprland = u.hyprland; # unstable version is more up2date, which might fix bugs
+      wlroots-hyprland = u.wlroots-hyprland; # wlroots needs to match hyprland version
     }
   );
-  unstableHyprlandModule = {...}: {
-    nixpkgs.overlays = [unstableHyprlandOverlay];
+  unstableModule = {...}: {
+    nixpkgs.overlays = [unstableOverlay];
   };
   # variables = nixpkgs.lib.importJSON ./secrets/variables.json;
-  # pkgs = nixpkgs.legacyPackages.${system};
-  # pkgs-unstable = import nixpkgs-unstable {
-  # inherit system;
-  # config.allowUnfree = true;
   # };
 in {
   # Used with `nixos-rebuild --flake .#<hostname>`
@@ -34,7 +33,7 @@ in {
       inherit system;
       specialArgs = {inherit inputs;};
       modules = [
-        unstableHyprlandModule
+        unstableModule
         ../nixos_modules
         disko.nixosModules.disko # required for nixos-anywhere
         ./systems/hacking-vm/configuration.nix
@@ -111,6 +110,7 @@ in {
       specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [
+        unstableModule
         ../nixos_modules
         nvf.nixosModules.default
         ./systems/work-admin/configuration.nix
@@ -138,7 +138,7 @@ in {
       # specialArgs = {inherit inputs;};
       # _module.args = {inherit inputs;};
       modules = [
-        unstableHyprlandModule
+        unstableModule
         ../nixos_modules
         nvf.nixosModules.default
         ./systems/deack-pc-01/configuration.nix
