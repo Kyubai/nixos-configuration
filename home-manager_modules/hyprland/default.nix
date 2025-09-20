@@ -150,9 +150,6 @@ in {
         misc = {
           focus_on_activate = false;
         };
-        gestures = {
-          workspace_swipe = false;
-        };
         input = {
           kb_layout = "eu";
         };
