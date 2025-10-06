@@ -180,6 +180,10 @@ in {
           extraDiagnostics.enable = true;
           lsp.enable = true;
         };
+        languages.rust = {
+          enable = true;
+          lsp.enable = true;
+        };
         autocomplete.nvim-cmp.enable = true;
 
         autopairs.nvim-autopairs.enable = true;

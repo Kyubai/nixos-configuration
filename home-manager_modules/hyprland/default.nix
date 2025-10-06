@@ -89,7 +89,8 @@ in {
 
         # autostart user applications
         exec-once = [workspace 0 silent] ${cfg.terminal}
-        exec-once = [workspace 2 silent] vivaldi
+        exec-once = [workspace 1 silent] ${cfg.terminal}
+        exec-once = [workspace 2 silent] floorp
         exec-once = [workspace 5 silent] flatpak run dev.vencord.Vesktop
         exec-once = [workspace 6 silent] feishin
         exec-once = [workspace 9 silent] steam
@@ -103,8 +104,8 @@ in {
         windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
 
         # open windows on specific workspace
-        windowrulev2 = workspace 2 silent, class:^(vivaldi-stable)$
-        windowrulev2 = workspace 4 silent, class:^(anki)$
+        windowrulev2 = workspace 2 silent, class:^(floorp)$
+        windowrulev2 = workspace 3 silent, class:^(anki)$
         windowrulev2 = workspace 5 silent, class:^(vesktop)$
         windowrulev2 = workspace 6 silent, class:^(feishin)$
         windowrulev2 = workspace 9 silent, class:^(steam)$
