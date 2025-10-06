@@ -1,6 +1,6 @@
 {...}: {
   home.sessionVariables = {
-    BROWSER = "vivaldi";
+    BROWSER = "floorp";
     EDITOR = "nvim";
   };
 

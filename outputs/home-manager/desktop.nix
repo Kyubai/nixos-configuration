@@ -21,11 +21,11 @@
   xdg.mimeApps = {
     enable = true;
     associations.added = {
-      "text/html" = ["vivaldi-stable.desktop"];
-      "x-scheme-handler/http" = ["vivaldi-stable.desktop"];
-      "x-scheme-handler/https" = ["vivaldi-stable.desktop"];
-      "x-scheme-handler/about" = ["vivaldi-stable.desktop"];
-      "x-scheme-handler/unknown" = ["vivaldi-stable.desktop"];
+      "text/html" = ["floorp.desktop"];
+      "x-scheme-handler/http" = ["floorp.desktop"];
+      "x-scheme-handler/https" = ["floorp.desktop"];
+      "x-scheme-handler/about" = ["floorp.desktop"];
+      "x-scheme-handler/unknown" = ["floorp.desktop"];
       "image/bmp" = ["imv-dir.desktop"];
       "image/gif" = ["imv-dir.desktop"];
       "image/jpeg" = ["imv-dir.desktop"];
@@ -46,11 +46,11 @@
       "image/avif" = ["imv-dir.desktop"];
     };
     defaultApplications = {
-      "text/html" = ["vivaldi-stable.desktop"];
-      "x-scheme-handler/http" = ["vivaldi-stable.desktop"];
-      "x-scheme-handler/https" = ["vivaldi-stable.desktop"];
-      "x-scheme-handler/about" = ["vivaldi-stable.desktop"];
-      "x-scheme-handler/unknown" = ["vivaldi-stable.desktop"];
+      "text/html" = ["floorp.desktop"];
+      "x-scheme-handler/http" = ["floorp.desktop"];
+      "x-scheme-handler/https" = ["floorp.desktop"];
+      "x-scheme-handler/about" = ["floorp.desktop"];
+      "x-scheme-handler/unknown" = ["floorp.desktop"];
       "image/bmp" = ["imv-dir.desktop"];
       "image/gif" = ["imv-dir.desktop"];
       "image/jpeg" = ["imv-dir.desktop"];
