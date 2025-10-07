@@ -24,6 +24,7 @@ in {
     services.xserver = {
       enable = true;
       xkb.layout = "eu";
+      xkb.options = "compose:ralt";
       displayManager = {
         gdm.enable = true;
         startx.enable = true;
