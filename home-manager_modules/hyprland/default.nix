@@ -153,6 +153,7 @@ in {
         };
         input = {
           kb_layout = "eu";
+          kb_options = "compose:ralt";
         };
         dwindle = {
           pseudotile = true;

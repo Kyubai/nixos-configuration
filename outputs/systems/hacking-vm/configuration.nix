@@ -51,29 +51,6 @@
     driSupport32Bit = true;
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  fonts.fontconfig.defaultFonts.serif = [
-    "Hack Nerd Font"
-  ];
-
-  fonts.fontconfig.defaultFonts.sansSerif = [
-    "Hack Nerd Font"
-  ];
-
-  fonts.fontconfig.defaultFonts.monospace = [
-    "Hack Nerd Font Mono"
-  ];
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
   services.dbus.enable = true;
 
   services.pipewire = {
@@ -93,10 +70,6 @@
 
   security.polkit.enable = true;
   security.rtkit.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "eu";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;

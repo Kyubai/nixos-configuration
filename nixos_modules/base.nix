@@ -52,7 +52,6 @@ in {
 
     time.timeZone = "Europe/Berlin";
     console.keyMap = "us";
-    services.xserver.xkb.layout = "eu";
 
     fonts.packages = [
       pkgs.nerd-fonts.hack
@@ -74,11 +73,6 @@ in {
     services.gnome.gnome-keyring.enable = true;
     # required for GTK apps
     programs.dconf.enable = true;
-
-    # doesn't seem to work with Vivaldi yet
-    # programs.chromium.extensions = [
-    #   "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-    # ];
 
     security.polkit.enable = true;
     security.rtkit.enable = true;
