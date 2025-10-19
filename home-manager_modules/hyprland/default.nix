@@ -85,8 +85,8 @@ in {
         bind = SHIFT, a, exec, hyprctl dismissnotify; grimblast --freeze save area ~/screenshots/$(date -Iseconds)_screenshot.png; hyprctl dispatch submap reset
         bind = , o, exec, hyprctl dismissnotify; grimblast --freeze copy output; hyprctl dispatch submap reset
         bind = SHIFT, o, exec, hyprctl dismissnotify; grimblast --freeze save output ~/screenshots/$(date -Iseconds)_screenshot.png; hyprctl dispatch submap reset
-        # bind = , escape, exec, hyprctl dismissnotify; hyprctl dispatch submap reset
-        bind = , catchall, exec, hyprctl dismissnotify; hyprctl dispatch submap reset
+        bind = , escape, exec, hyprctl dismissnotify; hyprctl dispatch submap reset
+        # bind = , catchall, exec, hyprctl dismissnotify; hyprctl dispatch submap reset
         submap = reset
 
         # $mod CTRL, p, exec, wl-screenrec -g \"$(slurp)\" -f ~/recordings/$(date -Iseconds)_recording.mp4"
