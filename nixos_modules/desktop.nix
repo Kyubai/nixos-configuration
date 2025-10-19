@@ -18,7 +18,7 @@ in {
       # discord
       feishin
       filezilla
-      floorp-bin-unwrapped
+      floorp-bin
       gimp
       keepassxc
       ntfs3g # TODO move to hacking/forensics module
