@@ -78,8 +78,21 @@ in {
         monitor = DP-1, 1920x1080, 0x180, 1
         monitor = DP-3, 2560x1440, 1920x0, 1
 
+        # bind = $mod, p, submap, screenshot
+        bind = $mod, p, exec, hyprctl notify -1 10000000 0 "SHIFT = save, a = area, o = output, escape = exit"; hyprctl dispatch submap screenshot
+        submap = screenshot
+        bind = , a, exec, hyprctl dismissnotify; grimblast --freeze copy area; hyprctl dispatch submap reset
+        bind = SHIFT, a, exec, hyprctl dismissnotify; grimblast --freeze save area ~/screenshots/$(date -Iseconds)_screenshot.png; hyprctl dispatch submap reset
+        bind = , o, exec, hyprctl dismissnotify; grimblast --freeze copy output; hyprctl dispatch submap reset
+        bind = SHIFT, o, exec, hyprctl dismissnotify; grimblast --freeze save output ~/screenshots/$(date -Iseconds)_screenshot.png; hyprctl dispatch submap reset
+        # bind = , escape, exec, hyprctl dismissnotify; hyprctl dispatch submap reset
+        bind = , catchall, exec, hyprctl dismissnotify; hyprctl dispatch submap reset
+        submap = reset
+
+        # $mod CTRL, p, exec, wl-screenrec -g \"$(slurp)\" -f ~/recordings/$(date -Iseconds)_recording.mp4"
+
         # applications for wayland
-        exec-once = hyprpaper
+        # exec-once = hyprpaper
         exec-once = sleep 1 && hyprctl hyprpaper reload , $(find /data/media/backgrounds -type f | shuf -n 1)
         exec-once = waybar
         exec-once = hyprctl setcursor Nordzy-hyprcursors 24
@@ -174,9 +187,6 @@ in {
           "$mod, c, killactive"
           # "$mod SHIFT, C, forcekillactive" # doesn't work for some reason
           "$mod, v, exec, pulsemixer"
-          "$mod, p, exec, grimblast --freeze save area - | swappy -f - -o - | wl-copy"
-          "$mod SHIFT, p, exec, grimblast --freeze save screen ~/screenshots/$(date -Iseconds)_screenshot.png"
-          "$mod CTRL, p, exec, wl-screenrec -g \"$(slurp)\" -f ~/recordings/$(date -Iseconds)_recording.mp4"
 
           # Move focus with mainMod + arrow keys
           "$mod, left, movefocus, l"
