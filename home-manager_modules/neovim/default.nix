@@ -13,7 +13,7 @@ in {
     programs.nvf = {
       enable = true;
       settings.vim = {
-        package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.system}.neovim;
+        # package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.system}.neovim;
         viAlias = false;
         vimAlias = true;
 
