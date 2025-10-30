@@ -25,8 +25,8 @@
 
     # NeoVim Framework
     # https://github.com/NotAShelf/nvf
-    nvf.url = "github:notashelf/nvf";
-    nvf.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nvf.url = "github:notashelf/nvf/v0.8"; # pinned to 0.8 to fix deprecation error https://github.com/NotAShelf/nvf/issues/1172
+    nvf.inputs.nixpkgs.follows = "nixpkgs";
 
     # neovim nightly overlay
     # https://github.com/nix-community/neovim-nightly-overlay
