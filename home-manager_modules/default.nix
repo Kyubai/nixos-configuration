@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./alacritty
+    # ./ashell
     ./docker
     ./eza
     ./flatpak
