@@ -28,7 +28,7 @@ in {
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
     nixpkgs.config.allowUnfree = true;
-    system.autoUpgrade.enable = true;
+    # system.autoUpgrade.enable = true;
     # Perform garbage collection to save disk space
     nix.gc = {
       automatic = true;

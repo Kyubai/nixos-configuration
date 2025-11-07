@@ -20,6 +20,7 @@ in {
     programs.wofi.enable = true; # dmenu
     modules.kitty.enable = true;
     modules.waybar.enable = true;
+    # modules.ashell.enable = true;
 
     modules.waybar.laptop = lib.mkIf cfg.laptop.enable {enable = true;};
 
@@ -75,8 +76,8 @@ in {
       systemd.variables = ["--all"];
       systemd.enableXdgAutostart = true;
       extraConfig = ''
-        monitor = DP-1, 1920x1080, 0x180, 1
-        monitor = DP-3, 2560x1440, 1920x0, 1
+        monitor = DP-1, 2560x1440, 2560x0, 1
+        monitor = DP-3, 2560x1440, 0x0, 1
 
         # bind = $mod, p, submap, screenshot
         bind = $mod, p, exec, hyprctl notify -1 10000000 0 "SHIFT = save, a = area, o = output, escape = exit"; hyprctl dispatch submap screenshot
