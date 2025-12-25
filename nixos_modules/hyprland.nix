@@ -43,7 +43,7 @@ in {
       wayland
       wdisplays # manage monitors
       wl-clipboard # clipboard cli
-      kdePackages.xwaylandvideobridge
+      # kdePackages.xwaylandvideobridge # not present in 25.11
       # portals
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk # required for themes?

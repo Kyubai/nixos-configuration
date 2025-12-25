@@ -98,7 +98,7 @@ in {
     # };
     # xdg.menus.enable = true;
 
-    programs.ssh.startAgent = true;
+    # programs.ssh.startAgent = true; # conflict with gnome agent
     security.sudo.extraConfig = ''
       Defaults>root        env_keep += "SSH_AUTH_SOCK XAUTHORITY DISPLAY"
       Defaults    timestamp_timeout=-1

@@ -19,7 +19,8 @@ in {
     services.dunst.enable = true; # notification deamon
     programs.wofi.enable = true; # dmenu
     modules.kitty.enable = true;
-    modules.waybar.enable = true;
+    modules.ashell.enable = true;
+    # modules.waybar.enable = true;
     # modules.ashell.enable = true;
 
     modules.waybar.laptop = lib.mkIf cfg.laptop.enable {enable = true;};
@@ -95,7 +96,7 @@ in {
         # applications for wayland
         # exec-once = hyprpaper
         exec-once = sleep 1 && hyprctl hyprpaper reload , $(find /data/media/backgrounds -type f | shuf -n 1)
-        exec-once = waybar
+        # exec-once = waybar
         exec-once = hyprctl setcursor Nordzy-hyprcursors 24
         # fix screen cast portal not being available
         # https://wiki.hyprland.org/Hypr-Ecosystem/xdg-desktop-portal-hyprland/#usage

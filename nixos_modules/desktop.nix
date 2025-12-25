@@ -11,7 +11,7 @@ in {
   config = lib.mkIf cfgDesktop.enable {
     environment.systemPackages = with pkgs; [
       anki
-      bitwarden
+      bitwarden-desktop
       brave
       chromium
       corefonts
