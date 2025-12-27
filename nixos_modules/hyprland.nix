@@ -57,20 +57,15 @@ in {
           vt = 1;
         };
         default_session = {
-          command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+          command = "${pkgs.greetd}/bin/agreety --cmd Hyprland";
           user = "mri";
         };
         initial_session = {
-          command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+          command = "${pkgs.greetd}/bin/agreety --cmd Hyprland";
           user = "mri";
         };
       };
     };
-    #     services.displayManager = {
-    #       autoLogin.enable = true;
-    #       autoLogin.user = "mri";
-    #       defaultSession = "hyprland";
-    #     };
 
     programs.xwayland.enable = true;
     programs.hyprland = {

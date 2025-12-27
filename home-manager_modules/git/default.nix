@@ -12,7 +12,7 @@ in {
     {
       programs.git.enable = true;
 
-      programs.git.extraConfig = {
+      programs.git.settings = {
         init = {
           defaultBranch = "main";
         };
@@ -32,11 +32,11 @@ in {
         rerere.enabled = true;
         column.ui = "auto";
         # branch.sort = "-commiterdate";
-      };
 
-      programs.git.aliases = {
-        staash = "stash --all";
-        blame = "blame -w -c -c -c";
+        alias = {
+          staash = "stash --all";
+          blame = "blame -w -c -c -c";
+        };
       };
 
       home.shellAliases = {

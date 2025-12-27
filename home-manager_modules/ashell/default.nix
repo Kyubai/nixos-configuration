@@ -12,12 +12,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    #         wayland.windowManager.sway.config.bars = [
-    #       {
-    #         command = "${pkgs.ashell}/bin/ashell";
-    #       }
-    #     ];
-
     programs.ashell = {
       enable = true;
       systemd.enable = true;
@@ -75,6 +69,24 @@ in {
               "Settings"
             ]
             "Tray"
+          ];
+        };
+
+        settings = {
+          lock_cmd = "hyprlock &";
+          audio_sinks_more_cmd = "pavucontrol -t 3";
+          audio_sources_more_cmd = "pavucontrol -t 4";
+          wifi_more_cmd = "nm-connection-editor";
+          vpn_more_cmd = "nm-connection-editor";
+          bluetooth_more_cmd = "blueman-manager";
+          remove_airplane_btn = true;
+          remove_idle_btn = true;
+          indicators = [
+            "Battery"
+            "Bluetooth"
+            "Network"
+            "Vpn"
+            "Audio"
           ];
         };
 
