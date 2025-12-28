@@ -30,6 +30,7 @@ in {
       # vesktop # discord client, currently installed via flatpak
       # veracrypt
       virtiofsd # for virt-manager https://discourse.nixos.org/t/virt-manager-cannot-find-virtiofsd/26752
+      virtualbox
       remmina # rdp client
       signal-desktop
       syncthing

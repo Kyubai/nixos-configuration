@@ -2,13 +2,9 @@
   config,
   lib,
   pkgs,
-  pkgs-unstable,
   ...
 }: let
   cfgBase = config.modules.base;
-  # nixpkgs-unstable.config.allowUnfree = true;
-  # unstablePkgs = import nixpkgs-unstable {
-  # };
 in {
   options.modules.base.enable = lib.mkEnableOption "base nix config";
 
@@ -98,7 +94,8 @@ in {
     # };
     # xdg.menus.enable = true;
 
-    # programs.ssh.startAgent = true; # conflict with gnome agent
+    services.gnome.gcr-ssh-agent.enable = false;
+    programs.ssh.startAgent = true; # conflict with gnome agent
     security.sudo.extraConfig = ''
       Defaults>root        env_keep += "SSH_AUTH_SOCK XAUTHORITY DISPLAY"
       Defaults    timestamp_timeout=-1
