@@ -24,5 +24,13 @@ modules.base.enable = true;
   boot.loader.grub.enable = true;
   boot.loader.grub.devices = ["/dev/sda"];
 
+services.openssh = {
+enable = true;
+settings = {
+PasswordAuthentication = true;
+PermitRootLogin = "yes";
+};
+};
+
   system.stateVersion = "25.11";
 }
