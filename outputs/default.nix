@@ -78,6 +78,16 @@ in {
       ];
     };
 
+server = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = {inherit inputs;};
+      modules = [
+        ../nixos_modules
+        # disko.nixosModules.disko # required for nixos-anywhere
+        ./systems/server/configuration.nix
+      ];
+};
+
     work2home = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs;};
