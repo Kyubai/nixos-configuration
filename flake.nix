@@ -37,5 +37,8 @@
 
     # Obsidian nvim plugin for nvf
     # obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
+
+    # auto-wipe rootfs
+    impermanence.url = "github:nix-community/impermanence";
   };
 }
