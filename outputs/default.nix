@@ -2,6 +2,7 @@
   nixpkgs,
   nixpkgs-unstable,
   home-manager,
+  impermanence,
   disko,
   nvf,
   ...
@@ -83,7 +84,7 @@ server = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         ../nixos_modules
-        # disko.nixosModules.disko # required for nixos-anywhere
+	impermanence.nixosModules.impermanence
         ./systems/server/configuration.nix
       ];
 };
