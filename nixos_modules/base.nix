@@ -35,6 +35,7 @@ in {
     boot.loader.systemd-boot.configurationLimit = 10;
     boot.loader.grub.configurationLimit = 10;
 
+    networking.firewall.enable = true;
     # services.ntp.enable = true;
 
     # Pick only one of the below networking options.
