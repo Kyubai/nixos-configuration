@@ -24,6 +24,7 @@ in {
           # "2a0f:fc81::" # dns0.eu
           "/react.intern/10.103.0.1"
           "/addyet.intern/10.10.0.2" # Hacker DMZ
+          "/authentication.add-yet.de/10.10.0.2" # Hacker DMZ
           "/addyet.intern/192.168.250.5" # addyet.intern
           "/intern.verriegelt.net/10.105.201.1"
         ];
