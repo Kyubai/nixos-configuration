@@ -62,6 +62,30 @@
     };
   };
 
+  system.activationScripts.cloneEtcNixosRepo = {
+    deps = ["etc"];
+    text = ''
+      set -euo pipefail
+
+      target=/etc/nixos
+      url=${lib.escapeShellArg "https://github.com/kyubai/nixos-configuration"}
+
+      # If something made /etc/nixos a symlink (common when managed via /nix/store),
+      # you can't have a writable git repo there.
+      if [ -L "$target" ]; then
+        echo "ERROR: $target is a symlink. Remove any environment.etc/tmpfiles rule that creates it."
+        exit 1
+      fi
+
+      # Only clone if it's not already a git repo.
+      if [ -d "$target" ]; then
+        exit 1
+      fi
+
+      ${pkgs.git}/bin/git clone "$url" "$target"
+    '';
+  };
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
