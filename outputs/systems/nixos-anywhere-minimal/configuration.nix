@@ -69,11 +69,13 @@
       target=/etc/nixos
       url="https://github.com/kyubai/nixos-configuration"
 
+      sleep 5
+
       rmdir "$target"
 
       ${pkgs.git}/bin/git clone "$url" "$target"
     '';
-    after = ["dhcpcd"];
+    after = ["dhcpcd.service"];
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "oneshot";
