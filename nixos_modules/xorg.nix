@@ -35,8 +35,10 @@ in {
           i3status
         ];
       };
-      # guest additions resize fix
-      videoDrivers = ["vmware"];
+      videoDrivers = [
+        # "vmware" # this used to fix resizing issues, but this driver is broken as of 2026-01-15
+        "modesetting"
+      ];
     };
 
     xdg.portal = {
