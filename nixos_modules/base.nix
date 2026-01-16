@@ -85,15 +85,6 @@ in {
     ];
 
     services.dbus.enable = true;
-    # xdg.portal = {
-    # enable = true;
-    # xdgOpenUsePortal = true;
-    # extraPortals = with pkgs; [
-    # xdg-desktop-portal-gtk
-    # kdePackages.xdg-desktop-portal-kde # for file-picker
-    # ];
-    # };
-    # xdg.menus.enable = true;
 
     services.gnome.gcr-ssh-agent.enable = false;
     programs.ssh.startAgent = true; # conflict with gnome agent
@@ -111,6 +102,7 @@ in {
       libsForQt5.qtstyleplugin-kvantum # might be required for kvantum https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
       libsForQt5.qt5ct # might be required for kvantum
       nix-search-cli
+      vim
       # lxqt.lxqt-menu-data
       # shared-mime-info # optional, but nice to have
     ];
