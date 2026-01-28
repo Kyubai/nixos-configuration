@@ -184,9 +184,9 @@ in {
           enable = true;
           lsp.enable = true;
         };
-        assistant.avante-nvim = {
-          enable = true;
-        };
+        # assistant.avante-nvim = {
+        # enable = true;
+        # };
         autocomplete.nvim-cmp.enable = true;
 
         autopairs.nvim-autopairs.enable = true;
