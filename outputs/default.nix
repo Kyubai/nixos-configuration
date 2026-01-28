@@ -79,15 +79,15 @@ in {
       ];
     };
 
-server = nixpkgs.lib.nixosSystem {
+    server = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs;};
       modules = [
         ../nixos_modules
-	impermanence.nixosModules.impermanence
+        impermanence.nixosModules.impermanence
         ./systems/server/configuration.nix
       ];
-};
+    };
 
     work2home = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -230,7 +230,7 @@ server = nixpkgs.lib.nixosSystem {
       modules = [
         inputs.self.outputs.homeManagerModules.default
         inputs.nvf.homeManagerModules.default
-        ./home-manager/ssh-utils.nix
+        ./home-manager/cli.nix
         ./home-manager/mri.nix
       ];
     };

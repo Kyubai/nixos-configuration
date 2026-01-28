@@ -20,7 +20,10 @@ in {
       jless # less for json
       lnav
       openfortivpn
+      squid # for internet forwading via ssh
       sqlite
+      sshfs
+      sshpass
       vmfs-tools
     ];
     security.krb5.enable = true;
