@@ -20,7 +20,6 @@ in {
       jless # less for json
       lnav
       openfortivpn
-      squid # for internet forwading via ssh
       sqlite
       sshfs
       sshpass
