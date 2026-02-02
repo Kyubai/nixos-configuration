@@ -160,6 +160,17 @@
     };
   };
 
+  # squid proxy for internet forwarding
+  services.squid = {
+    enable = true;
+    proxyPort = 3128;
+    # configText = ''
+    # http_access allow localhost
+    # http_access deny all # Default deny
+    # '';
+  };
+  networking.firewall.allowedTCPPorts = [3128];
+
   programs.proxychains.enable = true;
   programs.proxychains.proxies = {
     myproxy = {

@@ -8,10 +8,11 @@ in {
   options.modules.localdns.enable = lib.mkEnableOption "enable local dns server for various vpns";
 
   config = lib.mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [53];
     services.dnsmasq = {
       enable = true;
       settings = {
-        listen-address = "::1,127.0.0.1";
+        listen-address = "127.0.0.1,127.0.0.2";
         no-resolv = true; # ignore resolv.conf
         log-queries = true;
         log-facility = "/var/log/dnsmasq.log";

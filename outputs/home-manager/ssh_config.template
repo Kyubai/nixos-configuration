@@ -1,8 +1,10 @@
 Host customer-kali01
     Hostname customer.react.intern
     DynamicForward 9050
-    RemoteForward 127.0.0.2:23445 127.0.0.1:445
-    RemoteCommand sudo umount /home/mri/scripts; sudo mount -t cifs -o vers=3,ro,port=23445,username=anon,password=anon //127.0.0.1/tools/scripts /home/mri/scripts; /bin/zsh
+    RemoteForward 127.0.0.2:445 127.0.0.1:445
+    RemoteForward 127.0.0.2:3128 127.0.0.1:3128
+    RemoteForward 127.0.0.2:53 127.0.0.1:53
+    RemoteCommand sudo umount /home/mri/scripts; sudo mount -t cifs -o vers=3,ro,port=445,username=anon,password=anon //127.0.0.2/tools/scripts /home/mri/scripts; /bin/zsh
     RequestTTY yes
                                                                                                                                                                                               
 Host customer-kali01-simple
