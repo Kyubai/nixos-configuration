@@ -26,7 +26,6 @@ in {
       xkb.layout = "eu";
       xkb.options = "compose:ralt";
       displayManager = {
-        gdm.enable = true;
         startx.enable = true;
       };
       windowManager.i3 = {
@@ -40,6 +39,8 @@ in {
         "modesetting"
       ];
     };
+
+    services.displayManager.gdm.enable = true;
 
     xdg.portal = {
       enable = true;
