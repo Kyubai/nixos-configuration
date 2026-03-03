@@ -9,6 +9,12 @@ in {
   options.modules.zsh.enable = lib.mkEnableOption "enable zsh terminal";
 
   config = lib.mkIf cfgZsh.enable {
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
     programs.zsh = {
       enable = true;
       autosuggestion.enable = true;
@@ -23,9 +29,12 @@ in {
       };
 
       # zprof.enable = true; # enable profiling
-
       # defaultKeymap = "viins"; # replaced by zsh-vi-mode
       initContent = ''
+        autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+        zle -N up-line-or-beginning-search
+        zle -N down-line-or-beginning-search
+
         # create a zkbd compatible hash;
         # to add other keys to this hash, see: man 5 terminfo
         typeset -g -A key
@@ -49,13 +58,15 @@ in {
         [[ -n "''${key[Insert]}"    ]] && bindkey -- "''${key[Insert]}"     overwrite-mode
         [[ -n "''${key[Backspace]}" ]] && bindkey -- "''${key[Backspace]}"  backward-delete-char
         [[ -n "''${key[Delete]}"    ]] && bindkey -- "''${key[Delete]}"     delete-char
-        [[ -n "''${key[Up]}"        ]] && bindkey -- "''${key[Up]}"         up-line-or-history
-        [[ -n "''${key[Down]}"      ]] && bindkey -- "''${key[Down]}"       down-line-or-history
+        [[ -n "''${key[Up]}"        ]] && bindkey -- "''${key[Up]}"         up-line-or-beginning-search
+        [[ -n "''${key[Down]}"      ]] && bindkey -- "''${key[Down]}"       down-line-or-beginning-search
         [[ -n "''${key[Left]}"      ]] && bindkey -- "''${key[Left]}"       backward-char
         [[ -n "''${key[Right]}"     ]] && bindkey -- "''${key[Right]}"      forward-char
         [[ -n "''${key[PageUp]}"    ]] && bindkey -- "''${key[PageUp]}"     beginning-of-buffer-or-history
         [[ -n "''${key[PageDown]}"  ]] && bindkey -- "''${key[PageDown]}"   end-of-buffer-or-history
         [[ -n "''${key[Shift-Tab]}" ]] && bindkey -- "''${key[Shift-Tab]}"  reverse-menu-complete
+        [[ -n "''${key[Control-Left]}"  ]] && bindkey -- "''${key[Control-Left]}"  backward-word
+        [[ -n "''${key[Control-Right]}" ]] && bindkey -- "''${key[Control-Right]}" forward-word
 
         # Finally, make sure the terminal is in application mode, when zle is
         # active. Only then are the values from ''$terminfo valid.
@@ -70,26 +81,9 @@ in {
         key[Control-Left]="''${terminfo[kLFT5]}"
         key[Control-Right]="''${terminfo[kRIT5]}"
 
-        [[ -n "''${key[Control-Left]}"  ]] && bindkey -- "''${key[Control-Left]}"  backward-word
-        [[ -n "''${key[Control-Right]}" ]] && bindkey -- "''${key[Control-Right]}" forward-word
-
-        autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-        zle -N up-line-or-beginning-search
-        zle -N down-line-or-beginning-search
-
-        [[ -n "''${key[Up]}"   ]] && bindkey -- "''${key[Up]}"   up-line-or-beginning-search
-        [[ -n "''${key[Down]}" ]] && bindkey -- "''${key[Down]}" down-line-or-beginning-search
-
-        key[Control-Left]="''${terminfo[kLFT5]}"
-        key[Control-Right]="''${terminfo[kRIT5]}"
-
-        [[ -n "''${key[Control-Left]}"  ]] && bindkey -- "''${key[Control-Left]}"  backward-word
-        [[ -n "''${key[Control-Right]}" ]] && bindkey -- "''${key[Control-Right]}" forward-word
-
         bindkey "^[[3;5~" kill-word
         bindkey "^H" backward-kill-word
-        bindkey "^R" history-beginning-search-backward
-        # bindkey "''${key[Up]}" up-line-or-search # not sure if this works
+        bindkey "^R" history-incremental-search-backward
 
         # only compinit once a day
         # https://gist.github.com/ctechols/ca1035271ad134841284
