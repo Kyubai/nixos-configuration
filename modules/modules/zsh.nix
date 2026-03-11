@@ -1,14 +1,9 @@
 {
-  config,
-  lib,
-  pkgs,
+  inputs,
+  self,
   ...
-}: let
-  cfgZsh = config.modules.zsh;
-in {
-  options.modules.zsh.enable = lib.mkEnableOption "enable zsh terminal";
-
-  config = lib.mkIf cfgZsh.enable {
+}: {
+  flake.homeModules.zsh = {pkgs, ...}: {
     programs.direnv = {
       enable = true;
       enableZshIntegration = true;

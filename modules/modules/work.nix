@@ -1,13 +1,9 @@
 {
-  config,
-  lib,
+  inputs,
+  self,
   ...
-}: let
-  cfg = config.modules.localdns;
-in {
-  options.modules.localdns.enable = lib.mkEnableOption "enable local dns server for various vpns";
-
-  config = lib.mkIf cfg.enable {
+}: {
+  flake.nixosModules.work = {...}: {
     networking.firewall.allowedTCPPorts = [53];
     services.dnsmasq = {
       enable = true;

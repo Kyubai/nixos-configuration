@@ -1,14 +1,9 @@
 {
-  config,
-  lib,
-  pkgs,
+  inputs,
+  self,
   ...
-}: let
-  cfgBase = config.modules.base;
-in {
-  options.modules.base.enable = lib.mkEnableOption "base nix config";
-
-  config = lib.mkIf cfgBase.enable {
+}: {
+  flake.nixosModules.base = {pkgs, ...}: {
     # TODO: move this to home-manager
     programs.zsh = {
       enable = true;

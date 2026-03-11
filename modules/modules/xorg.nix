@@ -1,11 +1,9 @@
 {
-  config,
   self,
-  lib,
-  pkgs,
+  inputs,
   ...
-}:
-
+}: {
+  flake.nixosModules.xorg = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       xorg.xorgserver
       xorg.xf86inputevdev
@@ -40,11 +38,44 @@
 
     xdg.portal = {
       enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.kdePackages.xdg-desktop-portal-kde # for file-picker
+      ];
       config.common = {
         default = ["kde"]; # test only
         "org.freedesktop.impl.portal.FileChooser" = ["kde"];
         "org.freedesktop.portal.FileChooser" = ["kde"];
         "org.freedesktop.impl.portal.AppChooser" = ["kde"];
+      };
+    };
+  };
+
+  flake.homeModules.i3 = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    modules = [
+      self.homeModules.polybar
+      self.homeModules.kitty
+    ];
+    xsession.windowManager.i3 = {
+      enable = true;
+      config = {
+        modifier = "Mod4";
+        terminal = "${pkgs.kitty}/bin/kitty";
+        keybindings = lib.mkOptionDefault {
+          "Mod4+semicolon" = "exec ${self.config.xsession.windowManager.i3.config.terminal}"; # 47 is Semicolon
+        };
+        window = {
+          titlebar = false;
+          hideEdgeBorders = "both";
+        };
+        floating = {
+          titlebar = false;
+        };
       };
     };
   };

@@ -1,14 +1,18 @@
 {
-  config,
-  lib,
-  pkgs,
+  inputs,
+  self,
   ...
-}: let
-  cfgDesktop = config.modules.desktop.tools;
-in {
-  options.modules.desktop.tools.enable = lib.mkEnableOption "basic desktop gui tools";
-
-  config = lib.mkIf cfgDesktop.enable {
+}: {
+  flake.nixosModules.desktop = {
+    pkgs,
+    nixpkgs-unstable,
+    ...
+  }: let
+    unstable = import inputs.nixpkgs-unstable {
+      system = pkgs.system;
+      config = pkgs.config;
+    };
+  in {
     environment.systemPackages = with pkgs; [
       anki
       bitwarden-desktop
@@ -18,8 +22,9 @@ in {
       # discord
       feishin
       filezilla
-      floorp-bin
+      unstable.floorp-bin
       gimp
+      krita
       keepassxc
       ntfs3g # TODO move to hacking/forensics module
       obsidian
@@ -53,14 +58,5 @@ in {
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
-
-    # virtualisation.virtualbox.host.enable = true;
-    # virtualisation.virtualbox.host.enableExtensionPack = true;
-
-    # services.avahi = {
-    # enable = true;
-    # nssmdns4 = true;
-    # openFirewall = true;
-    # };
   };
 }

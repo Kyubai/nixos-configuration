@@ -1,14 +1,9 @@
 {
-  config,
-  lib,
-  pkgs,
+  inputs,
+  self,
   ...
-}:
-with lib; let
-  cfgUtils = config.modules.cli.utils;
-in {
-  options.modules.cli.utils.enable = mkEnableOption "basic cli utils";
-  config = mkIf cfgUtils.enable {
+}: {
+  flake.nixosModules.cli-utils = {pkgs, ...}: {
     programs.zsh = {
       enable = true;
     };

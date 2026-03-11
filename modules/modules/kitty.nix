@@ -1,13 +1,9 @@
 {
-  config,
-  lib,
+  inputs,
+  self,
   ...
-}: let
-  cfgKitty = config.modules.kitty;
-in {
-  options.modules.kitty.enable = lib.mkEnableOption "kitty terminal emulator";
-
-  config = lib.mkIf cfgKitty.enable {
+}: {
+  flake.homeModules.kitty = {...}: {
     programs.kitty = {
       enable = true;
       settings = {

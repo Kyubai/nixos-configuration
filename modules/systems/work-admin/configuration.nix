@@ -6,19 +6,25 @@
   flake.nixosConfigurations."work-admin" = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
+      self.nixosModules.base
+      self.nixosModules.cli-utils
+      self.nixosModules.desktop
+      self.nixosModules.it-sec
+      self.nixosModules.vmware-guest
+      self.nixosModules.work
       self.nixosModules.work-admin
+      self.nixosModules.xorg
+    ];
+
+    # doesn't exist
+    homeModules = [
+      self.homeModules.i3
+      self.homeModules.neovim
+      self.homeModules.zsh
     ];
   };
 
   flake.nixosModules.work-admin = {
-    # modules.base.enable = true;
-    # modules.cli.utils.enable = true;
-    # modules.sec.utils.enable = true;
-    # modules.desktop.tools.enable = true;
-    # modules.desktop.xorg.enable = true;
-    # modules.vm.vmware.guest.enable = true;
-    # modules.localdns.enable = true;
-
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
     system.autoUpgrade.enable = true;
