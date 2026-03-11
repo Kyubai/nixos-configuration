@@ -1,14 +1,11 @@
 {
-  config,
-  lib,
-  pkgs,
+  inputs,
+  self,
   ...
-}: let
-  cfgPolybar = config.modules.polybar;
-  customPackage = pkgs.polybar.override {i3Support = true;};
-in {
-  options.modules.polybar.enable = lib.mkEnableOption "enable polybar config";
-  config = lib.mkIf cfgPolybar.enable {
+}: {
+  flake.homeModules.polybar = {pkgs, ...}: let
+    customPackage = pkgs.polybar.override {i3Support = true;};
+  in {
     services.polybar = {
       enable = true;
       package = customPackage;

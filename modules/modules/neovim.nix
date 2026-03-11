@@ -1,15 +1,9 @@
 {
-  config,
-  lib,
-  pkgs,
   inputs,
+  self,
   ...
-}: let
-  cfgNvim = config.modules.neovim;
-in {
-  options.modules.neovim.enable = lib.mkEnableOption "enable nvim text editor";
-
-  config = lib.mkIf cfgNvim.enable {
+}: {
+  flake.homeModules.neovim = {pkgs, ...}: {
     programs.nvf = {
       enable = true;
       settings.vim = {
