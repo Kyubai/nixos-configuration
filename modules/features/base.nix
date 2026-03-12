@@ -89,6 +89,7 @@
     '';
 
     environment.systemPackages = with pkgs; [
+      comma
       dbus
       file
       git
