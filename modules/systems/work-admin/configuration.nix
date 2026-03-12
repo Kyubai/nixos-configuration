@@ -4,7 +4,6 @@
   ...
 }: {
   flake.nixosConfigurations."work-admin" = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
     modules = [
       self.nixosModules.base
       self.nixosModules.cli-utils
@@ -14,13 +13,41 @@
       self.nixosModules.work
       self.nixosModules.work-admin
       self.nixosModules.xorg
-    ];
-
-    # doesn't exist
-    homeModules = [
-      self.homeModules.i3
-      self.homeModules.neovim
-      self.homeModules.zsh
+      inputs.home-manager.nixosModules.home-manager
+      {
+        home-manager.users.mri = {
+          home.stateVersion = "25.11";
+          imports = [
+            self.homeModules.eza
+            self.homeModules.neovim
+            self.homeModules.zellij
+            self.homeModules.zsh
+            self.homeModules.starship
+            self.homeModules.zoxide
+            self.homeModules.nix-index
+            self.homeModules.nixos
+            self.homeModules.git
+            self.homeModules.home-manager
+            self.homeModules.i3
+          ];
+        };
+        home-manager.users.root = {
+          home.stateVersion = "25.11";
+          imports = [
+            self.homeModules.eza
+            self.homeModules.neovim
+            self.homeModules.zellij
+            self.homeModules.zsh
+            self.homeModules.starship
+            self.homeModules.zoxide
+            self.homeModules.nix-index
+            self.homeModules.nixos
+            self.homeModules.git
+            self.homeModules.home-manager
+            self.homeModules.i3
+          ];
+        };
+      }
     ];
   };
 
@@ -67,20 +94,11 @@
       options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount"];
     };
 
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.mri = {
       isNormalUser = true;
       extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     };
 
-    # Copy the NixOS configuration file and link it from the resulting system
-    # (/run/current-system/configuration.nix). This is useful in case you
-    # accidentally delete configuration.nix.
-    # system.copySystemConfiguration = true;
     system.stateVersion = "23.11";
   };
 }

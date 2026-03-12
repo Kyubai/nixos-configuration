@@ -57,7 +57,7 @@
     lib,
     ...
   }: {
-    modules = [
+    imports = [
       self.homeModules.polybar
       self.homeModules.kitty
     ];
@@ -67,7 +67,7 @@
         modifier = "Mod4";
         terminal = "${pkgs.kitty}/bin/kitty";
         keybindings = lib.mkOptionDefault {
-          "Mod4+semicolon" = "exec ${self.config.xsession.windowManager.i3.config.terminal}"; # 47 is Semicolon
+          "Mod4+semicolon" = "exec kitty"; # 47 is Semicolon
         };
         window = {
           titlebar = false;

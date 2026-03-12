@@ -1,13 +1,9 @@
 {
-  config,
-  lib,
+  inputs,
+  self,
   ...
-}: let
-  cfg = config.modules.zellij;
-in {
-  options.modules.zellij.enable = lib.mkEnableOption "zellij terminal multiplexer";
-
-  config = lib.mkIf cfg.enable {
+}: {
+  flake.homeModules.zellij = {
     programs.zellij = {
       enable = true;
       # enableBashIntegration = true;
