@@ -15,37 +15,17 @@
       self.nixosModules.xorg
       inputs.home-manager.nixosModules.home-manager
       {
-        home-manager.users.mri = {
-          home.stateVersion = "25.11";
-          imports = [
-            self.homeModules.eza
-            self.homeModules.neovim
-            self.homeModules.zellij
-            self.homeModules.zsh
-            self.homeModules.starship
-            self.homeModules.zoxide
-            self.homeModules.nix-index
-            self.homeModules.nixos
-            self.homeModules.git
-            self.homeModules.home-manager
+        home-manager = {
+          sharedModules = [
+            self.homeModules.cli-utils
             self.homeModules.i3
           ];
-        };
-        home-manager.users.root = {
-          home.stateVersion = "25.11";
-          imports = [
-            self.homeModules.eza
-            self.homeModules.neovim
-            self.homeModules.zellij
-            self.homeModules.zsh
-            self.homeModules.starship
-            self.homeModules.zoxide
-            self.homeModules.nix-index
-            self.homeModules.nixos
-            self.homeModules.git
-            self.homeModules.home-manager
-            self.homeModules.i3
-          ];
+          users.mri = {
+            home.stateVersion = "25.11";
+          };
+          users.root = {
+            home.stateVersion = "25.11";
+          };
         };
       }
     ];
@@ -54,14 +34,10 @@
   flake.nixosModules.work-admin = {
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
-    system.autoUpgrade.enable = true;
 
     # required for zfs support
     networking.hostId = "621cba57";
 
-    # Pick only one of the below networking options.
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
     networking.hostName = "work-admin";
 
     fileSystems."/data/tools/at-yet" = {
