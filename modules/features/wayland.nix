@@ -1,0 +1,347 @@
+{
+  inputs,
+  self,
+  ...
+}: {
+  flake.nixosModules.wayland = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    environment.systemPackages = with pkgs; [
+      grimblast # screenshot utility
+      hyprpaper # wallpaper
+      # https://wiki.nixos.org/wiki/Dolphin
+      kdePackages.dolphin # file manager
+      kdePackages.kio
+      kdePackages.kdf
+      kdePackages.qtsvg # icons for dolphin
+      kdePackages.kio-fuse # to mount remote filesystems via FUSE
+      kdePackages.kio-extras # extra protocols support (sftp, fish and more)
+      kdePackages.kio-admin
+      kdePackages.qtwayland # Qt wayland support
+      kdePackages.plasma-integration
+      kdePackages.breeze-icons
+      kdePackages.kservice
+      kdePackages.plasma-workspace # required for dolphin applications menu
+      shared-mime-info
+      slurp # geometry selector
+      swappy # screenshot editor
+      wl-screenrec # screen recording utility
+      wayland
+      wdisplays # manage monitors
+      wl-clipboard # clipboard cli
+      # kdePackages.xwaylandvideobridge # not present in 25.11
+      # portals
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk # required for themes?
+      kdePackages.xdg-desktop-portal-kde
+    ];
+
+    services.greetd = {
+      enable = true;
+      settings = {
+        terminal = {
+          vt = 1;
+        };
+        default_session = {
+          command = "${pkgs.greetd}/bin/agreety --cmd Hyprland";
+          user = "mri";
+        };
+        initial_session = {
+          command = "${pkgs.greetd}/bin/agreety --cmd Hyprland";
+          user = "mri";
+        };
+      };
+    };
+
+    programs.xwayland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      withUWSM = true;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      # wrapperFeatures.gtk = true;
+    };
+    programs.uwsm = {
+      enable = true;
+      waylandCompositors.hyprland = {
+        prettyName = "Hyprland";
+        comment = "Hyprland compositor managed by UWSM";
+        # binPath = lib.getExe pkgs.hyprland;
+        binPath = "/run/current-system/sw/bin/Hyprland";
+      };
+    };
+    programs.hyprlock.enable = true;
+
+    # xdg.autostart.enable = true;
+    xdg.portal = {
+      enable = true;
+      wlr.enable = false; # disable wlr when using hyprland
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk # required for themes?
+        kdePackages.xdg-desktop-portal-kde
+      ];
+      config = {
+        common = {
+          default = ["*"];
+          "org.freedesktop.portal.Settings" = ["hyprland"];
+          "org.freedesktop.portal.ScreenCast" = ["hyprland"];
+          "org.freedesktop.portal.Screenshot" = ["hyprland"];
+          "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+          "org.freedesktop.impl.portal.FileChooser" = ["hyprland"];
+          "org.freedesktop.portal.OpenURI" = ["hyprland"];
+        };
+        hyprland = {
+          default = ["hyprland"];
+          # hyprland.default = ["wlr" "kde" "gtk"];
+          # hyprland."org.freedesktop.impl.portal.FileChooser" = ["kde"];
+          # hyprland."org.freedesktop.impl.portal.AppChooser" = ["kde"];
+          # hyprland."org.freedesktop.portal.OpenURI" = ["kde"];
+        };
+      };
+    };
+    # xdg-desktop-portal works by exposing a series of D-Bus interfaces
+    # known as portals under a well-known name
+    # (org.freedesktop.portal.Desktop) and object path
+    # (/org/freedesktop/portal/desktop).
+    # The portal interfaces include APIs for file access, opening URIs, printing and others.
+    services.dbus.enable = lib.mkDefault true;
+    security.polkit.enable = true;
+  };
+
+  flake.homeModules.wayland = {
+    lib,
+    pkgs,
+    ...
+  }: {
+    imports = [
+      self.homeModules.ashell
+      self.homeModules.kitty
+    ];
+    services.dunst.enable = true; # notification deamon
+    programs.wofi.enable = true; # dmenu
+    # modules.kitty.enable = true;
+    # modules.ashell.enable = true;
+    # modules.waybar.enable = true;
+    # modules.ashell.enable = true;
+
+    # modules.waybar.laptop = lib.mkIf cfg.laptop.enable {enable = true;};
+
+    gtk.enable = true; # required for portals?
+
+    home.pointerCursor = {
+      hyprcursor.enable = true;
+      package = pkgs.nordzy-cursor-theme; # cursor theme
+      name = "Nordzy-hyprcursors";
+    };
+
+    # wallpaper deamon settings
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        ipc = "on";
+        splash = false;
+      };
+    };
+
+    # lock screen
+    programs.hyprlock = {
+      enable = true;
+      settings = {
+        general = {
+          disable_loading_bar = true;
+          grace = 300;
+          hide_cursor = true;
+          no_fade_in = false;
+        };
+        input-field = [
+          {
+            size = "200, 50";
+            position = "0, -80";
+            monitor = "";
+            dots_center = true;
+            fade_on_empty = false;
+            outline_thickness = 5;
+            placeholder_text = "Password";
+            shadow_passes = 2;
+          }
+        ];
+      };
+    };
+
+    wayland.windowManager.hyprland = {
+      enable = true;
+      # set packages to null to use nixos defined package
+      # https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/#using-the-home-manager-module-with-nixos
+      package = null;
+      portalPackage = null;
+      systemd.enable = true;
+      systemd.variables = ["--all"];
+      systemd.enableXdgAutostart = true;
+      extraConfig = ''
+        monitor = DP-1, 2560x1440, 2560x0, 1
+        monitor = DP-3, 2560x1440, 0x0, 1
+
+        # bind = $mod, p, submap, screenshot
+        bind = $mod, p, exec, hyprctl notify -1 10000000 0 "SHIFT = save, a = area, o = output, escape = exit"; hyprctl dispatch submap screenshot
+        submap = screenshot
+        bind = , a, exec, hyprctl dismissnotify; grimblast --freeze copy area; hyprctl dispatch submap reset
+        bind = SHIFT, a, exec, hyprctl dismissnotify; grimblast --freeze save area ~/screenshots/$(date -Iseconds)_screenshot.png; hyprctl dispatch submap reset
+        bind = , o, exec, hyprctl dismissnotify; grimblast --freeze copy output; hyprctl dispatch submap reset
+        bind = SHIFT, o, exec, hyprctl dismissnotify; grimblast --freeze save output ~/screenshots/$(date -Iseconds)_screenshot.png; hyprctl dispatch submap reset
+        bind = , escape, exec, hyprctl dismissnotify; hyprctl dispatch submap reset
+        # bind = , catchall, exec, hyprctl dismissnotify; hyprctl dispatch submap reset
+        submap = reset
+
+        # $mod CTRL, p, exec, wl-screenrec -g \"$(slurp)\" -f ~/recordings/$(date -Iseconds)_recording.mp4"
+
+        # applications for wayland
+        # exec-once = hyprpaper
+        exec-once = sleep 1 && hyprctl hyprpaper reload , $(find /data/media/backgrounds -type f | shuf -n 1)
+        # exec-once = waybar
+        exec-once = hyprctl setcursor Nordzy-hyprcursors 24
+        # fix screen cast portal not being available
+        # https://wiki.hyprland.org/Hypr-Ecosystem/xdg-desktop-portal-hyprland/#usage
+        exec-once = sleep 5 && xdg-desktop-portal-hyprland.service && sleep 5 && systemctl --user restart xdg-desktop-portal.service
+
+        # autostart user applications
+        exec-once = [workspace 0 silent] kitty
+        exec-once = [workspace 1 silent] kitty
+        exec-once = [workspace 2 silent] floorp
+        exec-once = [workspace 5 silent] flatpak run dev.vencord.Vesktop
+        exec-once = [workspace 6 silent] feishin
+        exec-once = [workspace 9 silent] steam
+
+        # https://wiki.hyprland.org/Configuring/Workspace-Rules/#smart-gaps
+        workspace = w[tv1], gapsout:0, gapsin:0
+        workspace = f[1], gapsout:0, gapsin:0
+        windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
+        windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
+        windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
+        windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+
+        # open windows on specific workspace
+        windowrulev2 = workspace 2 silent, class:^(floorp)$
+        windowrulev2 = workspace 3 silent, class:^(anki)$
+        windowrulev2 = workspace 5 silent, class:^(vesktop)$
+        windowrulev2 = workspace 6 silent, class:^(feishin)$
+        windowrulev2 = workspace 9 silent, class:^(steam)$
+
+        # https://wiki.hyprland.org/Configuring/Environment-variables/
+        # Toolkit Backed stuff
+        env = GDK_BACKEND,wayland,x11,*
+        # env = SDL_VIDEODRIVER,wayland # disabled for now, as this causes issues
+        env = CLUTTER_BACKEND,wayland
+        env = GTK_USE_PORTAL,1
+        # XDG stuff
+        # env = XDG_CURRENT_DESKTOP,Hyprland
+        # env = XDG_SESSION_DESKTOP,Hyprland
+        # env = XDG_SESSION_TYPE,wayland
+        # QT stuff
+        env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+        env = QT_QPA_PLATFORM,wayland;xcb
+        env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+        env = QT_QPA_PLATFORMTHEME,qt5ct # should already be set in theme module
+        # Application stuff
+        env = NIXOS_OZONE_WL,1
+        env = MOZ_ENABLE_WAYLAND,1
+        env = XDG_MENU_PREFIX,plasma-
+
+        env = WLR_NO_HARDWARE_CURSORS,1
+        env = WLR_RENDERER_ALLOW_SOFTWARE,1
+        env = _JAVA_AWT_WM_NONREPARENTING,1
+        env = NIXOS_XDG_OPEN_USE_PORTAL,1
+        # env = NIX_XDG_DESKTOP_PORTAL_DIR,/run/current-system/sw/share/xdg-desktop-portal/portals
+
+      '';
+
+      # enableNvidiaPatches = true;
+      xwayland.enable = true;
+      settings = {
+        "$mod" = "SUPER";
+        "$terminal" = "kitty";
+        "$menu" = "wofi -S drun -i";
+        "$fileManager" = "dolphin";
+        # debug = {
+        # disable_logs = false;
+        # };
+        misc = {
+          focus_on_activate = false;
+        };
+        input = {
+          kb_layout = "eu";
+          kb_options = "compose:ralt";
+        };
+        dwindle = {
+          pseudotile = true;
+          preserve_split = true;
+        };
+        animations = {
+          enabled = false;
+        };
+        bind = [
+          "$mod, Return, exec, $terminal"
+          "$mod, code:47, exec, $terminal" # code:47 is semicolon
+          "$mod, e, exec, $fileManager"
+          "$mod, d, exec, $menu"
+          "$mod, code:65, togglefloating," # code:65 is space
+          "$mod, n, pseudo," # dwindle
+          "$mod, m, togglesplit," # dwindle
+          "$mod, o, exec, hyprlock --immediate --no-fade-in"
+          "$mod, c, killactive"
+          # "$mod SHIFT, C, forcekillactive" # doesn't work for some reason
+          "$mod, v, exec, pulsemixer"
+
+          # Move focus with mainMod + arrow keys
+          "$mod, left, movefocus, l"
+          "$mod, right, movefocus, r"
+          "$mod, up, movefocus, u"
+          "$mod, down, movefocus, d"
+
+          "$mod, h, movefocus, l"
+          "$mod, l, movefocus, r"
+          "$mod, k, movefocus, u"
+          "$mod, j, movefocus, d"
+          "$mod, f, fullscreen"
+
+          # Switch workspaces with mainMod + [0-9]
+          "$mod, 1, workspace, 1"
+          "$mod, 2, workspace, 2"
+          "$mod, 3, workspace, 3"
+          "$mod, 4, workspace, 4"
+          "$mod, 5, workspace, 5"
+          "$mod, 6, workspace, 6"
+          "$mod, 7, workspace, 7"
+          "$mod, 8, workspace, 8"
+          "$mod, 9, workspace, 9"
+          "$mod, 0, workspace, 10"
+
+          # Move active window to a workspace with mainMod + SHIFT + [0-9]
+          "$mod SHIFT, 1, movetoworkspacesilent, 1"
+          "$mod SHIFT, 2, movetoworkspacesilent, 2"
+          "$mod SHIFT, 3, movetoworkspacesilent, 3"
+          "$mod SHIFT, 4, movetoworkspacesilent, 4"
+          "$mod SHIFT, 5, movetoworkspacesilent, 5"
+          "$mod SHIFT, 6, movetoworkspacesilent, 6"
+          "$mod SHIFT, 7, movetoworkspacesilent, 7"
+          "$mod SHIFT, 8, movetoworkspacesilent, 8"
+          "$mod SHIFT, 9, movetoworkspacesilent, 9"
+          "$mod SHIFT, 0, movetoworkspacesilent, 10"
+
+          "$mod, I, movecurrentworkspacetomonitor,+1"
+
+          # Example special workspace (scratchpad)
+          "$mod, S, togglespecialworkspace, magic"
+          "$mod SHIFT, S, movetoworkspace, special:magic"
+        ];
+        bindm = [
+          "$mod, mouse:272, movewindow"
+          "$mod, mouse:273, resizewindow"
+        ];
+      };
+    };
+  };
+}

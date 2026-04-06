@@ -1,17 +1,9 @@
 {
-  config,
-  lib,
-  pkgs,
+  inputs,
+  self,
   ...
-}: let
-  cfg = config.modules.ashell;
-in {
-  options.modules.ashell = {
-    enable = lib.mkEnableOption "enable ashell statusbar";
-    laptop.enable = lib.mkEnableOption "enable laptop config";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  flake.homeModules.ashell = {...}: {
     programs.ashell = {
       enable = true;
       systemd.enable = true;

@@ -1,14 +1,9 @@
 {
-  config,
-  lib,
-  pkgs,
+  inputs,
+  self,
   ...
-}:
-with lib; let
-  cfgAmd = config.modules.hardware.amd;
-in {
-  options.modules.hardware.amd.enable = mkEnableOption "amd graphics";
-  config = mkIf cfgAmd.enable {
+}: {
+  flake.nixosModules.amd = {pkgs, ...}: {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
