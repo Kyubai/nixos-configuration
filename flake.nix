@@ -23,6 +23,9 @@
     nix-index-db.url = "github:usertam/nix-index-db/standalone/nixpkgs-unstable";
     nix-index-db.inputs.nixpkgs.follows = "nixpkgs";
 
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     # nvf.url = "github:notashelf/nvf/v0.8"; # pinned to 0.8 to fix deprecation error https://github.com/NotAShelf/nvf/issues/1172
     nvf.url = "github:notashelf/nvf";
     nvf.inputs.nixpkgs.follows = "nixpkgs";

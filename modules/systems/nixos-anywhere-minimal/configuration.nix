@@ -12,6 +12,12 @@
       self.nixosModules.vmware-guest
       self.nixosModules.xorg
       self.nixosModules.nixos-anywhere-minimal
+      inputs.disko.nixosModules.disko
+      {
+        imports = [
+          ./disk-config.nix
+        ];
+      }
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
