@@ -4,9 +4,15 @@
 {
   inputs,
   self,
+  lib,
   ...
 }: {
-  flake.nixosConfigurations.nixos-anywhere-minimal = {pkgs, ...}: {
+  flake.nixosConfigurations.nixos-anywhere-minimal = inputs.nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+
+    specialArgs = {
+      inherit inputs self;
+    };
     modules = [
       self.nixosModules.base
       self.nixosModules.vmware-guest
@@ -14,9 +20,65 @@
       self.nixosModules.nixos-anywhere-minimal
       inputs.disko.nixosModules.disko
       {
-        imports = [
-          ./disk-config.nix
-        ];
+        disko.devices = {
+          disk.disk1 = {
+            # sometimes this can be /dev/vda or indeed some other device
+            device = lib.mkDefault "/dev/sda";
+            type = "disk";
+            content = {
+              type = "gpt";
+              partitions = {
+                boot = {
+                  name = "boot";
+                  size = "1M";
+                  type = "EF02";
+                };
+                esp = {
+                  name = "ESP";
+                  size = "500M";
+                  type = "EF00";
+                  content = {
+                    type = "filesystem";
+                    format = "vfat";
+                    mountpoint = "/boot";
+                  };
+                };
+                root = {
+                  name = "root";
+                  size = "100%";
+                  content = {
+                    type = "lvm_pv";
+                    vg = "pool";
+                  };
+                };
+              };
+            };
+          };
+          lvm_vg = {
+            pool = {
+              type = "lvm_vg";
+              lvs = {
+                swap = {
+                  size = "20%FREE";
+                  content = {
+                    type = "swap";
+                  };
+                };
+                root = {
+                  size = "100%FREE";
+                  content = {
+                    type = "filesystem";
+                    format = "ext4";
+                    mountpoint = "/";
+                    mountOptions = [
+                      "defaults"
+                    ];
+                  };
+                };
+              };
+            };
+          };
+        };
       }
       inputs.home-manager.nixosModules.home-manager
       {

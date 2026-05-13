@@ -7,9 +7,9 @@
   ...
 }: {
   flake.nixosModules.nixos-anywhere-encrypted = {lib, ...}: {
-    imports = [
-      ./disk-config.nix
-    ];
+    # imports = [
+    # ./disk-config.nix
+    # ];
 
     boot.initrd.availableKernelModules = ["ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "ahci" "xhci_pci" "sd_mod" "sr_mod"];
     boot.initrd.kernelModules = ["dm-snapshot"];
