@@ -24,7 +24,7 @@
         disko.devices = {
           disk.disk1 = {
             # sometimes this can be /dev/vda or indeed some other device
-            device = lib.mkDefault "/dev/nvme0n1";
+            device = lib.mkDefault "/dev/sda";
             type = "disk";
             content = {
               type = "gpt";
@@ -80,7 +80,7 @@
                         };
                         "/swap" = {
                           mountpoint = "/swap";
-                          swap.swapfile.size = "64G";
+                          swap.swapfile.size = "16G";
                         };
                       };
                     };
@@ -110,14 +110,6 @@
   };
 
   flake.nixosModules.nixos-anywhere-encrypted = {pkgs, ...}: {
-    # my own /etc/nixos/modules
-    modules.base.enable = true;
-    # modules.cli.utils.enable = true;
-    # modules.sec.utils.enable = true;
-    # modules.desktop.tools.enable = true;
-    modules.desktop.hyprland.enable = true;
-    # modules.desktop.xorg.enable = true;
-
     # boot.loader.systemd-boot.enable = true;
     boot = {
       kernelParams = [
@@ -129,7 +121,7 @@
     boot.loader.grub = {
       # no need to set devices, disko will add all devices that have a EF02 partition to the list already
       # devices = [ ];
-      # enable = true;
+      enable = true;
       # efiSupport = true;
       # efiInstallAsRemovable = true;
     };
@@ -165,70 +157,10 @@
       };
     };
 
-    # Shared folder
-    fileSystems."/data/tools/personal" = {
-      device = ".host:/tools_personal";
-      fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
-      options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
-    };
-
     fileSystems."/data/share" = {
       device = ".host:/share";
       fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
       options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
-    };
-
-    fileSystems."/data/at-yet/vpn/react" = {
-      device = ".host:/vpn_react";
-      fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
-      options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount" "nofail"];
-    };
-
-    # exported folders
-    fileSystems."/export/tools/scripts" = {
-      device = "/data/tools/personal/scripts";
-      # device = "/home/mri/test";
-      options = ["bind" "nofail"];
-    };
-
-    services.samba = {
-      enable = true;
-      securityType = "user";
-      openFirewall = true;
-      settings = {
-        global = {
-          "workgroup" = "WORKGROUP";
-          "server string" = "smbnix";
-          "netbios name" = "smbnix";
-          "security" = "user";
-          #"use sendfile" = "yes";
-          #"max protocol" = "smb2";
-          # note: localhost is the ipv6 localhost ::1
-          "hosts allow" = "127.0.0.1 localhost";
-          "hosts deny" = "0.0.0.0/0";
-          "guest account" = "nobody";
-          "map to guest" = "bad user";
-        };
-        "tools" = {
-          "path" = "/export/tools";
-          "browseable" = "yes";
-          "read only" = "yes";
-          "guest ok" = "yes";
-          "create mask" = "0644";
-          "directory mask" = "0755";
-          # "force user" = "username";
-          # "force group" = "groupname";
-        };
-      };
-    };
-
-    programs.proxychains.enable = true;
-    programs.proxychains.proxies = {
-      myproxy = {
-        type = "socks5";
-        host = "127.0.0.1";
-        port = 9050;
-      };
     };
 
     # Copy the NixOS configuration file and link it from the resulting system

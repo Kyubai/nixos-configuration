@@ -1,0 +1,83 @@
+{
+  inputs,
+  self,
+  ...
+}: {
+  flake.nixosConfigurations."work2home" = inputs.nixpkgs.lib.nixosSystem {
+    modules = [
+      self.nixosModules.base
+      self.nixosModules.cli-utils
+      self.nixosModules.desktop
+      self.nixosModules.vmware-guest
+      self.nixosModules.work
+      self.nixosModules.work2home
+      self.nixosModules.xorg
+      inputs.home-manager.nixosModules.home-manager
+      {
+        home-manager = {
+          sharedModules = [
+            self.homeModules.cli-utils
+            self.homeModules.i3
+          ];
+          users.mri = {
+            home.stateVersion = "25.11";
+          };
+          users.root = {
+            home.stateVersion = "25.11";
+          };
+        };
+      }
+    ];
+  };
+
+  flake.nixosModules.work2home = {
+    # Use the systemd-boot EFI boot loader.
+    boot.loader = {
+      # systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+      };
+    };
+    boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/2e1c4254-fea8-4b8f-b37c-a883b037a628";
+
+    # required for zfs support
+    # networking.hostId = "621cba57";
+
+    nixpkgs.config.allowUnfree = true;
+    # Pick only one of the below networking options.
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networking.hostName = "work2home";
+
+    fileSystems."/data/tools/personal" = {
+      device = ".host:/data_personal";
+      fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+      options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount"];
+    };
+
+    fileSystems."/data/share" = {
+      device = ".host:/share";
+      fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+      options = ["uid=1000" "gid=1000" "umask=0033" "allow_other" "auto_unmount"];
+    };
+
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users.mri = {
+      isNormalUser = true;
+      extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    };
+
+    # Copy the NixOS configuration file and link it from the resulting system
+    # (/run/current-system/configuration.nix). This is useful in case you
+    # accidentally delete configuration.nix.
+    # system.copySystemConfiguration = true;
+    system.stateVersion = "24.05"; # Did you read the comment?
+  };
+}

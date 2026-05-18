@@ -5,7 +5,6 @@
   ...
 }: {
   flake.nixosConfigurations."deack-pc-01" = inputs.nixpkgs.lib.nixosSystem {
-    # nixpkgs.hostPlatform = "x86_64-linux";
     modules = [
       self.nixosModules.deack-pc-01
       self.nixosModules.amd
