@@ -27,7 +27,7 @@
     });
   in {
     environment.systemPackages = with pkgs; [
-      angle-grinder-override
+      #   angle-grinder-override
       bintools
       flawz # tui cve
       fq # jq for binary
