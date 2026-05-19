@@ -4,9 +4,11 @@
   ...
 }: {
   flake.nixosModules.vmware-guest = {pkgs, ...}: {
+    imports = [
+      self.nixosModules.clipboard-sync
+    ];
     virtualisation.vmware.guest = {
       enable = true;
-      # headless = false;
     };
     environment.systemPackages = with pkgs; [
       xorg.xf86videovmware

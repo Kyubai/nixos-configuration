@@ -29,5 +29,8 @@
     # nvf.url = "github:notashelf/nvf/v0.8"; # pinned to 0.8 to fix deprecation error https://github.com/NotAShelf/nvf/issues/1172
     nvf.url = "github:notashelf/nvf";
     nvf.inputs.nixpkgs.follows = "nixpkgs";
+
+    wl-x11-clipsync.url = "github:Kyubai/wl-x11-clipsync";
+    wl-x11-clipsync.inputs.nixpkgs.follows = "nixpkgs";
   };
 }
