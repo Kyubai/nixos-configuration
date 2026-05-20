@@ -3,7 +3,7 @@
   self,
   ...
 }: {
-  flake.nixosModules.wayland = {
+  flake.nixosModules.hyprland = {
     pkgs,
     lib,
     ...
@@ -123,12 +123,6 @@
     ];
     services.dunst.enable = true; # notification deamon
     programs.wofi.enable = true; # dmenu
-    # modules.kitty.enable = true;
-    # modules.ashell.enable = true;
-    # modules.waybar.enable = true;
-    # modules.ashell.enable = true;
-
-    # modules.waybar.laptop = lib.mkIf cfg.laptop.enable {enable = true;};
 
     gtk.enable = true; # required for portals?
 

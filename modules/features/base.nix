@@ -4,27 +4,21 @@
   ...
 }: {
   flake.nixosModules.base = {pkgs, ...}: {
-    # TODO: move this to home-manager
     programs.zsh = {
       enable = true;
       enableGlobalCompInit = false; # home-manager config includes custom compinit to run only once a day for new completions
     };
     users.defaultUserShell = pkgs.zsh;
 
-    # disabled as package is broken atm. 2024-12-31
-    # boot.supportedFilesystems = ["zfs"];
-    # boot.zfs.forceImportRoot = false;
-    # nixpkgs.config.allowBroken = true;
-
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
     nixpkgs.config.allowUnfree = true;
-    # system.autoUpgrade.enable = true;
+
     # Perform garbage collection to save disk space
     nix.gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 5w";
+      options = "--delete-older-than 4w";
     };
     # Limit the number of generations to keep
     boot.loader.systemd-boot.configurationLimit = 10;
@@ -33,17 +27,13 @@
     networking.firewall.enable = true;
     # services.ntp.enable = true;
 
-    # Pick only one of the below networking options.
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
     };
 
     time.timeZone = "Europe/Berlin";
-    console.keyMap = "us";
+    console.keyMap = "eu";
 
     fonts.packages = [
       pkgs.nerd-fonts.hack
@@ -62,10 +52,10 @@
       "Hack Nerd Font Mono"
     ];
 
-    services.gnome.gnome-keyring.enable = true;
     # required for GTK apps
     programs.dconf.enable = true;
 
+    services.dbus.enable = true;
     security.polkit.enable = true;
     security.rtkit.enable = true;
 
@@ -79,9 +69,9 @@
       }
     ];
 
-    services.dbus.enable = true;
-
+    services.gnome.gnome-keyring.enable = true;
     services.gnome.gcr-ssh-agent.enable = false;
+
     programs.ssh.startAgent = true; # conflict with gnome agent
     security.sudo.extraConfig = ''
       Defaults>root        env_keep += "SSH_AUTH_SOCK XAUTHORITY DISPLAY"
@@ -90,16 +80,17 @@
 
     environment.systemPackages = with pkgs; [
       comma
+      curl
       dbus
       file
       git
       home-manager
       kdePackages.konsole # fallback terminal
-      libsForQt5.qtstyleplugin-kvantum # might be required for kvantum https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
       libsForQt5.qt5ct # might be required for kvantum
+      libsForQt5.qtstyleplugin-kvantum # might be required for kvantum https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
       nix-search-cli
       vim
-      # lxqt.lxqt-menu-data
+      wget
       # shared-mime-info # optional, but nice to have
     ];
   };
