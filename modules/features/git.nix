@@ -34,8 +34,13 @@
     };
 
     home.shellAliases = {
-      gs = "git status";
+      ga = "git add";
+      gb = "git branch";
       gc = "git commit";
+      gch = "git checkout";
+      gcl = "git clone";
+      gp = "git pull";
+      gs = "git status";
     };
   };
 }

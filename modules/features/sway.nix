@@ -33,7 +33,6 @@
       wl-clipboard # clipboard cli
       # kdePackages.xwaylandvideobridge # not present in 25.11
       # portals
-      xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk # required for themes?
       kdePackages.xdg-desktop-portal-kde
     ];
@@ -42,22 +41,30 @@
       WLR_NO_HARDWARE_CURSORS = "1";
     };
 
-    services.greetd = {
-      enable = true;
-      settings = {
-        terminal = {
-          vt = 1;
-        };
-        default_session = {
-          command = "${pkgs.greetd}/bin/agreety --cmd sway";
-          user = "mri";
-        };
-        initial_session = {
-          command = "${pkgs.greetd}/bin/agreety --cmd sway";
-          user = "mri";
-        };
-      };
+    services.getty = {
+      autologinUser = "mri";
+      autologinOnce = true;
     };
+    environment.loginShellInit = ''
+      [[ "$(tty)" == /dev/tty1 ]] && sway
+    '';
+
+    #     services.greetd = {
+    #       enable = true;
+    #       settings = {
+    #         terminal = {
+    #           vt = 1;
+    #         };
+    #         default_session = {
+    #           command = "${pkgs.greetd}/bin/agreety --cmd sway";
+    #           user = "mri";
+    #         };
+    #         initial_session = {
+    #           command = "${pkgs.greetd}/bin/agreety --cmd sway";
+    #           user = "mri";
+    #         };
+    #       };
+    #     };
 
     # programs.xwayland = true;
     programs.sway = {
@@ -115,12 +122,6 @@
     ];
     services.dunst.enable = true; # notification deamon
     programs.wofi.enable = true; # dmenu
-    # modules.kitty.enable = true;
-    # modules.ashell.enable = true;
-    # modules.waybar.enable = true;
-    # modules.ashell.enable = true;
-
-    # modules.waybar.laptop = lib.mkIf cfg.laptop.enable {enable = true;};
 
     gtk.enable = true; # required for portals?
 
@@ -145,7 +146,7 @@
       # xwayland.enable = true;
       config = {
         modifier = "Mod4";
-        terminal = "konsole";
+        terminal = "kitty";
         # "$menu" = "wofi -S drun -i";
         # "$fileManager" = "dolphin";
         # debug = {

@@ -12,6 +12,8 @@
         draw_minimal_border = true;
         disable_ligatures = "always";
         update_check_interval = 0;
+        scrollback_lines = 10000;
+        hide_window_decoration = true;
         term = "kitty";
       };
       themeFile = "tokyo_night_night";
