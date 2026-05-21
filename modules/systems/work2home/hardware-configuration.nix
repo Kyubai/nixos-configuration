@@ -3,7 +3,7 @@
   self,
   ...
 }: {
-  flake.nixosModules.work-admin = {
+  flake.nixosModules.work2home = {
     boot.initrd.availableKernelModules = ["ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "ahci" "xhci_pci" "sd_mod" "sr_mod"];
     boot.initrd.kernelModules = [];
     boot.kernelModules = [];

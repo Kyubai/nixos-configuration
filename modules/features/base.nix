@@ -33,7 +33,7 @@
     };
 
     time.timeZone = "Europe/Berlin";
-    console.keyMap = "eu";
+    console.keyMap = "us";
 
     fonts.packages = [
       pkgs.nerd-fonts.hack
