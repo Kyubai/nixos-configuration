@@ -112,7 +112,7 @@
     security.polkit.enable = true;
   };
 
-  flake.homeModules.wayland = {
+  flake.homeModules.hyprland = {
     lib,
     pkgs,
     ...

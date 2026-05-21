@@ -12,13 +12,13 @@
       self.nixosModules.gaming
       self.nixosModules.cli-utils
       self.nixosModules.desktop
-      self.nixosModules.wayland
+      self.nixosModules.hyprland
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
           sharedModules = [
             self.homeModules.cli-utils
-            self.homeModules.wayland
+            self.homeModules.hyprland
           ];
           users.mri = {
             home.stateVersion = "23.11";

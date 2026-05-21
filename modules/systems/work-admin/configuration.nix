@@ -12,13 +12,13 @@
       self.nixosModules.vmware-guest
       self.nixosModules.work
       self.nixosModules.work-admin
-      self.nixosModules.xorg
+      self.nixosModules.sway
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
           sharedModules = [
             self.homeModules.cli-utils
-            self.homeModules.i3
+            self.homeModules.sway
           ];
           users.mri = {
             home.stateVersion = "25.11";

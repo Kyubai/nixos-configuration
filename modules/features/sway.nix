@@ -49,6 +49,57 @@
       [[ "$(tty)" == /dev/tty1 ]] && sway
     '';
 
+    systemd.user.services.vmwgfxctrl-sway-resolution = {
+      description = "Update Sway Virtual-1 resolution from vmwgfxctrl topology";
+
+      wantedBy = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+
+      path = with pkgs; [
+        sway
+        gnugrep
+        coreutils
+        open-vm-tools
+      ];
+
+      script = ''
+        set -eu
+
+        state_file="$XDG_RUNTIME_DIR/vmwgfxctrl-sway-resolution.last"
+
+        get_mode() {
+          vmwgfxctrl --print-topology \
+            | grep -F 'Modes:' -A 1 \
+            | grep -F '0:' \
+            | cut -d ' ' -f 5
+        }
+
+        while true; do
+          mode="$(get_mode || true)"
+
+          if [ -n "$mode" ]; then
+            old_mode=""
+            if [ -f "$state_file" ]; then
+              old_mode="$(cat "$state_file")"
+            fi
+
+            if [ "$mode" != "$old_mode" ]; then
+              swaymsg -- output Virtual-1 mode --custom "$mode"
+              printf '%s\n' "$mode" > "$state_file"
+            fi
+          fi
+
+          sleep 2
+        done
+      '';
+
+      serviceConfig = {
+        Type = "simple";
+        Restart = "always";
+        RestartSec = 2;
+      };
+    };
+
     #     services.greetd = {
     #       enable = true;
     #       settings = {
@@ -129,6 +180,20 @@
       hyprcursor.enable = true;
       package = pkgs.nordzy-cursor-theme; # cursor theme
       name = "Nordzy-hyprcursors";
+    };
+
+    services.kanshi = {
+      enable = true;
+      settings = [
+        {
+          profile.outputs = [
+            {
+              criteria = "Virtual-1";
+              mode = "preferred";
+            }
+          ];
+        }
+      ];
     };
 
     wayland.windowManager.sway = {
