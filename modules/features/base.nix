@@ -25,7 +25,7 @@
     boot.loader.grub.configurationLimit = 10;
 
     networking.firewall.enable = true;
-    # services.ntp.enable = true;
+    # services.ntp.enable = false;
 
     hardware.graphics = {
       enable = true;

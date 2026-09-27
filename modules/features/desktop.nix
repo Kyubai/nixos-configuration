@@ -38,7 +38,7 @@
       virtualbox
       remmina # rdp client
       unstable.signal-desktop
-      syncthing
+      # syncthing
     ];
 
     services.gnome.gnome-keyring.enable = true;

@@ -198,28 +198,73 @@
 
     wayland.windowManager.sway = {
       enable = true;
-      # set packages to null to use nixos defined package
-      # https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/#using-the-home-manager-module-with-nixos
-      # package = null;
-      # portalPackage = null;
       systemd.enable = true;
       systemd.variables = ["--all"];
-      # systemd.enableXdgAutostart = true;
-      extraConfig = ''
+      extraSessionCommands = ''
+        export SDL_VIDEODRIVER="wayland"
+        export QT_QPA_PLATFORM="wayland"
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export MOZ_ENABLE_WAYLAND=1
       '';
-
-      # xwayland.enable = true;
+      extraConfig = ''
+        bindsym Mod4+i move workspace to output right
+        for_window [shell="xwayland"] title_format "[XWayland] %title"
+        exec_always xrandr --output $(xrandr --listactivemonitors | sed 's, ,/,g' | tail -n +2 | sed 's,2560,3000,g' | sort -t '/' -n -k4 -r | sed 's,.*/,,g' | head -n1) --primary
+        bindsym Mod4+p exec --no-startup-id grim -g "$(slurp)" - | wl-copy
+        bindsym Mod4+Shift+p exec --no-startup-id grim -g "$(slurp)" ~/screenshots/$(date -Iseconds)_screenshot.png
+      '';
       config = {
         modifier = "Mod4";
         terminal = "kitty";
-        # "$menu" = "wofi -S drun -i";
-        # "$fileManager" = "dolphin";
-        # debug = {
-        # disable_logs = false;
-        # };
-        #         input = {
-        # kb_layout = "eu";
-        # };
+        menu = "wofi -S drun -i";
+        input = {
+          "*" = {
+            xkb_layout = "eu";
+            xkb_options = "lv3:lalt_switch";
+          };
+        };
+        keybindings = lib.mkOptionDefault {
+          "Mod4+semicolon" = "exec kitty";
+          "Mod4+o" = "exec loginctl lock-session";
+          "Mod4+v" = "exec pulsemixer";
+          "Mod4+c" = "kill";
+          "Mod4+h" = "focus left";
+          "Mod4+j" = "focus down";
+          "Mod4+k" = "focus up";
+          "Mod4+l" = "focus right";
+          "Mod4+Shift+h" = "move left";
+          "Mod4+Shift+j" = "move down";
+          "Mod4+Shift+k" = "move up";
+          "Mod4+Shift+l" = "move right";
+          "Mod4+f" = "fullscreen toggle";
+          "Mod4+space" = "floating toggle";
+        };
+        window = {
+          titlebar = false;
+          hideEdgeBorders = "both";
+          border = 0;
+        };
+        floating = {
+          titlebar = false;
+          border = 0;
+        };
+        gaps = {
+          smartBorders = "on";
+          smartGaps = true;
+          inner = 10;
+          outer = 0;
+        };
+        output = {
+          "Samsung Electric Company LC27G7xT H4ZR400033" = {
+            mode = "2560x1440@244Hz";
+            pos = "1920 0";
+          };
+          "ViewSonic Corporation XG2402 SERIES V4K184902415" = {
+            mode = "1920x1080@144Hz";
+            pos = "0 360";
+          };
+        };
       };
     };
   };

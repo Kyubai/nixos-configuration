@@ -7,18 +7,20 @@
   flake.nixosConfigurations."deack-pc-01" = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.deack-pc-01
+      self.nixosModules.printing
       self.nixosModules.amd
       self.nixosModules.base
       self.nixosModules.gaming
       self.nixosModules.cli-utils
       self.nixosModules.desktop
-      self.nixosModules.hyprland
+      self.nixosModules.niri
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
           sharedModules = [
             self.homeModules.cli-utils
-            self.homeModules.hyprland
+            self.homeModules.gaming
+            self.homeModules.niri
           ];
           users.mri = {
             home.stateVersion = "23.11";
@@ -49,6 +51,9 @@
     # networking.hostId = "621cba57";
 
     networking.hostName = "deack-pc-01";
+    nixpkgs.config.permittedInsecurePackages = [
+      "electron-39.8.10"
+    ];
 
     users.users.mri = {
       isNormalUser = true;

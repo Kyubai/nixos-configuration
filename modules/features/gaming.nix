@@ -3,6 +3,12 @@
   inputs,
   ...
 }: {
+  flake.homeModules.gaming = {
+    imports = [
+      self.homeModules.opencomposite
+    ];
+  };
+
   flake.nixosModules.gaming = {
     lib,
     pkgs,
@@ -36,8 +42,8 @@
       })
       winetricks
       # alvr # VR streaming
+      wayvr
       wivrn
-      wlx-overlay-s
       unityhub # for 3d avatar modelling
     ];
     # https://wiki.nixos.org/wiki/VR
@@ -63,7 +69,7 @@
       # Write information to /etc/xdg/openxr/1/active_runtime.json, VR applications
       # will automatically read this and work with WiVRn (Note: This does not currently
       # apply for games run in Valve's Proton)
-      defaultRuntime = true;
+      # defaultRuntime = true;
 
       # Run WiVRn as a systemd service on startup
       autoStart = true;
@@ -89,11 +95,6 @@
           ];
         };
       };
-    };
-
-    programs.envision = {
-      enable = true;
-      openFirewall = true; # This is set true by default
     };
 
     boot.kernelPatches = [
@@ -124,6 +125,15 @@
 
       gamescopeSession.enable = true;
       protontricks.enable = true;
+
+      extraPackages = with pkgs; [
+        # 32-bit libraries required for Wine/Proton
+        pkgsi686Linux.freetype
+        pkgsi686Linux.fontconfig
+        pkgsi686Linux.libx11
+        pkgsi686Linux.libxext
+        pkgsi686Linux.libGL
+      ];
     };
 
     # this softlinks my clips dir into the steam_recording tmpfs to make clips persistent

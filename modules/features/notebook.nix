@@ -1,22 +1,17 @@
 {
-  config,
-  lib,
-  pkgs,
+  inputs,
+  self,
   ...
-}:
-with lib; let
-  cfgXorg = config.modules.notebook;
-in {
-  options.modules.notebook.enable = mkEnableOption "notebook config";
-
-  config = mkIf cfgXorg.enable {
+}: {
+  flake.nixosModules.notebook = {
+    lib,
+    pkgs,
+    ...
+  }: {
     environment.systemPackages = with pkgs; [
       brightnessctl
     ];
 
-    # sound.mediaKeys.enable = true;
-
-    # programs.light.brightnessKeys.enable = true;
     services.actkbd = {
       enable = true;
       bindings = [

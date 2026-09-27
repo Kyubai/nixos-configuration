@@ -1,20 +1,16 @@
 {
-  pkgs,
-  lib,
-  config,
+  inputs,
+  self,
   ...
-}:
-with lib; let
-  cfgSamsung = config.modules.hardware.printer.samsung;
-in {
-  options.modules.hardware.printer.samsung = {
-    enable = mkEnableOption "Samsung printer";
-  };
+}: {
+  flake.nixosModules.printing = {pkgs, ...}: {
+    # enable samsung printer drivers
 
-  # enable samsung printer drivers
-  config = mkIf cfgSamsung.enable {
     services.printing = {
+      enable = true;
       drivers = with pkgs; [
+        cups-filters
+        cups-browsed
         # gutenprint
         # gutenprintBin
         # hplip
@@ -25,5 +21,6 @@ in {
         # splix
       ];
     };
+    services.ipp-usb.enable = true;
   };
 }
