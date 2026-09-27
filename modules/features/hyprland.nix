@@ -38,22 +38,13 @@
       kdePackages.xdg-desktop-portal-kde
     ];
 
-    services.greetd = {
-      enable = true;
-      settings = {
-        terminal = {
-          vt = 1;
-        };
-        default_session = {
-          command = "${pkgs.greetd}/bin/agreety --cmd Hyprland";
-          user = "mri";
-        };
-        initial_session = {
-          command = "${pkgs.greetd}/bin/agreety --cmd Hyprland";
-          user = "mri";
-        };
-      };
+    services.getty = {
+      autologinUser = "mri";
+      autologinOnce = true;
     };
+    environment.loginShellInit = ''
+      [[ "$(tty)" == /dev/tty1 ]] && uwsm start hyprland-uwsm.desktop
+    '';
 
     programs.xwayland.enable = true;
     programs.hyprland = {
@@ -179,6 +170,7 @@
         monitor = DP-1, 2560x1440, 2560x0, 1
         monitor = DP-3, 2560x1440, 0x0, 1
 
+
         # bind = $mod, p, submap, screenshot
         bind = $mod, p, exec, hyprctl notify -1 10000000 0 "SHIFT = save, a = area, o = output, escape = exit"; hyprctl dispatch submap screenshot
         submap = screenshot
@@ -212,17 +204,17 @@
         # https://wiki.hyprland.org/Configuring/Workspace-Rules/#smart-gaps
         workspace = w[tv1], gapsout:0, gapsin:0
         workspace = f[1], gapsout:0, gapsin:0
-        windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-        windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-        windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-        windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+        # windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
+        # windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
+        # windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
+        # windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
 
         # open windows on specific workspace
-        windowrulev2 = workspace 2 silent, class:^(floorp)$
-        windowrulev2 = workspace 3 silent, class:^(anki)$
-        windowrulev2 = workspace 5 silent, class:^(vesktop)$
-        windowrulev2 = workspace 6 silent, class:^(feishin)$
-        windowrulev2 = workspace 9 silent, class:^(steam)$
+        # windowrulev2 = workspace 2 silent, class:^(floorp)$
+        # windowrulev2 = workspace 3 silent, class:^(anki)$
+        # windowrulev2 = workspace 5 silent, class:^(vesktop)$
+        # windowrulev2 = workspace 6 silent, class:^(feishin)$
+        # windowrulev2 = workspace 9 silent, class:^(steam)$
 
         # https://wiki.hyprland.org/Configuring/Environment-variables/
         # Toolkit Backed stuff
@@ -262,15 +254,30 @@
         # debug = {
         # disable_logs = false;
         # };
+        input = {
+          sensitivity = -0.5;
+        };
+        device = [
+          {
+            name = "logitech-usb-receiver";
+            sensitivity = -0.25; # Change this value between 0.0 and -1.0
+            accel_profile = "flat";
+          }
+          {
+            name = "logitech-usb-receiver-keyboard-1";
+            sensitivity = -0.25; # Change this value between 0.0 and -1.0
+            accel_profile = "flat";
+          }
+        ];
         misc = {
           focus_on_activate = false;
         };
         input = {
           kb_layout = "eu";
-          kb_options = "compose:ralt";
+          kb_options = "lv3:lalt_switch";
         };
         dwindle = {
-          pseudotile = true;
+          # pseudotile = true;
           preserve_split = true;
         };
         animations = {
@@ -282,8 +289,8 @@
           "$mod, e, exec, $fileManager"
           "$mod, d, exec, $menu"
           "$mod, code:65, togglefloating," # code:65 is space
-          "$mod, n, pseudo," # dwindle
-          "$mod, m, togglesplit," # dwindle
+          # "$mod, n, pseudo," # dwindle
+          # "$mod, m, togglesplit," # dwindle
           "$mod, o, exec, hyprlock --immediate --no-fade-in"
           "$mod, c, killactive"
           # "$mod SHIFT, C, forcekillactive" # doesn't work for some reason

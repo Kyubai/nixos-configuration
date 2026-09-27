@@ -18,7 +18,7 @@
     services.xserver = {
       enable = true;
       xkb.layout = "eu";
-      xkb.options = "compose:ralt";
+      xkb.options = "lv3:lalt_switch";
       displayManager = {
         startx.enable = true;
       };

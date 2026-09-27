@@ -24,6 +24,7 @@
 
     environment.systemPackages = with pkgs; [
       choose
+      claude-code
       dbus
       dig
       expect # for unbuffer command

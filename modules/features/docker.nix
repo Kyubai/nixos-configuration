@@ -1,13 +1,13 @@
 {
-  config,
-  lib,
+  inputs,
+  self,
   ...
-}: let
-  cfgDocker = config.modules.docker;
-in {
-  options.modules.docker.enable = lib.mkEnableOption "docker aliases";
-
-  config = lib.mkIf cfgDocker.enable {
+}: {
+  flake.homeModules.docker = {
+    lib,
+    pkgs,
+    ...
+  }: {
     home.shellAliases = {
       dcud = "sudo docker compose up -d";
       dcd = "sudo docker compose down";

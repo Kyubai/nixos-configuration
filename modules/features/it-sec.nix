@@ -39,7 +39,7 @@
       sqlite
       sshfs
       sshpass
-      teamviewer
+      # teamviewer
       vmfs-tools
     ];
     security.krb5.enable = true;
