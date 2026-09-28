@@ -149,6 +149,7 @@
       environment {
           DISPLAY ":0"
           QT_STYLE_OVERRIDE "kvantum"
+          QT_QPA_PLATFORMTHEME "kde"
       }
 
       spawn-at-startup "xwayland-satellite"
