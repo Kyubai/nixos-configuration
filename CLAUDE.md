@@ -8,14 +8,19 @@ You can see which system you're currently working on by looking at the hostname
 `deack-pc-01` is my desktop pc at home, which I use for administration, gaming and browsing
 
 # General Guidelines
-If you're unsure what to do, or could use additional information from me, you should ask me
+If you're unsure what to do, or could use additional information from me, you MUST prompt me
+Features MUST not be seperated by NixOS vs home-manager and CAN be combined in one file
 
 # Validation of changes
 ## All changes for NixOS and the repo
-`sudo nixos-rebuild switch --flake /etc/nixos --show-trace --option eval-cache false` Will rebuild the NixOS config. Do this after making changes to test them
+`sudo nixos-rebuild switch --flake /etc/nixos --show-trace --option eval-cache false` Will rebuild the NixOS config
+You MUST add new files to the git staging area. They won't be picked up by nix otherwise
+You SHOULD do this after making changes to test them
 
-After the rebuild create a new commit and push to origin. You can add and commit on your own, but always prompt me before pushing
-Following best practices for git commits, like seperatings features multiple commits, especially when they happen to different files
+After the rebuild create a new commit and push to origin.
+You SHOULD add and commit on your own
+You SHOULD follow best practices for git commits, like separatings features into multiple commits, especially when they happen to different files
+You MUST prompt me before pushing
 
 `ssh-add` will add the SSH key for pushing the commit
 
