@@ -2,34 +2,38 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  config,
-  lib,
-  pkgs,
-  modulesPath,
+  inputs,
+  self,
   ...
 }: {
-  imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
-  ];
+  flake.nixosModules.server = {
+    lib,
+    modulesPath,
+    ...
+  }: {
+    imports = [
+      (modulesPath + "/profiles/qemu-guest.nix")
+    ];
 
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = [];
-  boot.extraModulePackages = [];
+    boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod"];
+    boot.initrd.kernelModules = [];
+    boot.kernelModules = [];
+    boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/b5679814-28d9-40e7-b3d0-3b8c551c92dc";
-    fsType = "btrfs";
-    options = ["subvol=root"];
+    fileSystems."/" = {
+      device = "/dev/disk/by-uuid/b5679814-28d9-40e7-b3d0-3b8c551c92dc";
+      fsType = "btrfs";
+      options = ["subvol=root"];
+    };
+
+    fileSystems."/nix" = {
+      device = "/dev/disk/by-uuid/b5679814-28d9-40e7-b3d0-3b8c551c92dc";
+      fsType = "btrfs";
+      options = ["subvol=nix"];
+    };
+
+    swapDevices = [];
+
+    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/b5679814-28d9-40e7-b3d0-3b8c551c92dc";
-    fsType = "btrfs";
-    options = ["subvol=nix"];
-  };
-
-  swapDevices = [];
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
