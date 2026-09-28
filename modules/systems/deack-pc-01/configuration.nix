@@ -25,6 +25,21 @@
           ];
           users.mri = {
             home.stateVersion = "23.11";
+            wayland.windowManager.hyprland.settings.monitor = [
+              "DP-1, 2560x1440, 2560x0, 1"
+              "DP-3, 2560x1440, 0x0, 1"
+            ];
+            niri.outputConfig = ''
+              output "DP-1" {
+                  mode "2560x1440@240.000"
+                  position x=2560 y=0
+              }
+
+              output "DP-3" {
+                  mode "2560x1440@240.000"
+                  position x=0 y=0
+              }
+            '';
           };
           users.root = {
             home.stateVersion = "23.11";
