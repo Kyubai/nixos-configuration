@@ -21,12 +21,16 @@
     };
 
     # Override respect_DE so Kvantum uses its own GeneralColors instead of
-    # inheriting from the platform theme (which may provide Breeze Light palette)
+    # inheriting from the platform theme (which may provide Breeze Light palette).
+    # Both kvconfig and svg must be present in the user override dir or Kvantum
+    # fails to find the svg and falls back to a broken style.
     xdg.configFile."Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.kvconfig".text =
       builtins.replaceStrings
         ["respect_DE=true"]
         ["respect_DE=false"]
         (builtins.readFile "${pkgs.catppuccin-kvantum}/share/Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.kvconfig");
+    xdg.configFile."Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.svg".source =
+      "${pkgs.catppuccin-kvantum}/share/Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.svg";
 
     gtk = {
       enable = true;
