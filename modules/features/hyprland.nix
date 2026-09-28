@@ -31,8 +31,6 @@
       wayland
       wdisplays # manage monitors
       wl-clipboard # clipboard cli
-      # kdePackages.xwaylandvideobridge # not present in 25.11
-      # portals
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk # required for themes?
       kdePackages.xdg-desktop-portal-kde
@@ -52,20 +50,17 @@
       xwayland.enable = true;
       withUWSM = true;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
-      # wrapperFeatures.gtk = true;
     };
     programs.uwsm = {
       enable = true;
       waylandCompositors.hyprland = {
         prettyName = "Hyprland";
         comment = "Hyprland compositor managed by UWSM";
-        # binPath = lib.getExe pkgs.hyprland;
         binPath = "/run/current-system/sw/bin/Hyprland";
       };
     };
     programs.hyprlock.enable = true;
 
-    # xdg.autostart.enable = true;
     xdg.portal = {
       enable = true;
       wlr.enable = false; # disable wlr when using hyprland
@@ -87,10 +82,6 @@
         };
         hyprland = {
           default = ["hyprland"];
-          # hyprland.default = ["wlr" "kde" "gtk"];
-          # hyprland."org.freedesktop.impl.portal.FileChooser" = ["kde"];
-          # hyprland."org.freedesktop.impl.portal.AppChooser" = ["kde"];
-          # hyprland."org.freedesktop.portal.OpenURI" = ["kde"];
         };
       };
     };
@@ -167,10 +158,6 @@
       systemd.variables = ["--all"];
       systemd.enableXdgAutostart = true;
       extraConfig = ''
-        monitor = DP-1, 2560x1440, 2560x0, 1
-        monitor = DP-3, 2560x1440, 0x0, 1
-
-
         # bind = $mod, p, submap, screenshot
         bind = $mod, p, exec, hyprctl notify -1 10000000 0 "SHIFT = save, a = area, o = output, escape = exit"; hyprctl dispatch submap screenshot
         submap = screenshot
