@@ -34,7 +34,7 @@
       kdePackages.plasma-integration
       kdePackages.breeze-icons
       kdePackages.kservice
-      kdePackages.plasma-workspace
+
       kdePackages.qtstyleplugin-kvantum
       kdePackages.kde-cli-tools
       kdePackages.kded
