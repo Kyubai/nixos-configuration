@@ -50,7 +50,7 @@
           right = [
             "SystemInfo"
             [
-              "Clock"
+              "Tempo"
               "Privacy"
               "Settings"
             ]
@@ -81,8 +81,8 @@
           truncate_title_after_length = 75;
         };
 
-        clock = {
-          format = "%F %R";
+        tempo = {
+          clock_format = "%a %F %R";
         };
       };
     };
