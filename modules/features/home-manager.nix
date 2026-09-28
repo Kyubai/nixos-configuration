@@ -14,6 +14,8 @@
   };
 
   flake.homeModules.home-manager = {
+    nixpkgs.config.allowUnfree = true;
+
     home.shellAliases = {
       hms = "pushd /etc/nixos && home-manager switch --extra-experimental-features \"nix-command flakes\" --flake .#$USER && popd";
     };

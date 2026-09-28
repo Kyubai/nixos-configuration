@@ -5,6 +5,7 @@
 }: {
   flake.homeModules.cli-utils = {
     imports = [
+      self.homeModules.claude
       self.homeModules.docker
       self.homeModules.eza
       self.homeModules.git
