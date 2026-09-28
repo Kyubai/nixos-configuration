@@ -18,6 +18,7 @@
           "Bash(git add*)"
           "Bash(git commit*)"
           "Bash(git diff*)"
+          "Bash(niri validate)"
         ];
       };
     };
