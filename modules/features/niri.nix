@@ -113,8 +113,7 @@
     };
 
     config = {
-      services.dunst.enable = true;
-      programs.wofi.enable = true;
+      programs.wofi.enable = false;
       gtk.enable = true;
 
       home.pointerCursor = {
@@ -174,7 +173,6 @@
 
       spawn-at-startup "xwayland-satellite"
       spawn-at-startup "kded6"
-      spawn-at-startup "dunst"
       spawn-at-startup "noctalia"
       spawn-at-startup "copyq" "--start-server"
       spawn-at-startup "sh" "-c" "swaybg -m fill -i $(find /data/media/backgrounds -type f | shuf -n 1)"
@@ -201,7 +199,7 @@
       binds {
           Mod+Return { spawn "kitty"; }
           Mod+Semicolon { spawn "kitty"; }
-          Mod+D { spawn "wofi" "--show" "drun" "-i"; }
+          Mod+D { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
           Mod+Q { close-window; }
           Mod+O { spawn "sh" "-c" "loginctl lock-session"; }
           Mod+V { spawn "pavucontrol"; }
