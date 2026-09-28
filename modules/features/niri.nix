@@ -190,11 +190,6 @@
           open-floating true
       }
 
-      window-rule {
-          match app-id="com.github.hluk.copyq"
-          open-floating true
-      }
-
       binds {
           Mod+Return { spawn "kitty"; }
           Mod+Semicolon { spawn "kitty"; }
@@ -202,7 +197,7 @@
           Mod+Q { close-window; }
           Mod+O { spawn "sh" "-c" "loginctl lock-session"; }
           Mod+V { spawn "pavucontrol"; }
-          Mod+B { spawn "copyq" "show"; }
+          Mod+B { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
           Mod+Shift+B { spawn "sh" "-c" "wl-paste --type image/png > /tmp/screenshot.png"; }
           Mod+E { spawn "dolphin"; }
           Mod+Shift+E { quit; }
