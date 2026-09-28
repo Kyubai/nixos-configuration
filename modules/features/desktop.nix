@@ -65,8 +65,6 @@
     programs.imv.enable = true;
     programs.mpv.enable = true;
 
-    services.copyq.enable = true;
-
     home.sessionVariables = {
       BROWSER = "floorp";
     };
