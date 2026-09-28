@@ -103,7 +103,7 @@
   }: {
     imports = [
       self.homeModules.kitty
-      self.homeModules.ashell
+      self.homeModules.noctalia
     ];
 
     options.niri.outputConfig = lib.mkOption {
@@ -175,7 +175,7 @@
       spawn-at-startup "xwayland-satellite"
       spawn-at-startup "kded6"
       spawn-at-startup "dunst"
-      spawn-at-startup "ashell"
+      spawn-at-startup "noctalia"
       spawn-at-startup "copyq" "--start-server"
       spawn-at-startup "sh" "-c" "swaybg -m fill -i $(find /data/media/backgrounds -type f | shuf -n 1)"
 

@@ -34,5 +34,8 @@
 
     wl-x11-clipsync.url = "github:Kyubai/wl-x11-clipsync";
     wl-x11-clipsync.inputs.nixpkgs.follows = "nixpkgs";
+
+    noctalia.url = "github:noctalia-dev/noctalia";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
   };
 }
