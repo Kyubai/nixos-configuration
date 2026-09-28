@@ -74,6 +74,23 @@
       };
     };
 
+    # kbuildsycoca6 requires this file to build the app cache Dolphin uses for "Open with"
+    environment.etc."xdg/menus/applications.menu".text = ''
+      <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+       "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+      <Menu>
+        <Name>Applications</Name>
+        <DefaultAppDirs/>
+        <DefaultDirectoryDirs/>
+        <Include><All/></Include>
+        <DefaultLayout>
+          <Merge type="menus"/>
+          <Merge type="files"/>
+        </DefaultLayout>
+        <DefaultMergeDirs/>
+      </Menu>
+    '';
+
     services.dbus.enable = lib.mkDefault true;
     security.polkit.enable = true;
   };
