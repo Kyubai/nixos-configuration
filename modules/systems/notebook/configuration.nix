@@ -22,6 +22,7 @@
             self.homeModules.cli-utils
             self.homeModules.desktop
             self.homeModules.hyprland
+            self.homeModules.japanese-input
             self.homeModules.work
           ];
           users.mri = {
@@ -55,6 +56,8 @@
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.kernelParams = ["video=eDP-1:1920x1080@60"];
+
+    hardware.sane.enable = true;
 
     users.users.mri = {
       isNormalUser = true;
