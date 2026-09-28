@@ -165,7 +165,7 @@
           Mod+Return { spawn "kitty"; }
           Mod+Semicolon { spawn "kitty"; }
           Mod+D { spawn "wofi" "--show" "drun" "-i"; }
-          Mod+C { close-window; }
+          Mod+Q { close-window; }
           Mod+O { spawn "sh" "-c" "loginctl lock-session"; }
           Mod+V { spawn "pavucontrol"; }
           Mod+E { spawn "dolphin"; }
@@ -203,7 +203,7 @@
           Mod+Shift+F { fullscreen-window; }
           Mod+Space { toggle-window-floating; }
           Mod+W { toggle-column-tabbed-display; }
-          Mod+Ctrl+C { center-column; }
+          Mod+C { center-column; }
           Mod+I { move-workspace-to-monitor-right; }
           Mod+R { switch-preset-column-width; }
           Mod+Shift+R { reset-window-height; }
