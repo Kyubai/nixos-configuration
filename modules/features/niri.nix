@@ -98,6 +98,7 @@
   flake.homeModules.niri = {
     lib,
     pkgs,
+    config,
     ...
   }: {
     imports = [
@@ -105,46 +106,45 @@
       self.homeModules.ashell
     ];
 
-    services.dunst.enable = true;
-    programs.wofi.enable = true;
-    gtk.enable = true;
-
-    home.pointerCursor = {
-      package = pkgs.nordzy-cursor-theme;
-      name = "Nordzy-cursors";
+    options.niri.outputConfig = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+      description = "Per-system niri output blocks in KDL format.";
     };
 
-    xdg.configFile."niri/config.kdl".text = ''
-      input {
-          keyboard {
-              xkb {
-                  layout "eu"
-                  options "lv3:lalt_switch"
-              }
-          }
+    config = {
+      services.dunst.enable = true;
+      programs.wofi.enable = true;
+      gtk.enable = true;
 
-          mouse {
-              accel-speed -0.5
-              accel-profile "flat"
-          }
+      home.pointerCursor = {
+        package = pkgs.nordzy-cursor-theme;
+        name = "Nordzy-cursors";
+      };
 
-          touchpad {
-              tap
-              natural-scroll
-          }
-      }
+      xdg.configFile."niri/config.kdl".text = ''
+        input {
+            keyboard {
+                xkb {
+                    layout "eu"
+                    options "lv3:lalt_switch"
+                }
+            }
 
-      output "DP-1" {
-          mode "2560x1440@240.000"
-          position x=2560 y=0
-      }
+            mouse {
+                accel-speed -0.5
+                accel-profile "flat"
+            }
 
-      output "DP-3" {
-          mode "2560x1440@240.000"
-          position x=0 y=0
-      }
+            touchpad {
+                tap
+                natural-scroll
+            }
+        }
 
-      layout {
+        ${config.niri.outputConfig}
+
+        layout {
           gaps 10
 
           border {
@@ -324,5 +324,6 @@
           XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
       }
     '';
+    };
   };
 }
