@@ -10,7 +10,8 @@
       settings = {
         location.address = "Aachen";
         bar.default.position = "bottom";
-        accessibility.ui_scale = 1.5;
+        bar.default.scale = 1.5;
+        bar.default.thickness = 50;
         widget.workspaces = {
           style = "focus_hint";
           show_icons = true;
