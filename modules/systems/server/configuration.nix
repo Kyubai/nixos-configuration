@@ -26,10 +26,6 @@
   };
 
   flake.nixosModules.server = {
-    imports = [
-      ./hardware-configuration.nix
-    ];
-
     networking.hostName = "server";
 
     boot.loader.grub.enable = true;
