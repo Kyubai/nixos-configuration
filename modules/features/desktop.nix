@@ -59,4 +59,72 @@
     programs.virt-manager.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
   };
+
+  flake.homeModules.desktop = {
+    programs.imv.enable = true;
+    programs.mpv.enable = true;
+
+    services.copyq.enable = true;
+
+    home.sessionVariables = {
+      BROWSER = "floorp";
+    };
+
+    dconf.settings = {
+      "org/virt-manager/virt-manager/connections" = {
+        autoconnect = ["qemu:///system"];
+        uris = ["qemu:///system"];
+      };
+    };
+
+    xdg.mimeApps = {
+      enable = true;
+      associations.added = {
+        "text/html" = ["floorp.desktop"];
+        "x-scheme-handler/http" = ["floorp.desktop"];
+        "x-scheme-handler/https" = ["floorp.desktop"];
+        "x-scheme-handler/about" = ["floorp.desktop"];
+        "x-scheme-handler/unknown" = ["floorp.desktop"];
+        "image/bmp" = ["imv-dir.desktop"];
+        "image/gif" = ["imv-dir.desktop"];
+        "image/jpeg" = ["imv-dir.desktop"];
+        "image/jpg" = ["imv-dir.desktop"];
+        "image/png" = ["imv-dir.desktop"];
+        "image/tiff" = ["imv-dir.desktop"];
+        "image/webp" = ["imv-dir.desktop"];
+        "image/heif" = ["imv-dir.desktop"];
+        "image/avif" = ["imv-dir.desktop"];
+        "video/mp4" = ["mpv.desktop"];
+        "video/x-matroska" = ["mpv.desktop"];
+        "video/webm" = ["mpv.desktop"];
+        "video/quicktime" = ["mpv.desktop"];
+        "video/x-msvideo" = ["mpv.desktop"];
+        "video/mpeg" = ["mpv.desktop"];
+        "video/3gpp" = ["mpv.desktop"];
+      };
+      defaultApplications = {
+        "text/html" = ["floorp.desktop"];
+        "x-scheme-handler/http" = ["floorp.desktop"];
+        "x-scheme-handler/https" = ["floorp.desktop"];
+        "x-scheme-handler/about" = ["floorp.desktop"];
+        "x-scheme-handler/unknown" = ["floorp.desktop"];
+        "image/bmp" = ["imv-dir.desktop"];
+        "image/gif" = ["imv-dir.desktop"];
+        "image/jpeg" = ["imv-dir.desktop"];
+        "image/jpg" = ["imv-dir.desktop"];
+        "image/png" = ["imv-dir.desktop"];
+        "image/tiff" = ["imv-dir.desktop"];
+        "image/webp" = ["imv-dir.desktop"];
+        "image/heif" = ["imv-dir.desktop"];
+        "image/avif" = ["imv-dir.desktop"];
+        "video/mp4" = ["mpv.desktop"];
+        "video/x-matroska" = ["mpv.desktop"];
+        "video/webm" = ["mpv.desktop"];
+        "video/quicktime" = ["mpv.desktop"];
+        "video/x-msvideo" = ["mpv.desktop"];
+        "video/mpeg" = ["mpv.desktop"];
+        "video/3gpp" = ["mpv.desktop"];
+      };
+    };
+  };
 }
