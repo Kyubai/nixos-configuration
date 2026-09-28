@@ -36,6 +36,7 @@
       kdePackages.kservice
       kdePackages.plasma-workspace
       kdePackages.qtstyleplugin-kvantum
+      papirus-icon-theme
       shared-mime-info
       copyq
     ];
