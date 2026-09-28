@@ -204,7 +204,7 @@
           Mod+Space { toggle-window-floating; }
           Mod+W { toggle-column-tabbed-display; }
           Mod+C { center-column; }
-          Mod+I { move-workspace-to-monitor-right; }
+          Mod+I { move-workspace-to-monitor-next; }
           Mod+R { switch-preset-column-width; }
           Mod+Shift+R { reset-window-height; }
           Mod+Ctrl+R { switch-preset-window-height; }
