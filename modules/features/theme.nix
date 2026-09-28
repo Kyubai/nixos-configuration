@@ -12,10 +12,13 @@
       catppuccin-kvantum
     ];
 
-    xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
-      [General]
-      theme=catppuccin-frappe-blue
-    '';
+    xdg.configFile."Kvantum/kvantum.kvconfig" = {
+      force = true;
+      text = ''
+        [General]
+        theme=catppuccin-frappe-blue
+      '';
+    };
 
     gtk = {
       enable = true;
