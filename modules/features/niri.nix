@@ -40,7 +40,7 @@
       kdePackages.kded
       papirus-icon-theme
       shared-mime-info
-      copyq
+
     ];
 
     services.getty = {
@@ -172,9 +172,8 @@
       }
 
       spawn-at-startup "xwayland-satellite"
-      spawn-at-startup "kded6"
       spawn-at-startup "noctalia"
-      spawn-at-startup "copyq" "--start-server"
+
       spawn-at-startup "sh" "-c" "swaybg -m fill -i $(find /data/media/backgrounds -type f | shuf -n 1)"
 
       window-rule {
