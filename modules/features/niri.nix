@@ -174,7 +174,6 @@
       spawn-at-startup "xwayland-satellite"
       spawn-at-startup "noctalia"
 
-      spawn-at-startup "sh" "-c" "swaybg -m fill -i $(find /data/media/backgrounds -type f | shuf -n 1)"
 
       window-rule {
           match app-id="kitty"
