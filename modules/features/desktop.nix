@@ -38,6 +38,7 @@
       virtualbox
       remmina # rdp client
       unstable.signal-desktop
+      tutanota-desktop
       # syncthing
     ];
 
