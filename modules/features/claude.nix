@@ -21,6 +21,8 @@
           "Bash(niri validate)"
           "Bash(ls*)"
           "Bash(grep*)"
+          "Bash(head*)"
+          "Bash(tail*)"
           "Read(/tmp/screenshot.png)"
         ];
       };
