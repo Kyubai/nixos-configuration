@@ -190,7 +190,7 @@
         autocomplete.nvim-cmp.enable = true;
 
         autopairs.nvim-autopairs.enable = true;
-        binds.hardtime-nvim.enable = true;
+        binds.hardtime-nvim.enable = false;
         binds.whichKey.enable = true;
         comments.comment-nvim.enable = true;
         debugger.nvim-dap.enable = true;
