@@ -148,6 +148,7 @@
 
       environment {
           DISPLAY ":0"
+          QT_STYLE_OVERRIDE "kvantum"
       }
 
       spawn-at-startup "xwayland-satellite"
