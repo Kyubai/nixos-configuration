@@ -17,7 +17,9 @@
         home-manager = {
           sharedModules = [
             self.homeModules.cli-utils
+            self.homeModules.desktop
             self.homeModules.i3
+            self.homeModules.work
           ];
           users.mri = {
             home.stateVersion = "25.11";
