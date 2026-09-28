@@ -10,6 +10,7 @@ You can see which system you're currently working on by looking at the hostname
 # General Guidelines
 If you're unsure what to do, or could use additional information from me, you MUST prompt me
 Features MUST not be seperated by NixOS vs home-manager and CAN be combined in one file
+All changes SHOULD done using nix, instead of direct changes to dotfiles, etc.
 
 # Validation of changes
 ## All changes for NixOS and the repo
