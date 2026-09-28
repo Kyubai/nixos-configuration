@@ -3,8 +3,12 @@
   self,
   ...
 }: {
-  flake.homeModules.git = {
+  flake.homeModules.git = {pkgs, ...}: {
     programs.git.enable = true;
+
+    programs.git.hooks.commit-msg = pkgs.writeShellScript "strip-coauthored-by" ''
+      sed -i '/^Co-authored-by:/Id' "$1"
+    '';
 
     programs.git.settings = {
       init = {
