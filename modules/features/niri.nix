@@ -36,6 +36,8 @@
       kdePackages.kservice
       kdePackages.plasma-workspace
       kdePackages.qtstyleplugin-kvantum
+      kdePackages.kde-cli-tools
+      kdePackages.kded
       papirus-icon-theme
       shared-mime-info
       copyq
@@ -153,6 +155,7 @@
       }
 
       spawn-at-startup "xwayland-satellite"
+      spawn-at-startup "kded6"
       spawn-at-startup "dunst"
       spawn-at-startup "ashell"
       spawn-at-startup "swaybg -m fill -i \"$(find /data/media/backgrounds -type f | shuf -n 1)\""
