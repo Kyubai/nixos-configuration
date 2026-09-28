@@ -8,6 +8,15 @@
     pkgs,
     ...
   }: {
+    home.packages = with pkgs; [
+      catppuccin-kvantum
+    ];
+
+    xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+      [General]
+      theme=catppuccin-frappe-blue
+    '';
+
     gtk = {
       enable = true;
       theme = {
