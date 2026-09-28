@@ -19,6 +19,7 @@
         home-manager = {
           sharedModules = [
             self.homeModules.cli-utils
+            self.homeModules.desktop
             self.homeModules.gaming
             self.homeModules.niri
           ];
