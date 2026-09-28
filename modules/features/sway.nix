@@ -168,7 +168,7 @@
     ...
   }: {
     imports = [
-      # self.homeModules.ashell
+      self.homeModules.ashell
       self.homeModules.kitty
     ];
     services.dunst.enable = true; # notification deamon
