@@ -10,6 +10,7 @@
   }: {
     home.packages = with pkgs; [
       catppuccin-kvantum
+      papirus-icon-theme
     ];
 
     xdg.configFile."Kvantum/kvantum.kvconfig" = {
@@ -30,11 +31,23 @@
         name = "Tokyonight-Dark";
         package = pkgs.tokyonight-gtk-theme;
       };
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
       cursorTheme = {
         name = "Nordzy-cursors";
         package = pkgs.nordzy-cursor-theme;
         size = 24;
       };
+    };
+
+    xdg.configFile."kdeglobals" = {
+      force = true;
+      text = ''
+        [Icons]
+        Theme=Papirus-Dark
+      '';
     };
 
     qt = {

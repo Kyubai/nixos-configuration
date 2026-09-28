@@ -35,6 +35,7 @@
       kdePackages.breeze-icons
       kdePackages.kservice
       kdePackages.plasma-workspace
+      kdePackages.qtstyleplugin-kvantum
       shared-mime-info
       copyq
     ];

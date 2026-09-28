@@ -22,6 +22,7 @@
             self.homeModules.desktop
             self.homeModules.gaming
             self.homeModules.niri
+            self.homeModules.theme
           ];
           users.mri = {
             home.stateVersion = "23.11";
