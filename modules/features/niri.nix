@@ -68,6 +68,7 @@
         default = ["gnome"];
         "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
         "org.freedesktop.impl.portal.FileChooser" = ["kde"];
+        "org.freedesktop.impl.portal.AppChooser" = ["kde"];
         "org.freedesktop.portal.ScreenCast" = ["gnome"];
         "org.freedesktop.portal.Screenshot" = ["gnome"];
       };
