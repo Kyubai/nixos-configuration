@@ -36,6 +36,7 @@
       kdePackages.kservice
       kdePackages.plasma-workspace
       shared-mime-info
+      copyq
     ];
 
     services.getty = {
@@ -161,6 +162,16 @@
           }
       }
 
+      window-rule {
+          match app-id="org.pulseaudio.pavucontrol"
+          open-floating true
+      }
+
+      window-rule {
+          match app-id="com.github.hluk.copyq"
+          open-floating true
+      }
+
       binds {
           Mod+Return { spawn "kitty"; }
           Mod+Semicolon { spawn "kitty"; }
@@ -168,6 +179,7 @@
           Mod+Q { close-window; }
           Mod+O { spawn "sh" "-c" "loginctl lock-session"; }
           Mod+V { spawn "pavucontrol"; }
+          Mod+B { spawn "copyq" "show"; }
           Mod+E { spawn "dolphin"; }
           Mod+Shift+E { quit; }
           Mod+Shift+Slash { show-hotkey-overlay; }
