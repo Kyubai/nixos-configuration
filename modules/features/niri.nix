@@ -180,6 +180,7 @@
           Mod+O { spawn "sh" "-c" "loginctl lock-session"; }
           Mod+V { spawn "pavucontrol"; }
           Mod+B { spawn "copyq" "show"; }
+          Mod+Shift+B { spawn "sh" "-c" "wl-paste --type image/png > /tmp/screenshot.png"; }
           Mod+E { spawn "dolphin"; }
           Mod+Shift+E { quit; }
           Mod+Shift+Slash { show-hotkey-overlay; }
