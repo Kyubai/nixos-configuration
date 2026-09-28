@@ -8,6 +8,6 @@
     pkgs,
     ...
   }: {
-    programs.ssh.addKeysToAgent = "yes";
+    programs.ssh.settings."*".AddKeysToAgent = "yes";
   };
 }

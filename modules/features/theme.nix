@@ -14,6 +14,10 @@
         name = "Tokyonight-Dark";
         package = pkgs.tokyonight-gtk-theme;
       };
+      gtk4.theme = {
+        name = "Tokyonight-Dark";
+        package = pkgs.tokyonight-gtk-theme;
+      };
       cursorTheme = {
         name = "Nordzy-cursors";
         package = pkgs.nordzy-cursor-theme;

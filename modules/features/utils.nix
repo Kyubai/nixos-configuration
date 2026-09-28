@@ -24,7 +24,6 @@
 
     environment.systemPackages = with pkgs; [
       choose
-      claude-code
       dbus
       dig
       expect # for unbuffer command
@@ -46,7 +45,7 @@
       tcpdump
       vim
       widevine-cdm
-      wineWowPackages.stable
+      wineWow64Packages.stable
       wireguard-tools
       xan
     ];

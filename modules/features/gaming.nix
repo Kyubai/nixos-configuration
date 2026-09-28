@@ -26,10 +26,10 @@
           libvorbis
           libkrb5
           stdenv.cc.cc.lib
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXScrnSaver
+          libxcursor
+          libxi
+          libxinerama
+          libxscrnsaver
         ];
       })
       prismlauncher # minecraft client
@@ -37,7 +37,7 @@
       # runelite
       bolt-launcher # runescape
       steamtinkerlaunch
-      (wineWowPackages.stable.override {
+      (wineWow64Packages.stable.override {
         # mingwSupport = false;
       })
       winetricks

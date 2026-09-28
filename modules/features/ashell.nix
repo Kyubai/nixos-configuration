@@ -5,7 +5,7 @@
 }: {
   flake.homeModules.ashell = {pkgs, ...}: let
     unstable = import inputs.nixpkgs-unstable {
-      system = pkgs.system;
+      system = pkgs.stdenv.hostPlatform.system;
       config = pkgs.config;
     };
   in {

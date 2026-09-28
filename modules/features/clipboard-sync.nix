@@ -10,7 +10,7 @@
       || (config.programs.hyprland.enable);
 
     clipsync =
-      inputs.wl-x11-clipsync.packages.${pkgs.system}.default;
+      inputs.wl-x11-clipsync.packages.${pkgs.stdenv.hostPlatform.system}.default;
   in {
     config = lib.mkIf waylandEnabled {
       # sync host to vm

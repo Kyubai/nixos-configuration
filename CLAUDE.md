@@ -13,7 +13,10 @@ If you're unsure what to do, or could use additional information from me, you sh
 # Validation of changes
 ## All changes for NixOS and the repo
 `sudo nixos-rebuild switch --flake /etc/nixos --show-trace --option eval-cache false` Will rebuild the NixOS config. Do this after making changes to test them
-After the rebuild create a new commit and push to origin
+
+After the rebuild create a new commit and push to origin. You can add and commit on your own, but always prompt me before pushing
+Following best practices for git commits, like seperatings features multiple commits, especially when they happen to different files
+
 `ssh-add` will add the SSH key for pushing the commit
 
 ## Changes for specific features
