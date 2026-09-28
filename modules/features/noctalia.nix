@@ -7,6 +7,11 @@
 
     programs.noctalia = {
       enable = true;
+      settings = {
+        location.address = "Aachen";
+        bar.default.position = "bottom";
+        accessibility.ui_scale = 1.5;
+      };
     };
   };
 }
