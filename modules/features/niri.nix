@@ -196,7 +196,7 @@
           Mod+D { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
           Mod+Q { close-window; }
           Mod+O { spawn "sh" "-c" "loginctl lock-session"; }
-          Mod+V { spawn "pavucontrol"; }
+          Mod+V { spawn "noctalia" "msg" "panel-toggle" "control-center" "audio"; }
           Mod+B { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
           Mod+Shift+B { spawn "sh" "-c" "wl-paste --type image/png > /tmp/screenshot.png"; }
           Mod+E { spawn "dolphin"; }
