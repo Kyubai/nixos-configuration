@@ -19,6 +19,7 @@
           "Bash(git commit*)"
           "Bash(git diff*)"
           "Bash(niri validate)"
+          "Read(/tmp/screenshot.png)"
         ];
       };
     };
