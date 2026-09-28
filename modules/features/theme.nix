@@ -20,6 +20,14 @@
       '';
     };
 
+    # Override respect_DE so Kvantum uses its own GeneralColors instead of
+    # inheriting from the platform theme (which may provide Breeze Light palette)
+    xdg.configFile."Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.kvconfig".text =
+      builtins.replaceStrings
+        ["respect_DE=true"]
+        ["respect_DE=false"]
+        (builtins.readFile "${pkgs.catppuccin-kvantum}/share/Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.kvconfig");
+
     gtk = {
       enable = true;
       theme = {
@@ -74,7 +82,6 @@
 
     qt = {
       enable = true;
-      platformTheme.name = "kde";
       style.name = "kvantum";
     };
 
