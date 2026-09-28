@@ -10,6 +10,20 @@
     home.sessionVariables = {
       EDITOR = "nvim";
     };
+    xdg.desktopEntries.nvim = {
+      name = "Neovim";
+      genericName = "Text Editor";
+      exec = "kitty nvim %F";
+      terminal = false;
+      categories = ["Utility" "TextEditor"];
+      mimeType = ["text/plain"];
+      icon = "nvim";
+    };
+
+    xdg.mimeApps.defaultApplications = {
+      "text/plain" = ["nvim.desktop"];
+    };
+
     programs.nvf = {
       enable = true;
       settings.vim = {
