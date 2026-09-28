@@ -9,6 +9,15 @@
       enable = true;
       settings = {
         location.address = "Aachen";
+        wallpaper = {
+          directory = "/data/media/backgrounds";
+          automation = {
+            enabled = true;
+            order = "random";
+            recursive = true;
+            interval_seconds = 1800;
+          };
+        };
         bar.default.position = "bottom";
         bar.default.scale = 1.5;
         bar.default.thickness = 50;
