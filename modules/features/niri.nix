@@ -189,6 +189,11 @@
           open-floating true
       }
 
+      window-rule {
+          match app-id="com.gabm.satty"
+          open-floating true
+      }
+
       binds {
           Mod+Return { spawn "kitty"; }
           Mod+Semicolon { spawn "kitty"; }
