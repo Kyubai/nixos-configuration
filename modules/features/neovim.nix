@@ -131,9 +131,8 @@
               lua = true;
             };
             "<leader>ac" = {
-              action = "function() require('claudecode').toggle() end";
+              action = "<cmd>ClaudeCode<CR>";
               desc = "Toggle Claude Code";
-              lua = true;
             };
           };
           visual = {
