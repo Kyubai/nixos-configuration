@@ -208,7 +208,24 @@
         extraPlugins = {
           claudecode = {
             package = pkgs.vimPlugins.claudecode-nvim;
-            setup = "require('claudecode').setup({ terminal = { git_repo_cwd = true } })";
+            setup = ''
+              require('claudecode').setup({
+                terminal = {
+                  cwd_provider = function(ctx)
+                    local arg = tostring(vim.fn.argv(0) or "")
+                    if arg ~= "" then
+                      local expanded = vim.fn.expand(arg)
+                      if vim.fn.isdirectory(expanded) == 1 then
+                        return expanded
+                      end
+                    end
+                    local dir = ctx.file_dir or ctx.cwd
+                    local root = vim.fn.systemlist("git -C " .. vim.fn.shellescape(dir) .. " rev-parse --show-toplevel 2>/dev/null")[1]
+                    return (root and root ~= "") and root or ctx.cwd
+                  end,
+                },
+              })
+            '';
           };
         };
         autocomplete.nvim-cmp.enable = true;
