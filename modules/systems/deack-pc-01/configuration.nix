@@ -82,6 +82,7 @@
         "lp"
         "libvirtd" # for virt-manager
         "kvm" # for virt-manager
+        "networkmanager"
       ];
     };
 
