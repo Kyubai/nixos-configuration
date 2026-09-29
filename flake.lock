@@ -185,6 +185,26 @@
         "type": "github"
       }
     },
+    "niri-screenshare": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790507462,
+        "narHash": "sha256-cqrj/c+cqd9CbiNhLWtgqxvJwfwUYW1ck4Zj4wskaWE=",
+        "owner": "pantarune",
+        "repo": "niri-screenshare",
+        "rev": "3c9778682bb2299d1c5338ca17f7e49c2599c760",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pantarune",
+        "repo": "niri-screenshare",
+        "type": "github"
+      }
+    },
     "nix-index-db": {
       "inputs": {
         "nixpkgs": [
@@ -304,6 +324,7 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "import-tree": "import-tree",
+        "niri-screenshare": "niri-screenshare",
         "nix-index-db": "nix-index-db",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",

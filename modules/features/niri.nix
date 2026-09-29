@@ -7,7 +7,9 @@
     pkgs,
     lib,
     ...
-  }: {
+  }: let
+    niri-screenshare = inputs.niri-screenshare.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  in {
     environment.systemPackages = with pkgs; [
       xwayland-satellite
       swaybg
@@ -62,6 +64,7 @@
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk
         kdePackages.xdg-desktop-portal-kde
+        niri-screenshare
       ];
       config.common = {
         default = ["gnome"];
@@ -77,7 +80,7 @@
       config.niri = {
         "org.freedesktop.impl.portal.FileChooser" = ["kde"];
         "org.freedesktop.impl.portal.AppChooser" = ["kde"];
-        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+        "org.freedesktop.impl.portal.ScreenCast" = ["niri"];
         "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
       };
     };
