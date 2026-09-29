@@ -14,7 +14,7 @@
       pavucontrol
       grim # screenshot utility
       slurp # geometry selector
-      swappy # screenshot editor
+      satty # screenshot annotation tool
       wl-clipboard # clipboard cli
       wl-screenrec # screen recording utility
       wayland
@@ -163,7 +163,7 @@
           off
       }
 
-      screenshot-path "~/screenshots/%Y-%m-%dT%H:%M:%S_screenshot.png"
+      screenshot-path null
 
       environment {
           DISPLAY ":0"
@@ -301,8 +301,8 @@
           Mod+Ctrl+F5 { spawn "sh" "-c" "busctl call org.freedesktop.login1 /org/freedesktop/login1/seat/seat0 org.freedesktop.login1.Seat SwitchTo u 5"; }
           Mod+Ctrl+F6 { spawn "sh" "-c" "busctl call org.freedesktop.login1 /org/freedesktop/login1/seat/seat0 org.freedesktop.login1.Seat SwitchTo u 6"; }
 
-          Mod+P { screenshot; }
-          Mod+Shift+P { screenshot-screen; }
+          Mod+P { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty --filename -"; }
+          Mod+Shift+P { spawn "sh" "-c" "grim - | satty --filename -"; }
 
           XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
           XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
