@@ -121,7 +121,7 @@
     };
 
     config = {
-      home.sessionVariables = {
+      systemd.user.sessionVariables = {
         QT_QPA_PLATFORMTHEME = "kde";
       };
 

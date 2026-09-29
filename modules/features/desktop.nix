@@ -66,6 +66,11 @@
     programs.imv.enable = true;
     programs.mpv.enable = true;
 
+    xdg.dataFile."flatpak/overrides/dev.vencord.Vesktop".text = ''
+      [Environment]
+      ELECTRON_OZONE_PLATFORM_HINT=wayland
+    '';
+
     home.sessionVariables = {
       BROWSER = "floorp";
     };
