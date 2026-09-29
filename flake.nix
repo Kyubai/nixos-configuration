@@ -39,5 +39,8 @@
 
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
+
+    niri-screenshare.url = "github:pantarune/niri-screenshare";
+    niri-screenshare.inputs.nixpkgs.follows = "nixpkgs";
   };
 }
