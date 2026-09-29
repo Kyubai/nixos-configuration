@@ -121,6 +121,10 @@
     };
 
     config = {
+      home.sessionVariables = {
+        QT_QPA_PLATFORMTHEME = "kde";
+      };
+
       programs.wofi.enable = false;
       gtk.enable = true;
 
