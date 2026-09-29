@@ -50,7 +50,7 @@
     };
     environment.loginShellInit = ''
       if [[ "$(tty)" == /dev/tty1 ]] && [[ -z "$WAYLAND_DISPLAY" ]]; then
-        exec niri-session
+        exec niri-session -l
       fi
     '';
 
