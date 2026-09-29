@@ -8,7 +8,17 @@
     programs.noctalia = {
       enable = true;
       settings = {
-        location.address = "Aachen";
+        location = {
+          address = "Aachen";
+          custom_schedule = true;
+          sunrise = "06:30";
+          sunset = "22:00";
+        };
+        theme = {
+          source = "builtin";
+          builtin = "Tokyo-Night";
+        };
+        nightlight.enabled = true;
         wallpaper = {
           directory = "/data/media/backgrounds";
           automation = {
