@@ -208,7 +208,7 @@
         extraPlugins = {
           claudecode = {
             package = pkgs.vimPlugins.claudecode-nvim;
-            setup = "require('claudecode').setup({})";
+            setup = "require('claudecode').setup({ terminal = { git_repo_cwd = true } })";
           };
         };
         autocomplete.nvim-cmp.enable = true;
