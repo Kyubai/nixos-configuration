@@ -24,6 +24,14 @@
           "Bash(head*)"
           "Bash(tail*)"
           "Read(/tmp/screenshot.png)"
+          "Bash(journalctl*)"
+          "Bash(systemctl status*)"
+          "Bash(systemctl list-units*)"
+          "Bash(systemctl list-unit-files*)"
+          "Bash(systemctl is-active*)"
+          "Bash(systemctl is-enabled*)"
+          "Bash(systemctl cat*)"
+          "Bash(systemctl show*)"
         ];
       };
     };
