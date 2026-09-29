@@ -201,6 +201,7 @@
           Mod+Q { close-window; }
           Mod+O { spawn "sh" "-c" "loginctl lock-session"; }
           Mod+V { spawn "noctalia" "msg" "panel-toggle" "control-center" "audio"; }
+          Mod+N { spawn "noctalia" "msg" "panel-toggle" "control-center" "network"; }
           Mod+B { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
           Mod+Shift+B { spawn "sh" "-c" "wl-paste --type image/png > /tmp/screenshot.png"; }
           Mod+E { spawn "dolphin"; }
