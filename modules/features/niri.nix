@@ -203,6 +203,11 @@
           open-floating true
       }
 
+      window-rule {
+          match app-id="xdg-desktop-portal-kde"
+          open-floating true
+      }
+
       binds {
           Mod+Return { spawn "kitty"; }
           Mod+Semicolon { spawn "kitty"; }
