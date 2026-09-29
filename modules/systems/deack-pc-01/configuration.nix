@@ -7,6 +7,7 @@
   flake.nixosConfigurations."deack-pc-01" = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.deack-pc-01
+      self.nixosModules.agenix
       self.nixosModules.printing
       self.nixosModules.amd
       self.nixosModules.base

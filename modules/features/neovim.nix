@@ -130,6 +130,11 @@
               desc = "Open fuGitive";
               lua = true;
             };
+            "<leader>ac" = {
+              action = "function() require('claudecode').toggle() end";
+              desc = "Toggle Claude Code";
+              lua = true;
+            };
           };
           visual = {
             "J" = {
@@ -199,8 +204,14 @@
           lsp.enable = true;
         };
         # assistant.avante-nvim = {
-        # enable = true;
+        #   enable = true;
         # };
+        extraPlugins = {
+          claudecode = {
+            package = pkgs.vimPlugins.claudecode-nvim;
+            setup = "require('claudecode').setup({})";
+          };
+        };
         autocomplete.nvim-cmp.enable = true;
 
         autopairs.nvim-autopairs.enable = true;

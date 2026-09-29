@@ -32,6 +32,9 @@
     nvf.url = "github:notashelf/nvf";
     nvf.inputs.nixpkgs.follows = "nixpkgs";
 
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+
     wl-x11-clipsync.url = "github:Kyubai/wl-x11-clipsync";
     wl-x11-clipsync.inputs.nixpkgs.follows = "nixpkgs";
 
