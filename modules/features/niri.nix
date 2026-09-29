@@ -48,7 +48,7 @@
     };
     environment.loginShellInit = ''
       if [[ "$(tty)" == /dev/tty1 ]] && [[ -z "$WAYLAND_DISPLAY" ]]; then
-        exec niri --session
+        exec niri-session
       fi
     '';
 
@@ -68,8 +68,8 @@
         "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
         "org.freedesktop.impl.portal.FileChooser" = ["kde"];
         "org.freedesktop.impl.portal.AppChooser" = ["kde"];
-        "org.freedesktop.impl.portal.ScreenCast" = ["kde"];
-        "org.freedesktop.impl.portal.Screenshot" = ["kde"];
+        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+        "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
       };
       # XDG_CURRENT_DESKTOP=niri causes xdg-desktop-portal to read
       # niri-portals.conf instead of portals.conf, so KDE overrides must
@@ -77,8 +77,8 @@
       config.niri = {
         "org.freedesktop.impl.portal.FileChooser" = ["kde"];
         "org.freedesktop.impl.portal.AppChooser" = ["kde"];
-        "org.freedesktop.impl.portal.ScreenCast" = ["kde"];
-        "org.freedesktop.impl.portal.Screenshot" = ["kde"];
+        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+        "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
       };
     };
 
