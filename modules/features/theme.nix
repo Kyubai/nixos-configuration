@@ -142,29 +142,6 @@ in
     pkgs,
     ...
   }: {
-    home.packages = with pkgs; [
-      catppuccin-kvantum
-    ];
-
-    xdg.configFile."Kvantum/kvantum.kvconfig" = {
-      force = true;
-      text = ''
-        [General]
-        theme=catppuccin-frappe-blue
-      '';
-    };
-
-    # Override respect_DE so Kvantum uses its own GeneralColors instead of
-    # inheriting from the platform theme palette. Both files must be present
-    # in the user override dir or Kvantum can't find the SVG.
-    xdg.configFile."Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.kvconfig".text =
-      builtins.replaceStrings
-        ["respect_DE=true"]
-        ["respect_DE=false"]
-        (builtins.readFile "${pkgs.catppuccin-kvantum}/share/Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.kvconfig");
-    xdg.configFile."Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.svg".source =
-      "${pkgs.catppuccin-kvantum}/share/Kvantum/catppuccin-frappe-blue/catppuccin-frappe-blue.svg";
-
     gtk = {
       enable = true;
       theme = {
@@ -215,7 +192,7 @@ in
 
     qt = {
       enable = true;
-      style.name = "kvantum";
+      style.name = "breeze";
     };
 
     dconf.settings = {
