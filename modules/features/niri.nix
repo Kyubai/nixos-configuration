@@ -139,6 +139,8 @@
                 tap
                 natural-scroll
             }
+
+            workspace-auto-back-and-forth
         }
 
         ${config.niri.outputConfig}
@@ -297,6 +299,9 @@
           Mod+Ctrl+7 { move-column-to-workspace 7; }
           Mod+Ctrl+8 { move-column-to-workspace 8; }
           Mod+Ctrl+9 { move-column-to-workspace 9; }
+
+          Mod+Tab { spawn "sh" "-c" "niri msg action focus-column-right; niri msg action move-column-to-last; niri msg action focus-window-previous"; }
+          Mod+Shift+Tab { focus-window-previous; }
 
           Mod+G { toggle-overview; }
 
