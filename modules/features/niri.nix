@@ -35,7 +35,6 @@
       kdePackages.breeze-icons
       kdePackages.kservice
 
-      kdePackages.qtstyleplugin-kvantum
       kdePackages.kde-cli-tools
       kdePackages.kded
       papirus-icon-theme
@@ -69,14 +68,17 @@
         "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
         "org.freedesktop.impl.portal.FileChooser" = ["kde"];
         "org.freedesktop.impl.portal.AppChooser" = ["kde"];
-        "org.freedesktop.portal.ScreenCast" = ["gnome"];
-        "org.freedesktop.portal.Screenshot" = ["gnome"];
+        "org.freedesktop.portal.ScreenCast" = ["kde"];
+        "org.freedesktop.portal.Screenshot" = ["kde"];
       };
       # XDG_CURRENT_DESKTOP=niri causes xdg-desktop-portal to read
       # niri-portals.conf instead of portals.conf, so KDE overrides must
       # be repeated here.
       config.niri = {
         "org.freedesktop.impl.portal.FileChooser" = ["kde"];
+        "org.freedesktop.impl.portal.AppChooser" = ["kde"];
+        "org.freedesktop.portal.ScreenCast" = ["kde"];
+        "org.freedesktop.portal.Screenshot" = ["kde"];
       };
     };
 
@@ -175,7 +177,6 @@
 
       environment {
           DISPLAY ":0"
-          QT_STYLE_OVERRIDE "kvantum"
           QT_QPA_PLATFORMTHEME "kde"
       }
 
