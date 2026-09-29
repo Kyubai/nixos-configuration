@@ -212,16 +212,16 @@
               require('claudecode').setup({
                 terminal = {
                   cwd_provider = function(ctx)
-                    local arg = tostring(vim.fn.argv(0) or "")
-                    if arg ~= "" then
-                      local expanded = vim.fn.expand(arg)
-                      if vim.fn.isdirectory(expanded) == 1 then
-                        return expanded
-                      end
+                    local bufname = vim.api.nvim_buf_get_name(0)
+                    local dir
+                    local oil_path = bufname:match("^oil://(.+)$")
+                    if oil_path then
+                      dir = oil_path:gsub("/$", "")
+                    else
+                      dir = ctx.file_dir or ctx.cwd
                     end
-                    local dir = ctx.file_dir or ctx.cwd
                     local root = vim.fn.systemlist("git -C " .. vim.fn.shellescape(dir) .. " rev-parse --show-toplevel 2>/dev/null")[1]
-                    return (root and root ~= "") and root or ctx.cwd
+                    return (root and root ~= "") and root or dir
                   end,
                 },
               })

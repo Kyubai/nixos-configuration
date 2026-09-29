@@ -72,6 +72,12 @@
         "org.freedesktop.portal.ScreenCast" = ["gnome"];
         "org.freedesktop.portal.Screenshot" = ["gnome"];
       };
+      # XDG_CURRENT_DESKTOP=niri causes xdg-desktop-portal to read
+      # niri-portals.conf instead of portals.conf, so KDE overrides must
+      # be repeated here.
+      config.niri = {
+        "org.freedesktop.impl.portal.FileChooser" = ["kde"];
+      };
     };
 
     # kbuildsycoca6 requires this file to build the app cache Dolphin uses for "Open with"
