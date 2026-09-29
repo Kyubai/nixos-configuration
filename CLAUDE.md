@@ -21,6 +21,7 @@ You SHOULD do this after making changes to test them
 
 After the rebuild create a new commit and push to origin.
 You SHOULD add and commit on your own
+You SHOULD use `git add` and `git commit` over `git -C`, since you're allowed to use these directly
 You SHOULD follow best practices for git commits, like separatings features into multiple commits, especially when they happen to different files
 
 ## Changes for specific features
