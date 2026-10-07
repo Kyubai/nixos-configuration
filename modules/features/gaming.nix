@@ -108,6 +108,17 @@
       }
     ];
 
+    services.udev.packages = [
+      (pkgs.writeTextFile {
+        name = "brook-webhid-udev-rules";
+        destination = "/etc/udev/rules.d/70-brook-webhid.rules";
+        text = ''
+          # Brook converter (Nuvoton WPM USB) - WebHID access
+          KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="0416", ATTRS{idProduct}=="3f00", MODE="0660", TAG+="uaccess"
+        '';
+      })
+    ];
+
     # support for controllers
     hardware.steam-hardware.enable = true;
 
