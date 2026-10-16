@@ -32,7 +32,7 @@
             ];
             niri.outputConfig = ''
               output "DP-1" {
-                  mode "2560x1440@240.000"
+                  mode "2560x1440@180.000"
                   position x=2560 y=0
               }
 
