@@ -139,6 +139,8 @@
       gamescopeSession.enable = true;
       protontricks.enable = true;
 
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
+
       extraPackages = with pkgs; [
         # 32-bit libraries required for Wine/Proton
         pkgsi686Linux.freetype
