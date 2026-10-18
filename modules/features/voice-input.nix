@@ -52,7 +52,10 @@
             | sed 's/^[[:space:]]*//' \
             | sed 's/[[:space:]]*$//' \
             | sed 's/^「//; s/」$//')
-          [ -n "$TEXT" ] && printf '%s' "$TEXT" | ${pkgs.wl-clipboard}/bin/wl-copy
+          if [ -n "$TEXT" ]; then
+            printf '%s' "$TEXT" | ${pkgs.wl-clipboard}/bin/wl-copy
+            notify "Copied to clipboard"
+          fi
           rm -f "/tmp/voice-output.txt"
         fi
         rm -f "$AUDIOFILE"
@@ -69,8 +72,6 @@
         esac
 
         echo "$LANG_CODE" > "$LANGFILE"
-        notify "Recording ($LANG_CHOICE)… (press Mod+T again to stop)"
-
         ${pkgs.alsa-utils}/bin/arecord -f S16_LE -r 16000 -c 1 -q "$AUDIOFILE" &
         RECORD_PID=$!
         disown
