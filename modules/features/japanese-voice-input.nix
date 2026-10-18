@@ -33,7 +33,7 @@
         rm -f "$PIDFILE"
         notify "Transcribing…"
 
-        ${pkgs.whisper-cpp}/bin/whisper-cpp \
+        ${pkgs.whisper-cpp}/bin/whisper-cli \
           -m "$MODEL" \
           -l ja \
           -nt \
@@ -43,7 +43,7 @@
           > /dev/null 2>&1
 
         if [ -f "/tmp/jp-voice-output.txt" ]; then
-          TEXT=$(tr -d '\n' < "/tmp/jp-voice-output.txt" | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
+          TEXT=$(tr -d '\n' < "/tmp/jp-voice-output.txt" | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//' | sed 's/^「//; s/」$//')
           [ -n "$TEXT" ] && ${pkgs.wtype}/bin/wtype "$TEXT"
           rm -f "/tmp/jp-voice-output.txt"
         fi
@@ -60,7 +60,7 @@
     home.packages = [script];
 
     niri.extraBinds = ''
-      Mod+Y { spawn "${script}/bin/jp-voice-input"; }
+      Mod+T { spawn "${script}/bin/jp-voice-input"; }
     '';
   };
 }
