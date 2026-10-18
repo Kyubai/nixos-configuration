@@ -23,6 +23,7 @@
             self.homeModules.desktop
             self.homeModules.gaming
             self.homeModules.niri
+            self.homeModules.japanese-voice-input
           ];
           users.mri = {
             home.stateVersion = "23.11";
