@@ -52,7 +52,7 @@
             | sed 's/^[[:space:]]*//' \
             | sed 's/[[:space:]]*$//' \
             | sed 's/^「//; s/」$//')
-          [ -n "$TEXT" ] && ${pkgs.wtype}/bin/wtype "$TEXT"
+          [ -n "$TEXT" ] && printf '%s' "$TEXT" | ${pkgs.wl-clipboard}/bin/wl-copy
           rm -f "/tmp/voice-output.txt"
         fi
         rm -f "$AUDIOFILE"
