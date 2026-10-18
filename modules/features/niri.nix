@@ -123,6 +123,12 @@
       description = "Per-system niri output blocks in KDL format.";
     };
 
+    options.niri.extraBinds = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+      description = "Additional niri key bindings in KDL format.";
+    };
+
     config = {
       systemd.user.sessionVariables = {
         QT_QPA_PLATFORMTHEME = "kde";
@@ -343,6 +349,8 @@
 
           XF86MonBrightnessUp { spawn "brightnessctl" "set" "5%+"; }
           XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+
+          ${config.niri.extraBinds}
       }
     '';
     };
