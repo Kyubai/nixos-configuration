@@ -37,6 +37,7 @@
           style = "focus_hint";
           show_icons = true;
         };
+        widget.clock.format = "{:%Y-%m-%d %H:%M}";
       };
     };
   };
