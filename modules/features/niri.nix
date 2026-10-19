@@ -134,6 +134,15 @@
         QT_QPA_PLATFORMTHEME = "kde";
       };
 
+      home.packages = with pkgs; [
+        fuzzel
+        (writeShellScriptBin "script-launcher" ''
+          script=$(find "$HOME/scripts" -maxdepth 1 -type f -executable -printf '%f\n' | sort | fuzzel --dmenu --prompt "run script: ")
+          [[ -z "$script" ]] && exit 0
+          kitty --title script-runner --hold -- "$HOME/scripts/$script"
+        '')
+      ];
+
       programs.wofi.enable = false;
       gtk.enable = true;
 
@@ -207,6 +216,11 @@
       }
 
       window-rule {
+          match app-id="kitty" title="script-runner"
+          open-floating true
+      }
+
+      window-rule {
           match app-id="org.pulseaudio.pavucontrol"
           open-floating true
       }
@@ -223,6 +237,7 @@
 
       binds {
           Mod+Return { spawn "kitty"; }
+          Mod+S { spawn "script-launcher"; }
           Mod+Semicolon { spawn "kitty"; }
           Mod+D { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
           Mod+Q { close-window; }
