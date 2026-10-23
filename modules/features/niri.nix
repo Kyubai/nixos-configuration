@@ -26,6 +26,7 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
       kdePackages.dolphin # file manager
+      kdePackages.ark # archive manager
       kdePackages.kio
       kdePackages.kdf
       kdePackages.qtsvg
