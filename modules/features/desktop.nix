@@ -116,6 +116,13 @@
         "video/x-msvideo" = ["mpv.desktop"];
         "video/mpeg" = ["mpv.desktop"];
         "video/3gpp" = ["mpv.desktop"];
+        "application/zip" = ["org.kde.dolphin.desktop"];
+        "application/x-tar" = ["org.kde.dolphin.desktop"];
+        "application/x-compressed-tar" = ["org.kde.dolphin.desktop"];
+        "application/x-bzip-compressed-tar" = ["org.kde.dolphin.desktop"];
+        "application/x-xz-compressed-tar" = ["org.kde.dolphin.desktop"];
+        "application/x-7z-compressed" = ["org.kde.dolphin.desktop"];
+        "application/x-rar" = ["org.kde.dolphin.desktop"];
       };
       defaultApplications = {
         "text/html" = ["floorp.desktop"];
@@ -149,6 +156,13 @@
         "video/x-msvideo" = ["mpv.desktop"];
         "video/mpeg" = ["mpv.desktop"];
         "video/3gpp" = ["mpv.desktop"];
+        "application/zip" = ["org.kde.dolphin.desktop"];
+        "application/x-tar" = ["org.kde.dolphin.desktop"];
+        "application/x-compressed-tar" = ["org.kde.dolphin.desktop"];
+        "application/x-bzip-compressed-tar" = ["org.kde.dolphin.desktop"];
+        "application/x-xz-compressed-tar" = ["org.kde.dolphin.desktop"];
+        "application/x-7z-compressed" = ["org.kde.dolphin.desktop"];
+        "application/x-rar" = ["org.kde.dolphin.desktop"];
       };
     };
   };
