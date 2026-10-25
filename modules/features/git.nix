@@ -15,7 +15,7 @@
         defaultBranch = "main";
       };
       user = {
-        email = "public@verriegelt.net";
+        email = "service-github@verriegelt.net";
         name = "Matthias Riegel";
       };
       pull = {
