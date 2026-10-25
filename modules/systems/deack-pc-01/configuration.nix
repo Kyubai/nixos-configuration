@@ -69,6 +69,51 @@
     # networking.hostId = "621cba57";
 
     networking.hostName = "deack-pc-01";
+
+    # Prefer DNS from enp4s0 (internal network) over enp12s0f3u3 (Vodafone USB).
+    # The toggle-vodafone.sh script can override by running:
+    #   nmcli connection modify enp12s0f3u3 ipv4.dns-priority 10 ipv6.dns-priority 10
+    #   nmcli connection modify enp4s0 ipv4.dns-priority 200 ipv6.dns-priority 200
+    networking.networkmanager.ensureProfiles.profiles = {
+      enp4s0 = {
+        connection = {
+          id = "enp4s0";
+          type = "ethernet";
+          interface-name = "enp4s0";
+          autoconnect-priority = "10";
+        };
+        ethernet = {};
+        ipv4 = {
+          method = "auto";
+          dns-priority = "10";
+        };
+        ipv6 = {
+          addr-gen-mode = "default";
+          method = "auto";
+          dns-priority = "10";
+        };
+        proxy = {};
+      };
+      enp12s0f3u3 = {
+        connection = {
+          id = "enp12s0f3u3";
+          type = "ethernet";
+          interface-name = "enp12s0f3u3";
+          autoconnect-priority = "10";
+        };
+        ethernet = {};
+        ipv4 = {
+          method = "auto";
+          dns-priority = "200";
+        };
+        ipv6 = {
+          addr-gen-mode = "default";
+          method = "auto";
+          dns-priority = "200";
+        };
+        proxy = {};
+      };
+    };
     nixpkgs.config.permittedInsecurePackages = [
       "electron-39.8.10"
     ];
