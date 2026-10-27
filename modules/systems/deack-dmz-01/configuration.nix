@@ -11,6 +11,7 @@
       self.nixosModules.cli-utils
       self.nixosModules.agenix
       self.nixosModules.impermanence
+      self.nixosModules.srv-compose
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
