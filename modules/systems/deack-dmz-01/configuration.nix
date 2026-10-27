@@ -41,6 +41,17 @@
 
     # Enable NetworkManager for network configuration
     networking.networkmanager.enable = true;
+    networking.networkmanager.ensureProfiles.profiles = {
+      ens18 = {
+        connection = {
+          id = "ens18";
+          type = "ethernet";
+          interface-name = "ens18";
+        };
+        ipv4.method = "auto";
+        ipv6.method = "ignore";
+      };
+    };
 
     # Enable SSH for remote access (essential for DMZ server)
     services.openssh.enable = true;
