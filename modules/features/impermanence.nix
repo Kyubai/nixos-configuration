@@ -17,6 +17,7 @@
         "/var/lib/bluetooth"
         "/var/lib/nixos"
         "/var/log"
+        "/srv"
       ];
       files = [
         "/etc/machine-id"
