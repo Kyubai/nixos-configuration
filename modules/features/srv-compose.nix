@@ -21,7 +21,7 @@
       dynamicFilesFrom = "cat /srv/restic/include.txt";
       extraBackupArgs = [
         "--exclude-file=/srv/restic/exclude.txt"
-        "--hostname=deack-restic-03"
+        "--host=${config.networking.hostName}"
       ];
       timerConfig = {
         OnCalendar = "daily";
