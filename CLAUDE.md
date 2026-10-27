@@ -6,9 +6,11 @@ This is a repo for managing the configuration of multiple systems using NixOS an
 
 You can see which system you're currently working on by looking at the hostname
 `deack-pc-01` is my desktop pc at home, which I use for administration, gaming and browsing
+`deack-dmz-01` is my dmz host, where I host services available to the internet
 
 # General Guidelines
-If you're unsure what to do, or could use additional information from me, you MUST prompt me
+If you're unsure what to do, or could use additional information from me, you MUST ask me
+If you're working on one host you MUST NOT break the other ones
 Features MUST not be seperated by NixOS vs home-manager and CAN be combined in one file
 All changes SHOULD done using nix, instead of direct changes to dotfiles, etc.
 Whenever I mention a screenshot you CAN read it at /tmp/screenshot.png
