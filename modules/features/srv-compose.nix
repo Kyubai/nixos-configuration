@@ -18,11 +18,7 @@
     services.restic.backups.wasabi = {
       repository = "s3:https://s3.eu-central-2.wasabisys.com/restic-verriegelt";
       environmentFile = config.age.secrets.restic-wasabi.path;
-      dynamicFilesFrom = "cat /srv/restic/include.txt";
-      extraBackupArgs = [
-        "--exclude-file=/srv/restic/exclude.txt"
-        "--host=${config.networking.hostName}"
-      ];
+      paths = [ "/srv" ];
       timerConfig = {
         OnCalendar = "daily";
         Persistent = true;
