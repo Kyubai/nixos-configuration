@@ -9,18 +9,12 @@
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
-        {
-          directory = "/etc/nixos";
-          method = "symlink";
-        }
+        "/etc/nixos"
         "/etc/NetworkManager/system-connections"
         "/var/lib/bluetooth"
         "/var/lib/nixos"
         "/var/log"
-        {
-          directory = "/srv";
-          method = "symlink";
-        }
+        "/srv"
       ];
       files = [
         "/etc/machine-id"
@@ -29,6 +23,12 @@
         "/etc/ssh/ssh_host_rsa_key"
         "/etc/ssh/ssh_host_rsa_key.pub"
       ];
+      users.mri = {
+        files = [
+          ".ssh/id_ed25519"
+          ".ssh/id_ed25519.pub"
+        ];
+      };
     };
   };
 }

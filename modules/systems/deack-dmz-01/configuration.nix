@@ -10,6 +10,7 @@
       self.nixosModules.base
       self.nixosModules.cli-utils
       self.nixosModules.agenix
+      self.nixosModules.impermanence
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
