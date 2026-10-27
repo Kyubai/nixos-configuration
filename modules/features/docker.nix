@@ -8,6 +8,8 @@
     pkgs,
     ...
   }: {
+    home.packages = [ pkgs.docker-compose ];
+
     home.shellAliases = {
       dcud = "sudo docker compose up -d";
       dcd = "sudo docker compose down";
