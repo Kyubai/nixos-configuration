@@ -38,12 +38,6 @@
       options = ["subvol=nix"];
     };
 
-    fileSystems."/etc/nixos" = {
-      device = "/nix/persist/etc/nixos";
-      fsType = "none";
-      options = ["bind"];
-    };
-
     swapDevices = [];
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
