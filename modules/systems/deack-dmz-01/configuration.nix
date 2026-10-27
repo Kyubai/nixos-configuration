@@ -57,6 +57,16 @@
     services.openssh.enable = true;
     services.openssh.settings.PermitRootLogin = "no";
 
+    security.sudo.extraRules = [
+      {
+        users = ["mri"];
+        commands = [{
+          command = "ALL";
+          options = ["NOPASSWD"];
+        }];
+      }
+    ];
+
     # User configuration
     users.users.mri = {
       isNormalUser = true;
