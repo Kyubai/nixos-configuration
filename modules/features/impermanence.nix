@@ -30,5 +30,10 @@
         ];
       };
     };
+
+    systemd.tmpfiles.rules = [
+      "d /persist/home/mri 0700 mri users -"
+      "d /home/mri 0700 mri users -"
+    ];
   };
 }
