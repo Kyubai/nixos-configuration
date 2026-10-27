@@ -9,7 +9,10 @@
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
-        "/etc/nixos"
+        {
+          directory = "/etc/nixos";
+          method = "symlink";
+        }
         "/etc/NetworkManager/system-connections"
         "/var/lib/bluetooth"
         "/var/lib/nixos"
