@@ -17,7 +17,10 @@
         "/var/lib/bluetooth"
         "/var/lib/nixos"
         "/var/log"
-        "/srv"
+        {
+          directory = "/srv";
+          method = "symlink";
+        }
       ];
       files = [
         "/etc/machine-id"
