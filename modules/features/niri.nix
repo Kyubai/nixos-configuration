@@ -133,6 +133,7 @@
     config = {
       systemd.user.sessionVariables = {
         QT_QPA_PLATFORMTHEME = "kde";
+        MOZ_ENABLE_WAYLAND = "1";
       };
 
       home.packages = with pkgs; [
