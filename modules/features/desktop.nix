@@ -13,6 +13,8 @@
       config = pkgs.config;
     };
   in {
+    imports = [inputs.nix-flatpak.nixosModules.nix-flatpak];
+
     environment.systemPackages = with pkgs; [
       anki
       bitwarden-desktop
@@ -53,7 +55,12 @@
       jack.enable = true;
     };
 
-    services.flatpak.enable = true;
+    services.flatpak = {
+      enable = true;
+      packages = [
+        {appId = "app.fluxer.Fluxer"; origin = "flathub";}
+      ];
+    };
 
     # required for virt-manager
     # https://nixos.wiki/wiki/Virt-manager

@@ -42,5 +42,7 @@
 
     niri-screenshare.url = "github:pantarune/niri-screenshare";
     niri-screenshare.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 }
