@@ -29,6 +29,7 @@
     '';
 
     networking.firewall.enable = true;
+    networking.enableIPv6 = false;
     # services.ntp.enable = false;
 
     hardware.graphics = {
