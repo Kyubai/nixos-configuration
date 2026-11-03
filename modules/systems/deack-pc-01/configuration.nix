@@ -13,6 +13,7 @@
       self.nixosModules.base
       self.nixosModules.gaming
       self.nixosModules.cli-utils
+      self.nixosModules.dfir
       self.nixosModules.desktop
       self.nixosModules.niri
       inputs.home-manager.nixosModules.home-manager
