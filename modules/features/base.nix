@@ -30,6 +30,7 @@
 
     networking.firewall.enable = true;
     networking.enableIPv6 = false;
+    networking.networkmanager.settings.connection."ipv6.method" = "disabled";
     # services.ntp.enable = false;
 
     hardware.graphics = {
