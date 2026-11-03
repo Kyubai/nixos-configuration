@@ -87,6 +87,7 @@
         ipv4 = {
           method = "auto";
           dns-priority = "10";
+          route-metric = "50";
         };
         ipv6.method = "disabled";
         proxy = {};
@@ -98,10 +99,11 @@
           interface-name = "enp12s0f3u3";
           autoconnect-priority = "10";
         };
-        ethernet = {};
+        ethernet.mtu = "1400";
         ipv4 = {
           method = "auto";
           dns-priority = "200";
+          route-metric = "200";
         };
         ipv6.method = "disabled";
         proxy = {};
