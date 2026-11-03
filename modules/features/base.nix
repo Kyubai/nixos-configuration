@@ -24,6 +24,10 @@
     boot.loader.systemd-boot.configurationLimit = 10;
     boot.loader.grub.configurationLimit = 10;
 
+    services.journald.extraConfig = ''
+      SystemMaxUse=500M
+    '';
+
     networking.firewall.enable = true;
     # services.ntp.enable = false;
 

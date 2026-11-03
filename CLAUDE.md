@@ -14,6 +14,7 @@ If you're working on one host you MUST NOT break the other ones
 Features MUST not be seperated by NixOS vs home-manager and CAN be combined in one file
 All changes SHOULD done using nix, instead of direct changes to dotfiles, etc.
 Whenever I mention a screenshot you CAN read it at /tmp/screenshot.png
+You SHOULD read the official docs of a tool before reading source code
 
 # Validation of changes
 ## All changes for NixOS and the repo
