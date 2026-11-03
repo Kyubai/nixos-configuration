@@ -88,11 +88,7 @@
           method = "auto";
           dns-priority = "10";
         };
-        ipv6 = {
-          addr-gen-mode = "default";
-          method = "auto";
-          dns-priority = "10";
-        };
+        ipv6.method = "disabled";
         proxy = {};
       };
       enp12s0f3u3 = {
@@ -107,11 +103,7 @@
           method = "auto";
           dns-priority = "200";
         };
-        ipv6 = {
-          addr-gen-mode = "default";
-          method = "auto";
-          dns-priority = "200";
-        };
+        ipv6.method = "disabled";
         proxy = {};
       };
     };
