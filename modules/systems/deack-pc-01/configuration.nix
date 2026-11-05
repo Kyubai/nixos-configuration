@@ -8,6 +8,7 @@
     modules = [
       self.nixosModules.deack-pc-01
       self.nixosModules.agenix
+      self.nixosModules.nas
       self.nixosModules.printing
       self.nixosModules.amd
       self.nixosModules.base
@@ -23,6 +24,7 @@
             self.homeModules.cli-utils
             self.homeModules.desktop
             self.homeModules.gaming
+            self.homeModules.nas
             self.homeModules.niri
             self.homeModules.voice-input
           ];
