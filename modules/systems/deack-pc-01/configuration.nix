@@ -106,6 +106,7 @@
           method = "auto";
           dns-priority = "200";
           route-metric = "200";
+          never-default = "true";
         };
         ipv6.method = "disabled";
         proxy = {};
