@@ -23,6 +23,7 @@
     virtualisation.docker.enable = true;
 
     environment.systemPackages = with pkgs; [
+      awscli2
       choose
       dbus
       dig
