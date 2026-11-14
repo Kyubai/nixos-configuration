@@ -4,7 +4,10 @@
   ...
 }: {
   flake.homeModules.claude = {pkgs, ...}: {
-    home.packages = [pkgs.claude-code];
+    home.packages = [
+      pkgs.claude-code
+      inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
+    ];
 
     home.file.".claude/settings.json" = {
       force = true;
