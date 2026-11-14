@@ -3,7 +3,7 @@
   self,
   ...
 }: {
-  flake.homeModules.claude = {pkgs, ...}: {
+  flake.homeModules.ai = {pkgs, ...}: {
     home.packages = [
       pkgs.claude-code
       inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
