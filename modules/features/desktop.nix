@@ -130,6 +130,7 @@
         "application/x-xz-compressed-tar" = ["org.kde.ark.desktop"];
         "application/x-7z-compressed" = ["org.kde.ark.desktop"];
         "application/x-rar" = ["org.kde.ark.desktop"];
+        "application/pdf" = ["floorp.desktop"];
       };
       defaultApplications = {
         "text/html" = ["floorp.desktop"];
@@ -170,6 +171,7 @@
         "application/x-xz-compressed-tar" = ["org.kde.ark.desktop"];
         "application/x-7z-compressed" = ["org.kde.ark.desktop"];
         "application/x-rar" = ["org.kde.ark.desktop"];
+        "application/pdf" = ["floorp.desktop"];
       };
     };
   };
