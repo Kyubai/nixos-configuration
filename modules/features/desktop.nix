@@ -24,7 +24,6 @@
       # discord
       feishin
       filezilla
-      unstable.floorp-bin
       gimp
       krita
       keepassxc
@@ -69,9 +68,87 @@
     virtualisation.spiceUSBRedirection.enable = true;
   };
 
-  flake.homeModules.desktop = {
+  flake.homeModules.desktop = {pkgs, ...}: {
     programs.imv.enable = true;
     programs.mpv.enable = true;
+
+    programs.floorp = {
+      enable = true;
+      package = pkgs.floorp-bin;
+
+      policies.ExtensionSettings = {
+        "addon@darkreader.org" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+        };
+        "deArrow@ajay.app" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/dearrow/latest.xpi";
+        };
+        "gdpr@cavi.au.dk" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/consent_o_matic/latest.xpi";
+        };
+        "sponsorBlocker@ajay.app" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
+        };
+        "treestyletab@piro.sakura.ne.jp" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/tree_style_tab/latest.xpi";
+        };
+        "VolumeBoosterWithoutDementia@zWolfrost.github.com" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/better_volume_booster/latest.xpi";
+        };
+        "{6b733b82-9261-47ee-a595-2dda294a4d08}" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/yomitan/latest.xpi";
+        };
+        "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/youtube_addon/latest.xpi";
+        };
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden_password_manager/latest.xpi";
+        };
+        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium_ff/latest.xpi";
+        };
+      };
+
+      profiles."default" = {
+        id = 0;
+        isDefault = true;
+        path = "jtc1y592.default-release";
+        settings = {
+          "browser.startup.homepage" = "https://homepage.intern.verriegelt.net";
+          "browser.newtabpage.enabled" = false;
+          "browser.fullscreen.autohide" = false;
+          "browser.search.region" = "DE";
+          "media.eme.enabled" = true;
+
+          "privacy.donottrackheader.enabled" = true;
+          "privacy.fingerprintingProtection" = true;
+          "privacy.globalprivacycontrol.enabled" = true;
+          "privacy.query_stripping.enabled" = true;
+          "privacy.query_stripping.enabled.pbmode" = true;
+          "privacy.trackingprotection.enabled" = true;
+          "privacy.trackingprotection.socialtracking.enabled" = true;
+          "privacy.trackingprotection.emailtracking.enabled" = true;
+          "privacy.trackingprotection.allow_list.convenience.enabled" = false;
+          "privacy.sanitize.sanitizeOnShutdown" = true;
+          "privacy.clearOnShutdown_v2.formdata" = true;
+
+          "services.sync.engine.passwords" = false;
+
+          "noraneko.downloadbar.enable" = false;
+          "noraneko.statusbar.enable" = false;
+        };
+      };
+    };
 
     xdg.dataFile."flatpak/overrides/dev.vencord.Vesktop".text = ''
       [Environment]
