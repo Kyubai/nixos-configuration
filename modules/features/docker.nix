@@ -4,6 +4,14 @@
   ...
 }: {
   flake.nixosModules.docker = {
+    virtualisation.docker.daemon.settings = {
+      log-driver = "json-file";
+      log-opts = {
+        max-size = "10m";
+        max-file = "3";
+      };
+    };
+
     virtualisation.docker.autoPrune = {
       enable = true;
       flags = ["--all"];
