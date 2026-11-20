@@ -76,6 +76,7 @@
     boot.loader.grub.enable = true;
 
     boot.supportedFilesystems = ["btrfs"];
+    boot.initrd.systemd.enable = false;
 
     boot.initrd.postDeviceCommands = lib.mkAfter ''
       mkdir /mnt
@@ -85,6 +86,8 @@
       sync
       umount /mnt
     '';
+
+    fileSystems."/persist".neededForBoot = true;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
