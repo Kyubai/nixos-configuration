@@ -22,5 +22,10 @@
       ];
     };
     services.ipp-usb.enable = true;
+
+    system.activationScripts.cupsLpoptions = ''
+      mkdir -p /etc/cups
+      echo "Default m2026" > /etc/cups/lpoptions
+    '';
   };
 }
