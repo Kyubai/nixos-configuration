@@ -8,11 +8,13 @@
     modules = [
       self.nixosModules.deack-pc-01
       self.nixosModules.agenix
+      self.nixosModules.nas
       self.nixosModules.printing
       self.nixosModules.amd
       self.nixosModules.base
       self.nixosModules.gaming
       self.nixosModules.cli-utils
+      self.nixosModules.dfir
       self.nixosModules.desktop
       self.nixosModules.niri
       inputs.home-manager.nixosModules.home-manager
@@ -22,6 +24,7 @@
             self.homeModules.cli-utils
             self.homeModules.desktop
             self.homeModules.gaming
+            self.homeModules.nas
             self.homeModules.niri
             self.homeModules.voice-input
           ];
@@ -86,12 +89,9 @@
         ipv4 = {
           method = "auto";
           dns-priority = "10";
+          route-metric = "50";
         };
-        ipv6 = {
-          addr-gen-mode = "default";
-          method = "auto";
-          dns-priority = "10";
-        };
+        ipv6.method = "disabled";
         proxy = {};
       };
       enp12s0f3u3 = {
@@ -101,16 +101,14 @@
           interface-name = "enp12s0f3u3";
           autoconnect-priority = "10";
         };
-        ethernet = {};
+        ethernet.mtu = "1400";
         ipv4 = {
           method = "auto";
           dns-priority = "200";
+          route-metric = "200";
+          never-default = "true";
         };
-        ipv6 = {
-          addr-gen-mode = "default";
-          method = "auto";
-          dns-priority = "200";
-        };
+        ipv6.method = "disabled";
         proxy = {};
       };
     };

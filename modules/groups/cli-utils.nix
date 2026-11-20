@@ -6,7 +6,7 @@
   flake.homeModules.cli-utils = {
     imports = [
       self.homeModules.bat
-      self.homeModules.claude
+      self.homeModules.ai
       self.homeModules.docker
       self.homeModules.eza
       self.homeModules.git
