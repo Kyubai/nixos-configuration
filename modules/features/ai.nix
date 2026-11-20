@@ -3,7 +3,7 @@
   self,
   ...
 }: {
-  flake.homeModules.ai = {pkgs, ...}: let
+  flake.homeModules.ai = {pkgs, lib, ...}: let
     ccstatusline = pkgs.stdenv.mkDerivation {
       pname = "ccstatusline";
       version = "2.2.34";
@@ -27,6 +27,38 @@
         runHook postInstall
       '';
     };
+
+    ccstatuslineConfig = pkgs.writeText "ccstatusline-settings.json" (builtins.toJSON {
+      version = 3;
+      lines = [
+        [
+          {
+            id = "1";
+            type = "model";
+          }
+          {
+            id = "2";
+            type = "git-branch";
+          }
+          {
+            id = "3";
+            type = "current-working-dir";
+          }
+          {
+            id = "4";
+            type = "session-usage";
+          }
+          {
+            id = "5";
+            type = "weekly-usage";
+          }
+        ]
+      ];
+      colorLevel = 0;
+      defaultSeparator = "|";
+      minimalistMode = true;
+      powerline = {enabled = false;};
+    });
   in {
     home.packages = [
       pkgs.claude-code
@@ -34,31 +66,10 @@
       ccstatusline
     ];
 
-    home.file.".config/ccstatusline/settings.json" = {
-      text = builtins.toJSON {
-        version = 3;
-        lines = [
-          [
-            {
-              id = "1";
-              type = "model";
-            }
-            {
-              id = "2";
-              type = "git-branch";
-            }
-            {
-              id = "3";
-              type = "current-working-dir";
-            }
-          ]
-        ];
-        colorLevel = 0;
-        defaultSeparator = "|";
-        minimalistMode = true;
-        powerline = {enabled = false;};
-      };
-    };
+    home.activation.ccstatuslineSettings = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      mkdir -p "$HOME/.config/ccstatusline"
+      install -m 644 "${ccstatuslineConfig}" "$HOME/.config/ccstatusline/settings.json"
+    '';
 
     home.file.".claude/settings.json" = {
       force = true;
