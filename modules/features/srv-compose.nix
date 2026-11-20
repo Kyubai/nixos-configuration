@@ -8,6 +8,8 @@
     pkgs,
     ...
   }: {
+    imports = [ self.nixosModules.docker ];
+
     virtualisation.docker.enable = true;
 
     environment.persistence."/persist".directories = [
@@ -38,6 +40,7 @@
         Persistent = true;
       };
     };
+
 
     system.autoUpgrade = {
       enable = true;
