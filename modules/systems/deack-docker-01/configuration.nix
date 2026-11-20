@@ -71,6 +71,8 @@
   };
 
   flake.nixosModules.deack-docker-01 = {pkgs, lib, ...}: {
+    nixpkgs.hostPlatform = "x86_64-linux";
+
     boot.loader.grub.enable = true;
 
     boot.supportedFilesystems = ["btrfs"];
