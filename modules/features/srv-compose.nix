@@ -49,6 +49,8 @@
       allowReboot = true;
     };
 
+    systemd.services.nixos-upgrade.preStart = "${pkgs.nix}/bin/nix flake update /etc/nixos";
+
     age.secrets.restic-wasabi.file = "${self}/secrets/restic-wasabi.age";
 
     services.restic.backups.wasabi = {
