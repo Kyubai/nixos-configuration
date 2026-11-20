@@ -83,6 +83,11 @@
           command = "ccstatusline";
           refreshInterval = 10;
         };
+        enabledPlugins = {
+          "code-simplifier@claude-plugins-official" = true;
+          "claude-md-management@claude-plugins-official" = true;
+          "superpowers@claude-plugins-official" = true;
+        };
         permissions.allow = [
           "Bash(sudo nixos-rebuild switch --flake /etc/nixos*)"
           "Bash(git add*)"
