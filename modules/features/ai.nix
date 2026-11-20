@@ -3,10 +3,29 @@
   self,
   ...
 }: {
-  flake.homeModules.ai = {pkgs, ...}: {
+  flake.homeModules.ai = {pkgs, ...}: let
+    gjc = pkgs.stdenv.mkDerivation {
+      pname = "gajae-code";
+      version = "0.22.0";
+      src = pkgs.fetchurl {
+        url = "https://github.com/Yeachan-Heo/gajae-code/releases/download/v0.22.0/gjc-linux-x64";
+        sha256 = "02piy149iighwspgms756dj4hpj0hvf7yhqrmcq4a3yi03z184sm";
+      };
+      nativeBuildInputs = [pkgs.autoPatchelfHook];
+      buildInputs = [pkgs.glibc];
+      dontUnpack = true;
+      dontBuild = true;
+      installPhase = ''
+        mkdir -p $out/bin
+        cp $src $out/bin/gjc
+        chmod +x $out/bin/gjc
+      '';
+    };
+  in {
     home.packages = [
       pkgs.claude-code
       inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
+      gjc
     ];
 
     home.file.".claude/settings.json" = {
