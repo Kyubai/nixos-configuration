@@ -3,6 +3,15 @@
   self,
   ...
 }: {
+  flake.nixosModules.docker = {
+    virtualisation.docker.autoPrune = {
+      enable = true;
+      flags = ["--all"];
+      dates = "weekly";
+      allVolumes.enable = true;
+    };
+  };
+
   flake.homeModules.docker = {
     lib,
     pkgs,
