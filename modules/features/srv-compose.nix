@@ -57,6 +57,7 @@
       repository = "s3:https://s3.eu-central-2.wasabisys.com/restic-verriegelt";
       environmentFile = config.age.secrets.restic-wasabi.path;
       paths = [ "/srv" ];
+      exclude = [ "*.bak" ];
       timerConfig = {
         OnCalendar = "05:00:00";
         Persistent = true;
