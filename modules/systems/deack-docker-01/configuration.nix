@@ -70,8 +70,14 @@
     ];
   };
 
-  flake.nixosModules.deack-docker-01 = {pkgs, lib, ...}: {
+  flake.nixosModules.deack-docker-01 = {pkgs, lib, modulesPath, ...}: {
+    imports = [
+      (modulesPath + "/profiles/qemu-guest.nix")
+    ];
+
     nixpkgs.hostPlatform = "x86_64-linux";
+
+    boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod"];
 
     boot.loader.grub.enable = true;
 
