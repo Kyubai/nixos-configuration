@@ -1,5 +1,6 @@
 {
   self,
+  lib,
   ...
 }: {
   flake.nixosModules.restic-verriegelt = {config, ...}: {
@@ -11,7 +12,7 @@
       paths = ["/srv"];
       exclude = ["*.bak"];
       timerConfig = {
-        OnCalendar = "05:00:00";
+        OnCalendar = lib.mkDefault "05:00:00";
         Persistent = true;
       };
       pruneOpts = [
