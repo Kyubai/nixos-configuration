@@ -12,6 +12,7 @@
       self.nixosModules.agenix
       self.nixosModules.impermanence
       self.nixosModules.srv-compose
+      self.nixosModules.nas
       inputs.disko.nixosModules.disko
       {
         disko.devices = {
@@ -125,6 +126,23 @@
       ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaOvQm6DCDl+ytVcGr7sFtJZINapQynYASlnlf090nV mri@deack-pc-01"
+      ];
+    };
+
+    systemd.tmpfiles.rules = ["d /mnt/media 0755 root root -"];
+
+    fileSystems."/mnt/media" = {
+      device = "//deack-nas-01.intern.verriegelt.net/media";
+      fsType = "cifs";
+      options = [
+        "credentials=/run/agenix/nas-credentials"
+        "vers=3.0"
+        "noperm"
+        "file_mode=0777"
+        "dir_mode=0777"
+        "x-systemd.automount"
+        "noauto"
+        "_netdev"
       ];
     };
 

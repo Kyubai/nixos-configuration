@@ -6,5 +6,5 @@ let
 in {
   "anthropic-api-key.age".publicKeys = [deack-pc-01-host mri];
   "restic-wasabi.age".publicKeys = [deack-dmz-01-host deack-docker-01-host];
-  "nas-credentials.age".publicKeys = [deack-pc-01-host mri];
+  "nas-credentials.age".publicKeys = [deack-pc-01-host deack-docker-01-host mri];
 }
