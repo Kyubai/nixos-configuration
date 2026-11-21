@@ -95,6 +95,8 @@
 
     fileSystems."/persist".neededForBoot = true;
 
+    age.identityPaths = ["/persist/etc/ssh/ssh_host_ed25519_key"];
+
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
 
