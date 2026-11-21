@@ -56,8 +56,17 @@
     services.restic.backups.wasabi = {
       repository = "s3:https://s3.eu-central-2.wasabisys.com/restic-verriegelt";
       environmentFile = config.age.secrets.restic-wasabi.path;
-      paths = [ "/srv" ];
-      exclude = [ "*.bak" ];
+      paths = [
+        "/srv"
+        "/mnt/media/books"
+        "/mnt/media/music"
+        "/mnt/media/images"
+        "/mnt/media/manga"
+      ];
+      exclude = [
+        "*.bak"
+        "/srv/audiobookshelf/metadata"
+      ];
       timerConfig = {
         OnCalendar = "05:00:00";
         Persistent = true;

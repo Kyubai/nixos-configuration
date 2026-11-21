@@ -129,19 +129,6 @@
       ];
     };
 
-    services.restic.backups.wasabi = {
-      paths = [
-        "/mnt/media/books"
-        "/mnt/media/music"
-        "/mnt/media/images"
-        "/mnt/media/manga"
-      ];
-      exclude = [
-        "/srv/audiobookshelf/metadata"
-        "/srv/abiotic-factor"
-      ];
-    };
-
     systemd.tmpfiles.rules = ["d /mnt/media 0755 root root -"];
 
     fileSystems."/mnt/media" = {
