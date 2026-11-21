@@ -138,7 +138,6 @@
       ];
       exclude = [
         "/srv/audiobookshelf/metadata"
-        "/srv/immich/pgdata.bak"
         "/srv/abiotic-factor"
       ];
     };
