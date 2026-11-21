@@ -99,6 +99,7 @@
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings.auto-optimise-store = true;
+    nix.settings.trusted-users = ["mri"];
 
     networking.hostName = "deack-docker-01";
     networking.networkmanager.enable = true;
