@@ -21,7 +21,7 @@ $ARGUMENTS
 If the arguments don't specify all required values, ask the user for them before starting:
 - **hostname** (e.g. `deack-docker-02`)
 - **disk device** on the target (e.g. `/dev/sda` or `/dev/vda`)
-- **target IP** where the NixOS install ISO is running
+- **target IP and SSH port** where the NixOS install ISO is running (e.g. `192.168.1.50` port `22`, or `54.38.178.50` port `2201`)
 - **ISO root password**
 - **networking**: DHCP (default) or static IP
 
@@ -48,19 +48,22 @@ In `/etc/nixos/secrets/agenix-rules.nix`:
 
 **Do not run `agenix --rekey`** — it will abort on `nas-credentials.age` (which `deack-dmz-01` can't decrypt) before it ever reaches `restic-wasabi.age`.
 
-Instead, re-encrypt it directly. Read the current deack-dmz-01-host key from agenix-rules.nix, then ask the user to run this on deack-dmz-01:
+Instead, re-encrypt it directly. Read **all current** `publicKeys` for `restic-wasabi.age` from `agenix-rules.nix` — every existing recipient must be included or they will lose access. Then ask the user to run this on deack-dmz-01:
 
 ```bash
 # Ask user to run:
 ssh -A mri@deack-dmz-01 'sudo sh -c "
-  age -d -i /etc/ssh/ssh_host_ed25519_key /etc/nixos/secrets/restic-wasabi.age \
+  cd /etc/nixos \
+  && git pull \
+  && age -d -i /etc/ssh/ssh_host_ed25519_key secrets/restic-wasabi.age \
   | age -e \
     -r \"<deack-dmz-01-host key>\" \
+    -r \"<deack-docker-01-host key>\" \
+    -r \"<...any other existing recipient keys>\" \
     -r \"<new host public key>\" \
     > /tmp/restic-new.age \
-  && cp /tmp/restic-new.age /etc/nixos/secrets/restic-wasabi.age \
+  && cp /tmp/restic-new.age secrets/restic-wasabi.age \
   && rm /tmp/restic-new.age \
-  && cd /etc/nixos \
   && git add secrets/restic-wasabi.age \
   && git commit -m \"secrets: rekey restic-wasabi for <hostname>\" \
   && git push"'
@@ -108,12 +111,25 @@ Additional host-specific settings matching `deack-dmz-01`:
 - `boot.loader.grub.enable = true`
 - `boot.supportedFilesystems = ["btrfs"]`
 - `networking.hostName = "<hostname>"`
-- `networking.networkmanager.enable = true` (for DHCP) — if static, also set `networking.networkmanager.ensureProfiles`
+- `networking.networkmanager.enable = true` (for DHCP) — if static, also set `networking.networkmanager.ensureProfiles` with `method = "manual"`, `address1 = "<ip>/<prefix>,<gateway>"`, `dns = "<dns-server>;"`. Verify the DNS entry is an actual resolver, not just the gateway.
 - `services.openssh.enable = true`, `PermitRootLogin = "no"`
 - `security.sudo.extraRules` — NOPASSWD for mri
 - `users.users.mri` — isNormalUser, groups `["wheel" "networkmanager"]`, authorizedKey for `mri@deack-pc-01`
 - `nix.settings.experimental-features = ["nix-command" "flakes"]`, `auto-optimise-store = true`
 - `system.stateVersion = "25.11"`
+
+**Restic on hosts without NAS:** The `srv-compose` module hardcodes `/mnt/media/...` backup paths. For hosts without a NAS mount, override to avoid backup failures:
+```nix
+services.restic.backups.wasabi.paths = lib.mkForce ["/srv"];
+```
+
+**Restic timer staggering:** All hosts share the same Wasabi repo — concurrent runs cause lock conflicts. Current schedule: `deack-dmz-01` → 05:00, `deack-docker-01` → 05:30. Each new host should add 15 minutes:
+```nix
+services.restic.backups.wasabi.timerConfig = lib.mkForce {
+  OnCalendar = "05:45:00";  # increment by 15m per host
+  Persistent = true;
+};
+```
 
 ### 5 — Stage, commit, and push
 
@@ -141,12 +157,23 @@ SSHPASS=<iso-root-password> nixos-anywhere \
   --flake /etc/nixos#<hostname> \
   --extra-files /tmp/nax-extra \
   --env-password \
+  --ssh-port <port> \
   root@<target-ip>
 ```
+
+Omit `--ssh-port` if using the standard port 22. The target does **not** need internet access — nixos-anywhere pushes the entire closure from deack-pc-01 over SSH. Warnings about `cache.nixos.org` being unreachable are non-fatal.
 
 Watch for errors. Common first-run issues are covered in the Troubleshooting section below.
 
 ### 8 — Wait for reboot and verify
+
+First add the host key (the one generated in Step 1) to known_hosts, otherwise SSH will refuse to connect:
+
+```bash
+ssh-keyscan -p <port> <target-ip> 2>/dev/null >> ~/.ssh/known_hosts
+```
+
+Then wait for the host to come up. After nixos-anywhere reboots it, connect on the **permanent IP** (not the ISO IP), standard port 22 unless a port-forward is configured:
 
 ```bash
 until ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 mri@<target-ip> 'echo up' 2>/dev/null; do sleep 5; done
@@ -157,15 +184,26 @@ The agenix secret `restic-wasabi` must appear in `/run/agenix/`. All three timer
 
 ### 9 — Clone nixos config to /persist
 
-Without this, `auto-upgrade` will fail (it looks for `/etc/nixos` which is bind-mounted from `/persist/etc/nixos`):
+The `clone-nixos-config` systemd service (defined in `base.nix`) runs automatically on first boot and clones the repo if `/etc/nixos/.git` is absent. If the host has internet access, nothing further is needed — verify with:
 
 ```bash
-ssh mri@<target-ip> 'sudo git clone https://github.com/Kyubai/nixos-configuration /persist/etc/nixos'
+ssh mri@<target-ip> 'sudo systemctl status clone-nixos-config'
 ```
+
+**If the host has no internet access**, the service will fail. Fall back to rsync from deack-pc-01:
+
+```bash
+sudo rsync -az -e "ssh -p <port>" --rsync-path="sudo rsync" /etc/nixos/ mri@<target-ip>:/persist/etc/nixos/
+```
+
+Note: without outbound internet, `auto-upgrade`, restic backups to Wasabi, and the clone service will all fail until routing is fixed at the network/Proxmox level.
 
 ---
 
 ## Troubleshooting
+
+**After install, host boots back into the ISO**
+→ The VM boot order has CD-ROM before the hard disk. In Proxmox, either detach the ISO from the CD drive or move the hard disk above the CD-ROM in the boot order. Then reboot — the installed NixOS on `/dev/sda` will start normally.
 
 **Boot fails — "disk-main-root does not exist" or "by-label/nixos does not exist"**
 → The initrd kernel modules are missing. Ensure `availableKernelModules` and `qemu-guest.nix` are present. Reboot to ISO and redeploy.
