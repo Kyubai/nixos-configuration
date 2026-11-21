@@ -113,7 +113,7 @@
         ipv4 = {
           method = "manual";
           address1 = "10.99.0.10/24,10.99.0.1";
-          dns = "10.99.0.1;";
+          dns = "8.8.8.8;";
         };
         ipv6.method = "ignore";
       };
