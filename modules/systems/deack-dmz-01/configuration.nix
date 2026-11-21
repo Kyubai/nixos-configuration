@@ -29,7 +29,7 @@
     ];
   };
 
-  flake.nixosModules.deack-dmz-01 = {pkgs, ...}: {
+  flake.nixosModules.deack-dmz-01 = {pkgs, config, ...}: {
     # Boot loader configuration for GRUB
     boot.loader.grub.enable = true;
     boot.loader.grub.device = "/dev/sda";
@@ -82,7 +82,9 @@
     };
 
 
-    # System state version
+    age.secrets.restic-verriegelt.file = "${self}/secrets/restic-verriegelt.age";
+    services.restic.backups.verriegelt.environmentFile = config.age.secrets.restic-verriegelt.path;
+
     system.stateVersion = "25.11";
   };
 }

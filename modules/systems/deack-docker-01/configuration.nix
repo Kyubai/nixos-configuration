@@ -71,7 +71,7 @@
     ];
   };
 
-  flake.nixosModules.deack-docker-01 = {pkgs, lib, modulesPath, ...}: {
+  flake.nixosModules.deack-docker-01 = {pkgs, lib, modulesPath, config, ...}: {
     imports = [
       (modulesPath + "/profiles/qemu-guest.nix")
     ];
@@ -129,6 +129,8 @@
       ];
     };
 
+    age.secrets.restic-verriegelt.file = "${self}/secrets/restic-verriegelt.age";
+    services.restic.backups.verriegelt.environmentFile = config.age.secrets.restic-verriegelt.path;
     services.restic.backups.verriegelt.timerConfig = lib.mkForce {
       OnCalendar = "05:30:00";
       Persistent = true;
