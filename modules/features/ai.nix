@@ -46,10 +46,14 @@
           }
           {
             id = "4";
-            type = "session-usage";
+            type = "context-window";
           }
           {
             id = "5";
+            type = "session-usage";
+          }
+          {
+            id = "6";
             type = "weekly-usage";
           }
         ]
