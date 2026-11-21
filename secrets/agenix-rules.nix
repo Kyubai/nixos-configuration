@@ -6,6 +6,7 @@ let
   mri = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaOvQm6DCDl+ytVcGr7sFtJZINapQynYASlnlf090nV";
 in {
   "anthropic-api-key.age".publicKeys = [deack-pc-01-host mri];
-  "restic-wasabi.age".publicKeys = [deack-dmz-01-host deack-docker-01-host fluxer-host];
+  "restic-verriegelt.age".publicKeys = [deack-dmz-01-host deack-docker-01-host mri];
+  "restic-bonfire.age".publicKeys = [fluxer-host mri];
   "nas-credentials.age".publicKeys = [deack-pc-01-host deack-docker-01-host mri];
 }

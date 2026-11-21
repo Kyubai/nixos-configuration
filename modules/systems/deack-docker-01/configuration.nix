@@ -129,7 +129,7 @@
       ];
     };
 
-    services.restic.backups.wasabi.timerConfig = lib.mkForce {
+    services.restic.backups.verriegelt.timerConfig = lib.mkForce {
       OnCalendar = "05:30:00";
       Persistent = true;
     };

@@ -70,7 +70,7 @@
     ];
   };
 
-  flake.nixosModules.fluxer = {lib, modulesPath, ...}: {
+  flake.nixosModules.fluxer = {lib, modulesPath, config, ...}: {
     imports = [
       (modulesPath + "/profiles/qemu-guest.nix")
     ];
@@ -143,7 +143,11 @@
       ];
     };
 
-    services.restic.backups.wasabi = {
+    age.secrets.restic-bonfire.file = "${self}/secrets/restic-bonfire.age";
+
+    services.restic.backups.verriegelt = {
+      repository = lib.mkForce "s3:https://s3.eu-central-2.wasabisys.com/restic-fluxer-contabo";
+      environmentFile = lib.mkForce config.age.secrets.restic-bonfire.path;
       paths = lib.mkForce ["/srv"];
       timerConfig = lib.mkForce {
         OnCalendar = "05:45:00";

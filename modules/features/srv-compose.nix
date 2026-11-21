@@ -51,11 +51,11 @@
 
     systemd.services.nixos-upgrade.preStart = "${pkgs.nix}/bin/nix flake update --flake /etc/nixos";
 
-    age.secrets.restic-wasabi.file = "${self}/secrets/restic-wasabi.age";
+    age.secrets.restic-verriegelt.file = "${self}/secrets/restic-verriegelt.age";
 
-    services.restic.backups.wasabi = {
+    services.restic.backups.verriegelt = {
       repository = "s3:https://s3.eu-central-2.wasabisys.com/restic-verriegelt";
-      environmentFile = config.age.secrets.restic-wasabi.path;
+      environmentFile = config.age.secrets.restic-verriegelt.path;
       paths = [
         "/srv"
         "/mnt/media/books"
