@@ -129,6 +129,11 @@
       ];
     };
 
+    services.restic.backups.wasabi.timerConfig = lib.mkForce {
+      OnCalendar = "05:30:00";
+      Persistent = true;
+    };
+
     systemd.tmpfiles.rules = ["d /mnt/media 0755 root root -"];
 
     fileSystems."/mnt/media" = {
