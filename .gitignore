@@ -1,2 +1,3 @@
 result
-.claude
+.claude/settings.local.json
+.claude/todos.json
