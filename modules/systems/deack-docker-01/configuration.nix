@@ -1,7 +1,6 @@
 {
   inputs,
   self,
-  lib,
   ...
 }: {
   flake.nixosConfigurations."deack-docker-01" = inputs.nixpkgs.lib.nixosSystem {
@@ -13,6 +12,7 @@
       self.nixosModules.impermanence
       self.nixosModules.srv-compose
       self.nixosModules.nas
+      self.nixosModules.restic-verriegelt
       inputs.disko.nixosModules.disko
       {
         disko.devices = {
@@ -71,7 +71,7 @@
     ];
   };
 
-  flake.nixosModules.deack-docker-01 = {pkgs, lib, modulesPath, config, ...}: {
+  flake.nixosModules.deack-docker-01 = {pkgs, lib, modulesPath, ...}: {
     imports = [
       (modulesPath + "/profiles/qemu-guest.nix")
     ];
@@ -129,12 +129,13 @@
       ];
     };
 
-    age.secrets.restic-verriegelt.file = "${self}/secrets/restic-verriegelt.age";
-    services.restic.backups.verriegelt.environmentFile = config.age.secrets.restic-verriegelt.path;
-    services.restic.backups.verriegelt.timerConfig = lib.mkForce {
-      OnCalendar = "05:30:00";
-      Persistent = true;
-    };
+    services.restic.backups.verriegelt.paths = [
+      "/mnt/media/books"
+      "/mnt/media/music"
+      "/mnt/media/images"
+      "/mnt/media/manga"
+    ];
+    services.restic.backups.verriegelt.timerConfig.OnCalendar = "05:30:00";
 
     systemd.tmpfiles.rules = ["d /mnt/media 0755 root root -"];
 

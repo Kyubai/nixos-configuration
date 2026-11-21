@@ -1,7 +1,6 @@
 {
   inputs,
   self,
-  pkgs,
   ...
 }: {
   flake.nixosConfigurations."deack-dmz-01" = inputs.nixpkgs.lib.nixosSystem {
@@ -12,6 +11,7 @@
       self.nixosModules.agenix
       self.nixosModules.impermanence
       self.nixosModules.srv-compose
+      self.nixosModules.restic-verriegelt
       inputs.home-manager.nixosModules.home-manager
       {
         home-manager = {
@@ -29,7 +29,7 @@
     ];
   };
 
-  flake.nixosModules.deack-dmz-01 = {pkgs, config, ...}: {
+  flake.nixosModules.deack-dmz-01 = {...}: {
     # Boot loader configuration for GRUB
     boot.loader.grub.enable = true;
     boot.loader.grub.device = "/dev/sda";
@@ -81,9 +81,6 @@
       ];
     };
 
-
-    age.secrets.restic-verriegelt.file = "${self}/secrets/restic-verriegelt.age";
-    services.restic.backups.verriegelt.environmentFile = config.age.secrets.restic-verriegelt.path;
 
     system.stateVersion = "25.11";
   };
