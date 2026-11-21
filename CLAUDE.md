@@ -8,6 +8,7 @@
 # Hosts
 - `deack-pc-01` — desktop (admin, gaming, browsing)
 - `deack-dmz-01` — DMZ host (internet-facing services)
+- `deack-docker-01` — internal Docker host (services in `/srv`)
 - Changes to one host MUST NOT break the other
 
 # Rules
