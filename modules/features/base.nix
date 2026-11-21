@@ -92,6 +92,26 @@
       Defaults    timestamp_timeout=-1
     '';
 
+    systemd.services.clone-nixos-config = {
+      script = ''
+        set -euo pipefail
+        target=/etc/nixos
+        url="https://github.com/Kyubai/nixos-configuration"
+        if [ -d "$target/.git" ]; then
+          exit 0
+        fi
+        rmdir "$target"
+        ${pkgs.git}/bin/git clone "$url" "$target"
+      '';
+      after = ["network-online.target"];
+      wants = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+    };
+
     environment.systemPackages = with pkgs; [
       age
       comma
