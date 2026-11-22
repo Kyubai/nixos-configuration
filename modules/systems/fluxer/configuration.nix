@@ -103,8 +103,7 @@
     nix.settings.trusted-users = ["mri"];
 
     networking.hostName = "fluxer";
-    networking.useDHCP = false;
-    networking.interfaces.ens18.useDHCP = true;
+    networking.useDHCP = true;
 
     services.openssh.enable = true;
     services.openssh.settings.PermitRootLogin = "yes";
