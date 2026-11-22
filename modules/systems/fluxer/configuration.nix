@@ -128,6 +128,46 @@
       ];
     };
 
+    systemd.services.fluxer-upgrade = {
+      description = "Upgrade Fluxer (docker compose bundle)";
+      after = ["docker.service" "network-online.target"];
+      requires = ["docker.service"];
+      wants = ["network-online.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer/fluxer-upgrade.sh";
+        TimeoutStartSec = "45min";
+      };
+    };
+
+    systemd.timers.fluxer-upgrade = {
+      description = "Weekly Fluxer upgrade";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnCalendar = "Sun 06:00";
+        Persistent = true;
+      };
+    };
+
+    systemd.services.fluxer-reboot-check = {
+      description = "Announce in Fluxer when the server needs a reboot";
+      after = ["network-online.target"];
+      wants = ["network-online.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer/reboot-check.sh";
+      };
+    };
+
+    systemd.timers.fluxer-reboot-check = {
+      description = "Daily check whether the server needs a reboot";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnCalendar = "*-*-* 09:00";
+        Persistent = true;
+      };
+    };
+
     system.stateVersion = "25.11";
   };
 }
