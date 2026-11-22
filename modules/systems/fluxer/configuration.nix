@@ -103,20 +103,8 @@
     nix.settings.trusted-users = ["mri"];
 
     networking.hostName = "fluxer";
-    networking.networkmanager.enable = true;
-    networking.networkmanager.ensureProfiles.profiles = {
-      ens18 = {
-        connection = {
-          id = "ens18";
-          type = "ethernet";
-          interface-name = "ens18";
-        };
-        ipv4 = {
-          method = "auto";
-        };
-        ipv6.method = "ignore";
-      };
-    };
+    networking.useDHCP = false;
+    networking.interfaces.ens18.useDHCP = true;
 
     services.openssh.enable = true;
     services.openssh.settings.PermitRootLogin = "yes";
@@ -135,7 +123,6 @@
       isNormalUser = true;
       extraGroups = [
         "wheel"
-        "networkmanager"
       ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaOvQm6DCDl+ytVcGr7sFtJZINapQynYASlnlf090nV mri@deack-pc-01"
