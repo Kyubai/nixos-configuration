@@ -23,7 +23,7 @@
       requires = ["docker.service"];
       script = ''
         for dir in /srv/*/; do
-          if [ -f "$dir/docker-compose.yml" ]; then
+          if [ -f "$dir/docker-compose.yml" ] && [ ! -f "$dir/.no-auto-update" ]; then
             ${pkgs.docker}/bin/docker compose -f "$dir/docker-compose.yml" pull --quiet
             ${pkgs.docker}/bin/docker compose -f "$dir/docker-compose.yml" up -d --remove-orphans
           fi
