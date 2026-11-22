@@ -10,7 +10,7 @@
       repository = "s3:https://s3.eu-central-2.wasabisys.com/restic-verriegelt";
       environmentFile = config.age.secrets.restic-verriegelt.path;
       paths = ["/srv"];
-      exclude = ["*.bak"];
+      exclude = config.srv-compose.resticExclude;
       timerConfig = {
         OnCalendar = lib.mkDefault "05:00:00";
         Persistent = true;

@@ -9,6 +9,7 @@
       repository = "s3:https://s3.eu-central-2.wasabisys.com/restic-fluxer-contabo";
       environmentFile = config.age.secrets.restic-bonfire.path;
       paths = ["/srv"];
+      exclude = config.srv-compose.resticExclude;
       timerConfig = {
         OnCalendar = "05:45:00";
         Persistent = true;
