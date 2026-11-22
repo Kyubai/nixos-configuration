@@ -112,16 +112,14 @@
           interface-name = "ens18";
         };
         ipv4 = {
-          method = "manual";
-          address1 = "10.99.0.10/24,10.99.0.1";
-          dns = "8.8.8.8;";
+          method = "auto";
         };
         ipv6.method = "ignore";
       };
     };
 
     services.openssh.enable = true;
-    services.openssh.settings.PermitRootLogin = "no";
+    services.openssh.settings.PermitRootLogin = "yes";
 
     security.sudo.extraRules = [
       {
