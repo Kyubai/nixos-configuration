@@ -104,6 +104,7 @@
 
     networking.hostName = "fluxer";
     networking.useDHCP = true;
+    networking.firewall.enable = false;
 
     services.openssh.enable = true;
     services.openssh.settings.PermitRootLogin = "yes";
