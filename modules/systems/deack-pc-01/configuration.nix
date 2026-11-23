@@ -73,6 +73,34 @@
 
     networking.hostName = "deack-pc-01";
 
+    # CAKE shaper for Vodafone uplink — eliminates bufferbloat under SF6 / general load.
+    # Bandwidth set to 95% of measured line speed (dl: 64 → 61 Mbit/s, ul: 5 → 4.8 Mbit/s).
+    # Ingress shaping uses an IFB device to redirect inbound traffic through a CAKE qdisc.
+    boot.kernelModules = [ "ifb" ];
+    systemd.services."cake-shaper" = {
+      description = "CAKE traffic shaper for Vodafone uplink";
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      path = [ pkgs.iproute2 ];
+      script = ''
+        tc qdisc del dev enp4s0 root 2>/dev/null || true
+        tc qdisc add dev enp4s0 root cake bandwidth 4800kbit besteffort
+
+        ip link add ifb-wan type ifb 2>/dev/null || true
+        ip link set ifb-wan up
+        tc qdisc del dev enp4s0 ingress 2>/dev/null || true
+        tc qdisc add dev enp4s0 handle ffff: ingress
+        tc filter add dev enp4s0 parent ffff: matchall action mirred egress redirect dev ifb-wan
+        tc qdisc del dev ifb-wan root 2>/dev/null || true
+        tc qdisc add dev ifb-wan root cake bandwidth 61000kbit besteffort ingress
+      '';
+    };
+
     # Prefer DNS from enp4s0 (internal network) over enp12s0f3u3 (Vodafone USB).
     # The toggle-vodafone.sh script can override by running:
     #   nmcli connection modify enp12s0f3u3 ipv4.dns-priority 10 ipv6.dns-priority 10
