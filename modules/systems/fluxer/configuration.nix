@@ -189,6 +189,7 @@
     systemd.services.fluxer-mod-bot-docker-stats = {
       description = "Fluxer mod bot: export container state";
       after = ["docker.service"];
+      path = with pkgs; [docker];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/docker-stats-export";
@@ -212,6 +213,7 @@
     systemd.services.fluxer-mod-bot-nft-counters = {
       description = "Fluxer mod bot: export voice traffic counters";
       after = ["docker.service"];
+      path = with pkgs; [nftables];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/nft-counters";
@@ -235,6 +237,7 @@
     systemd.services.fluxer-mod-bot-ping = {
       description = "Fluxer mod bot: ping targets";
       after = ["docker.service"];
+      path = with pkgs; [iputils coreutils];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/ping-export";
@@ -258,6 +261,7 @@
     systemd.services.fluxer-mod-bot-security = {
       description = "Fluxer mod bot: export SSH failures";
       after = ["docker.service"];
+      path = with pkgs; [gawk coreutils];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/security-export";
@@ -282,6 +286,7 @@
       description = "Fluxer mod bot: update the DB-IP Lite Country database";
       after = ["network-online.target"];
       wants = ["network-online.target"];
+      path = with pkgs; [curl gzip coreutils];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/geoip-update";
@@ -305,6 +310,7 @@
     systemd.services.fluxer-mod-bot-storage = {
       description = "Fluxer mod bot: Fluxer storage breakdown";
       after = ["docker.service"];
+      path = with pkgs; [docker jq coreutils];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/fluxer-storage-export";
@@ -332,6 +338,7 @@
     systemd.services.fluxer-mod-bot-media = {
       description = "Fluxer mod bot: media bot state export";
       after = ["docker.service"];
+      path = with pkgs; [jq curl gawk coreutils];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/media-bot-export";
