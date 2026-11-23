@@ -76,6 +76,23 @@
       enable = true;
       package = pkgs.floorp-bin;
 
+      policies.Cookies.Allow = [
+        "https://www.youtube.com"
+        "https://google.com"
+        "https://tuta.com"
+        "https://lieferando.de"
+        "https://gmail.com"
+        "https://amazon.de"
+        "https://bunpro.jp"
+        "https://chatgpt.com"
+        "https://musicbrainz.org"
+        "https://account.rewe.de"
+        "https://www.paypal.com"
+        "https://www.pokeclicker.com"
+        "https://claude.ai"
+        "https://linkedin.com"
+      ];
+
       policies.ExtensionSettings = {
         "addon@darkreader.org" = {
           installation_mode = "force_installed";
