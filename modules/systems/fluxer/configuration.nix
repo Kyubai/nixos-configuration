@@ -71,7 +71,7 @@
     ];
   };
 
-  flake.nixosModules.fluxer = {lib, modulesPath, ...}: {
+  flake.nixosModules.fluxer = {lib, pkgs, modulesPath, ...}: {
     imports = [
       (modulesPath + "/profiles/qemu-guest.nix")
     ];
@@ -166,6 +166,193 @@
       timerConfig = {
         OnCalendar = "*-*-* 09:00";
         Persistent = true;
+      };
+    };
+
+    # Host-side helper services for the mod-bot monitor.
+    # Scripts live in /srv (persisted); this config survives impermanence.
+    systemd.tmpfiles.rules = [
+      "d /run/fluxer-mod-bot 0755 root root -"
+    ];
+
+    systemd.services.fluxer-mod-bot-nft = {
+      description = "Fluxer mod bot: load the nftables counter table";
+      after = ["network-pre.target"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.nftables}/bin/nft -f /srv/fluxer-mod-bot/host/nft/fluxer-mod-bot.nft";
+      };
+    };
+
+    systemd.services.fluxer-mod-bot-docker-stats = {
+      description = "Fluxer mod bot: export container state";
+      after = ["docker.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer-mod-bot/host/docker-stats-export";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = ["/run/fluxer-mod-bot"];
+      };
+    };
+    systemd.timers.fluxer-mod-bot-docker-stats = {
+      description = "Fluxer mod bot: export container state (timer)";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "10s";
+        OnUnitActiveSec = "5s";
+        AccuracySec = "1s";
+      };
+    };
+
+    systemd.services.fluxer-mod-bot-nft-counters = {
+      description = "Fluxer mod bot: export voice traffic counters";
+      after = ["docker.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer-mod-bot/host/nft-counters";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = ["/run/fluxer-mod-bot"];
+      };
+    };
+    systemd.timers.fluxer-mod-bot-nft-counters = {
+      description = "Fluxer mod bot: export voice traffic counters (timer)";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "10s";
+        OnUnitActiveSec = "2s";
+        AccuracySec = "1s";
+      };
+    };
+
+    systemd.services.fluxer-mod-bot-ping = {
+      description = "Fluxer mod bot: ping targets";
+      after = ["docker.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer-mod-bot/host/ping-export";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = ["/run/fluxer-mod-bot"];
+      };
+    };
+    systemd.timers.fluxer-mod-bot-ping = {
+      description = "Fluxer mod bot: ping targets (timer)";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "10s";
+        OnUnitActiveSec = "30s";
+        AccuracySec = "1s";
+      };
+    };
+
+    systemd.services.fluxer-mod-bot-security = {
+      description = "Fluxer mod bot: export SSH failures";
+      after = ["docker.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer-mod-bot/host/security-export";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = ["/run/fluxer-mod-bot"];
+      };
+    };
+    systemd.timers.fluxer-mod-bot-security = {
+      description = "Fluxer mod bot: export SSH failures (timer)";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "10s";
+        OnUnitActiveSec = "60s";
+        AccuracySec = "1s";
+      };
+    };
+
+    systemd.services.fluxer-mod-bot-geoip = {
+      description = "Fluxer mod bot: update the DB-IP Lite Country database";
+      after = ["network-online.target"];
+      wants = ["network-online.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer-mod-bot/host/geoip-update";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = ["/srv/fluxer-mod-bot/data/geoip"];
+      };
+    };
+    systemd.timers.fluxer-mod-bot-geoip = {
+      description = "Fluxer mod bot: update the DB-IP Lite Country database (timer)";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnCalendar = "*-*-03 03:00:00";
+        Persistent = true;
+        RandomizedDelaySec = "10min";
+      };
+    };
+
+    systemd.services.fluxer-mod-bot-storage = {
+      description = "Fluxer mod bot: Fluxer storage breakdown";
+      after = ["docker.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer-mod-bot/host/fluxer-storage-export";
+        Nice = 19;
+        IOSchedulingClass = "idle";
+        TimeoutStartSec = "600";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = ["/run/fluxer-mod-bot"];
+        ReadOnlyPaths = ["/srv/fluxer/volumes"];
+      };
+    };
+    systemd.timers.fluxer-mod-bot-storage = {
+      description = "Fluxer mod bot: Fluxer storage breakdown (timer)";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "5min";
+        OnCalendar = "hourly";
+        RandomizedDelaySec = "300";
+      };
+    };
+
+    systemd.services.fluxer-mod-bot-media = {
+      description = "Fluxer mod bot: media bot state export";
+      after = ["docker.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/srv/fluxer-mod-bot/host/media-bot-export";
+        Nice = 19;
+        IOSchedulingClass = "idle";
+        TimeoutStartSec = "300";
+        NoNewPrivileges = true;
+        PrivateTmp = true;
+        ProtectHome = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = ["/run/fluxer-mod-bot"];
+        ReadOnlyPaths = ["/srv/fluxer-media-bot" "/var/lib/docker/volumes/fluxer-media-bot_cache"];
+      };
+    };
+    systemd.timers.fluxer-mod-bot-media = {
+      description = "Fluxer mod bot: media bot state export (timer)";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "3min";
+        OnCalendar = "*:0/15";
+        RandomizedDelaySec = "60";
       };
     };
 
