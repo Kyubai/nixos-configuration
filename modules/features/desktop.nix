@@ -88,7 +88,6 @@
         "https://musicbrainz.org"
         "https://account.rewe.de"
         "https://www.paypal.com"
-        "https://www.pokeclicker.com"
         "https://claude.ai"
         "https://linkedin.com"
       ];
