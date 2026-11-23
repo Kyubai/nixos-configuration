@@ -191,7 +191,7 @@
       after = ["docker.service"];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/srv/fluxer-mod-bot/host/docker-stats-export";
+        ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/docker-stats-export";
         NoNewPrivileges = true;
         PrivateTmp = true;
         ProtectHome = true;
@@ -214,7 +214,7 @@
       after = ["docker.service"];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/srv/fluxer-mod-bot/host/nft-counters";
+        ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/nft-counters";
         NoNewPrivileges = true;
         PrivateTmp = true;
         ProtectHome = true;
@@ -237,7 +237,7 @@
       after = ["docker.service"];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/srv/fluxer-mod-bot/host/ping-export";
+        ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/ping-export";
         NoNewPrivileges = true;
         PrivateTmp = true;
         ProtectHome = true;
@@ -260,7 +260,7 @@
       after = ["docker.service"];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/srv/fluxer-mod-bot/host/security-export";
+        ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/security-export";
         NoNewPrivileges = true;
         PrivateTmp = true;
         ProtectHome = true;
@@ -284,7 +284,7 @@
       wants = ["network-online.target"];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/srv/fluxer-mod-bot/host/geoip-update";
+        ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/geoip-update";
         NoNewPrivileges = true;
         PrivateTmp = true;
         ProtectHome = true;
@@ -307,7 +307,7 @@
       after = ["docker.service"];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/srv/fluxer-mod-bot/host/fluxer-storage-export";
+        ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/fluxer-storage-export";
         Nice = 19;
         IOSchedulingClass = "idle";
         TimeoutStartSec = "600";
@@ -334,7 +334,7 @@
       after = ["docker.service"];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/srv/fluxer-mod-bot/host/media-bot-export";
+        ExecStart = "${pkgs.bash}/bin/bash /srv/fluxer-mod-bot/host/media-bot-export";
         Nice = 19;
         IOSchedulingClass = "idle";
         TimeoutStartSec = "300";
