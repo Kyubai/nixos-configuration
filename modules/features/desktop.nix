@@ -141,6 +141,7 @@
         path = "jtc1y592.default-release";
         settings = {
           "browser.startup.homepage" = "https://homepage.intern.verriegelt.net";
+          "browser.startup.page" = 3;
           "browser.newtabpage.enabled" = false;
           "browser.fullscreen.autohide" = false;
           "browser.search.region" = "DE";
@@ -157,6 +158,7 @@
           "privacy.trackingprotection.allow_list.convenience.enabled" = false;
           "privacy.sanitize.sanitizeOnShutdown" = true;
           "privacy.clearOnShutdown_v2.formdata" = true;
+          "privacy.clearOnShutdown_v2.openWindows" = false;
 
           "services.sync.engine.passwords" = false;
 
